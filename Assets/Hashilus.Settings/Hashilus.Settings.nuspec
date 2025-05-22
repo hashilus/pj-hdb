@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata>
+    <id>Hashilus.Settings</id>
+    <version>1.0.0</version>
+    <description>設定ファイルの仕組み</description>
+    <authors>Hashilus</authors>
+    <owners>Hashilus</owners>
+    <projectUrl>https://github.com/hashilus/Hashilus.Settings</projectUrl>
+    <iconUrl>https://www.nuget.org/Content/Images/packageDefaultIcon-50x50.png</iconUrl>
+    <copyright>Copyright 2017</copyright>
+    <dependencies>
+      <dependency id="Hashilus.Helper" version="1.0.0" />
+    </dependencies>
+  </metadata>
+</package>

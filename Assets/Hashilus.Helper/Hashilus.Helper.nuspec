@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata>
+    <id>Hashilus.Helper</id>
+    <version>1.1.0</version>
+    <description>ハシラスで使うヘルパークラス・関数集</description>
+    <authors>Hashilus</authors>
+    <owners>Hashilus</owners>
+    <licenseUrl>http://your_license_url_here</licenseUrl>
+    <projectUrl>http://your_project_url_here</projectUrl>
+    <iconUrl>https://www.nuget.org/Content/Images/packageDefaultIcon-50x50.png</iconUrl>
+    <copyright>Copyright 2017 Hashilus</copyright>
+  </metadata>
+</package>
