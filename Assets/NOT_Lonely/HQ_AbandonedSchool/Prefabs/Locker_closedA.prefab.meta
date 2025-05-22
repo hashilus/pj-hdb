@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 70ab625bdb1c1db448a3da39186d03d1
+timeCreated: 1498903935
+licenseType: Free
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 106665
+  packageName: HQ Abandoned School (Modular)
+  packageVersion: 1.2.1
+  assetPath: Assets/NOT_Lonely/HQ_AbandonedSchool/Prefabs/Locker_closedA.prefab
+  uploadId: 717771

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: aace196c21473bd478366c0bc1f888de
+timeCreated: 1499942791
+licenseType: Free
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 106665
+  packageName: HQ Abandoned School (Modular)
+  packageVersion: 1.2.1
+  assetPath: Assets/NOT_Lonely/HQ_AbandonedSchool/Models/Materials/ArchiveDrawers_mtl.mat
+  uploadId: 717771

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e52f689c99a539a42a09a2cc4b3904b5
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 106665
+  packageName: HQ Abandoned School (Modular)
+  packageVersion: 1.2.1
+  assetPath: Assets/NOT_Lonely/HQ_AbandonedSchool/Shaders/NOT_Lonely_VertexAnim.shader
+  uploadId: 717771

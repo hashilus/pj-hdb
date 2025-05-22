@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: b754f6e260ecab84991b89c528d7b6fa
+timeCreated: 1511811052
+licenseType: Free
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 36300000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 106665
+  packageName: HQ Abandoned School (Modular)
+  packageVersion: 1.2.1
+  assetPath: Assets/NOT_Lonely/HQ_AbandonedSchool/DemoScene/DemoScene/OcclusionCullingData.asset
+  uploadId: 717771

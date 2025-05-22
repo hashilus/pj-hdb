@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 57cbdad9f2f74854995c8ddf814278b5
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 106665
+  packageName: HQ Abandoned School (Modular)
+  packageVersion: 1.2.1
+  assetPath: Assets/NOT_Lonely/HQ_AbandonedSchool/Shaders/NOT_Lonely_Grass.shader
+  uploadId: 717771

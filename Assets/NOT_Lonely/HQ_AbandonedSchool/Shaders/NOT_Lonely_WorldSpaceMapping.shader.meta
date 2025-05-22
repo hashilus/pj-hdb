@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e7c33d77b08fc8d43a4967dd3ae5e038
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 106665
+  packageName: HQ Abandoned School (Modular)
+  packageVersion: 1.2.1
+  assetPath: Assets/NOT_Lonely/HQ_AbandonedSchool/Shaders/NOT_Lonely_WorldSpaceMapping.shader
+  uploadId: 717771

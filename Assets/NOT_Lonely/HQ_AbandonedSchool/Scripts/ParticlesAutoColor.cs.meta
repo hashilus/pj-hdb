@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: b8eadb569077fbb4b815257ff7818af9
+timeCreated: 1512212342
+licenseType: Store
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 106665
+  packageName: HQ Abandoned School (Modular)
+  packageVersion: 1.2.1
+  assetPath: Assets/NOT_Lonely/HQ_AbandonedSchool/Scripts/ParticlesAutoColor.cs
+  uploadId: 717771

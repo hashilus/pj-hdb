@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 4ca11fc669d747449bdd8fa9bd6b1991
+timeCreated: 1512555119
+licenseType: Store
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 106665
+  packageName: HQ Abandoned School (Modular)
+  packageVersion: 1.2.1
+  assetPath: Assets/NOT_Lonely/HQ_AbandonedSchool/Shaders/NOT_Lonely_Decals.shader
+  uploadId: 717771

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 568ed7dfb265d38448e7bcd216889b6c
+timeCreated: 1485762112
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 106665
+  packageName: HQ Abandoned School (Modular)
+  packageVersion: 1.2.1
+  assetPath: Assets/NOT_Lonely/HQ_AbandonedSchool/DemoScene/Flashlight_prefab.prefab
+  uploadId: 717771

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 5257a13580e2ee94c94ca33530f443d6
+timeCreated: 1512567098
+licenseType: Free
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 106665
+  packageName: HQ Abandoned School (Modular)
+  packageVersion: 1.2.1
+  assetPath: Assets/NOT_Lonely/HQ_AbandonedSchool/Models/Materials/StreetLamp_glass_mtl.mat
+  uploadId: 717771

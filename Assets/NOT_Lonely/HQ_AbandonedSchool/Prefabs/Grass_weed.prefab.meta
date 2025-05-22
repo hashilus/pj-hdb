@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 476816f29c7f820449da530fcbcaab03
+timeCreated: 1511940933
+licenseType: Free
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 106665
+  packageName: HQ Abandoned School (Modular)
+  packageVersion: 1.2.1
+  assetPath: Assets/NOT_Lonely/HQ_AbandonedSchool/Prefabs/Grass_weed.prefab
+  uploadId: 717771

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b5fa708f37eeef340b3d273761f9eefa
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 106665
+  packageName: HQ Abandoned School (Modular)
+  packageVersion: 1.2.1
+  assetPath: Assets/NOT_Lonely/HQ_AbandonedSchool/Shaders/NOT_Lonely_Tesselation.shader
+  uploadId: 717771

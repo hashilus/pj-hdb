@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 4358efabf71f8bb49a70f8a9b3d39643
+timeCreated: 1526983440
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 106665
+  packageName: HQ Abandoned School (Modular)
+  packageVersion: 1.2.1
+  assetPath: Assets/NOT_Lonely/HQ_AbandonedSchool/Models/RetroSchoolBus/Materials/SchoolBus_glass_clean_mtl.mat
+  uploadId: 717771

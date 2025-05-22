@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 31ec233ce59b36c48816f3835c44972a
+timeCreated: 1507886512
+licenseType: Free
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 106665
+  packageName: HQ Abandoned School (Modular)
+  packageVersion: 1.2.1
+  assetPath: Assets/NOT_Lonely/HQ_AbandonedSchool/Prefabs/Books/ObjectPlacementTool_combined/BooksHeap_combined02.prefab
+  uploadId: 717771

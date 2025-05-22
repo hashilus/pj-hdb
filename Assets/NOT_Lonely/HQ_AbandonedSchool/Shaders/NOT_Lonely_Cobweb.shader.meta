@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 43c05b4077c0f5f44b9b606aeb17f06b
+timeCreated: 1509125150
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 106665
+  packageName: HQ Abandoned School (Modular)
+  packageVersion: 1.2.1
+  assetPath: Assets/NOT_Lonely/HQ_AbandonedSchool/Shaders/NOT_Lonely_Cobweb.shader
+  uploadId: 717771

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a0e84bf9aa36a0c4cb0b5ec189a1e29f
+timeCreated: 1499786270
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 106665
+  packageName: HQ Abandoned School (Modular)
+  packageVersion: 1.2.1
+  assetPath: Assets/NOT_Lonely/HQ_AbandonedSchool/Animations/Bookcase_open.anim
+  uploadId: 717771
