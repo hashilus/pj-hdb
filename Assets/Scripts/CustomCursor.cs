@@ -52,17 +52,23 @@ public class CustomCursor : MonoBehaviour
             // gunBarrel.localPosition = new Vector3(0, -0.56f, 0.18f);
             gunBarrel.localPosition = new Vector3(0, 0, 0.5f);
             gunBarrel.localRotation = Quaternion.Euler(-29.003f + trackerBarrelXAngle, -0.196f, 0);
+
+            cursorRect.gameObject.SetActive(false);
         }
     }
 
     void Update()
     {
-        // マウスの移動  
-        Vector2 delta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
-        currentPos += delta * sensitivity;
-        currentPos.x = Mathf.Clamp(currentPos.x, 0, Screen.width);
-        currentPos.y = Mathf.Clamp(currentPos.y, 0, Screen.height);
-        cursorRect.position = currentPos;
+        if (!Settings.System.IsUseTracker)
+        {
+            // マウスの移動  
+            Vector2 delta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+            currentPos += delta * sensitivity;
+            currentPos.x = Mathf.Clamp(currentPos.x, 0, Screen.width);
+            currentPos.y = Mathf.Clamp(currentPos.y, 0, Screen.height);
+            cursorRect.position = currentPos;
+        }
+
 
         // 射撃時に煙を出す
         shootTimer += Time.deltaTime;
