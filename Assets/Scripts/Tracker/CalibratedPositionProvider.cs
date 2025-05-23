@@ -23,10 +23,7 @@ public class CalibratedPositionProvider : MonoBehaviour
     
     void Start()
     {
-        // Debug.Log(Camera.main.gameObject.name);
-
         controllerOrgTransform = Camera.main.transform;
-
 
         controller.gameObject.SetActive(false);
 
@@ -59,10 +56,13 @@ public class CalibratedPositionProvider : MonoBehaviour
             trackingOrgRot = trackingTransform.rotation;
             controller.gameObject.SetActive(true);
         }
+
+        controller.rotation = controllerOrgTransform.rotation * RotationDiff();
+
         controller.position = controllerOrgTransform.TransformPoint(
-                                PositionDiff() * Settings.Calibration.TrackerTransferCoefficient
-                            )
-                            + Settings.Calibration.ControllerOffset;
+                                PositionDiff() * Settings.Calibration.TrackerTransferCoefficient 
+                                + Settings.Calibration.ControllerOffset
+                            );
 
         // Debug.Log("controllerOrgTransform.name : " + controllerOrgTransform.gameObject.name);
         // Debug.Log("controllerOrgTransform.position : " + controllerOrgTransform.position);
@@ -71,8 +71,6 @@ public class CalibratedPositionProvider : MonoBehaviour
         // Debug.Log("controller.position : " + controller.position);
         // Debug.Log("--------------------------------");
 
-
-        controller.rotation = controllerOrgTransform.rotation * RotationDiff();
     }
 
     Vector3 PositionDiff()
