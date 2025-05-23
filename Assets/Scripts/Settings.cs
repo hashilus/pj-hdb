@@ -7,6 +7,7 @@ public partial class Settings
     {
         // public static SettingFloat NextPlayWaitTime = new("体験終了後、ファンファーレを流すまでの待機時間（sec）※5秒単位推奨", 10f);
         // public static SettingFloat MouseCursorHiddenTime = new("マウスカーソルを動かさない時に非表示とする時間（sec）", 1.5f);
+        public static SettingBool IsUseTracker = new("トラッカーを使用するかどうか", false);
     }
 
     public class Calibration

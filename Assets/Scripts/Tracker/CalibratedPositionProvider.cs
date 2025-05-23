@@ -21,19 +21,34 @@ public class CalibratedPositionProvider : MonoBehaviour
     Quaternion trackingBeforRot;
     bool isLost;
     
-    private void Start()
+    void Start()
     {
+        // Debug.Log(Camera.main.gameObject.name);
+
+        controllerOrgTransform = Camera.main.transform;
+
+
         controller.gameObject.SetActive(false);
+
+        if (!Settings.System.IsUseTracker)
+        {
+            gameObject.SetActive(false);
+        }
+
+        // 遅延させないと値が拾えない
+        StartCoroutine(Delay(() => trackingTransform.gameObject.SetActive(true), 1f));
     }
+
+    IEnumerator Delay(Action a, float t) { yield return new WaitForSeconds(t); a(); }
 
     void Update()
     {
-        isLost = trackingBeforPos == trackingTransform.position && trackingBeforRot == trackingTransform.rotation;
-        if (isLost)
-        {
-            Debug.Log("LOST");
-            return;
-        }
+        // isLost = trackingBeforPos == trackingTransform.position && trackingBeforRot == trackingTransform.rotation;
+        // if (isLost)
+        // {
+        //     Debug.Log("LOST");
+        //     return;
+        // }
 
         trackingBeforPos = trackingTransform.position;
         trackingBeforRot = trackingTransform.rotation;
@@ -44,17 +59,26 @@ public class CalibratedPositionProvider : MonoBehaviour
             trackingOrgRot = trackingTransform.rotation;
             controller.gameObject.SetActive(true);
         }
-        controller.position = controllerOrgTransform.position 
-                            + controllerOrgTransform.TransformPoint(
+        controller.position = controllerOrgTransform.TransformPoint(
                                 PositionDiff() * Settings.Calibration.TrackerTransferCoefficient
                             )
                             + Settings.Calibration.ControllerOffset;
+
+        // Debug.Log("controllerOrgTransform.name : " + controllerOrgTransform.gameObject.name);
+        // Debug.Log("controllerOrgTransform.position : " + controllerOrgTransform.position);
+        // Debug.Log("controllerOrgTransform.TransformPoint(PositionDiff() * Settings.Calibration.TrackerTransferCoefficient) : " + controllerOrgTransform.TransformPoint(PositionDiff() * Settings.Calibration.TrackerTransferCoefficient));
+        // Debug.Log("Settings.Calibration.ControllerOffset : " + Settings.Calibration.ControllerOffset);
+        // Debug.Log("controller.position : " + controller.position);
+        // Debug.Log("--------------------------------");
+
+
         controller.rotation = controllerOrgTransform.rotation * RotationDiff();
     }
 
     Vector3 PositionDiff()
     {
         var diff = trackingTransform.position - trackingOrgPos;
+
         // X軸とZ軸を反転させる
         return new Vector3(-diff.x, diff.y, -diff.z);
     }
