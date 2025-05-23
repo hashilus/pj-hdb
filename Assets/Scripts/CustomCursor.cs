@@ -46,10 +46,12 @@ public class CustomCursor : MonoBehaviour
 
         if (Settings.System.IsUseTracker)
         {
+            var trackerBarrelXAngle = 90f;
+
             gunBarrel.SetParent(trackerTransform);
             // gunBarrel.localPosition = new Vector3(0, -0.56f, 0.18f);
             gunBarrel.localPosition = new Vector3(0, 0, 0.5f);
-            gunBarrel.localRotation = Quaternion.Euler(-29.003f, -0.196f, 0);
+            gunBarrel.localRotation = Quaternion.Euler(-29.003f + trackerBarrelXAngle, -0.196f, 0);
         }
     }
 
@@ -100,9 +102,6 @@ public class CustomCursor : MonoBehaviour
         Ray ray = Settings.System.IsUseTracker
             ? new Ray(origin, trackerTransform.forward)
             : Camera.main.ScreenPointToRay(currentPos);
-
-        // レイを視覚化（赤色で表示、3秒間表示）
-        // Debug.DrawRay(origin, ray.direction * 100f, Color.red, 3f);
 
         // 銃身をRayの方向に向ける（回転はしない）
         if (gunBarrel != null)
