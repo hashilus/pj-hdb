@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CalibratedPositionProvider : MonoBehaviour
@@ -14,12 +13,17 @@ public class CalibratedPositionProvider : MonoBehaviour
     [SerializeField]
     Transform controller;
 
+    [SerializeField]
+    bool isLController;
+    
     Vector3 trackingOrgPos;
     Quaternion trackingOrgRot;
 
     Vector3 trackingBeforPos;
     Quaternion trackingBeforRot;
     bool isLost;
+
+    Vector3 ControllerOffset => isLController ? Settings.Calibration.ControllerOffsetL : Settings.Calibration.ControllerOffsetR;
     
     void Start()
     {
@@ -61,7 +65,7 @@ public class CalibratedPositionProvider : MonoBehaviour
 
         controller.position = controllerOrgTransform.TransformPoint(
                                 PositionDiff() * Settings.Calibration.TrackerTransferCoefficient 
-                                + Settings.Calibration.ControllerOffset
+                                + ControllerOffset
                             );
 
         // Debug.Log("controllerOrgTransform.name : " + controllerOrgTransform.gameObject.name);

@@ -21,7 +21,8 @@ public partial class Settings
         
      
         public static SettingFloat TrackerTransferCoefficient = new ("トラッカーの移動量をどれだけ空間内に反映かの係数", 1f);
-        public static SettingVector3 ControllerOffset = new("コントローラーのオフセット", new Vector3(0,-0.5f,-1f));
+        public static SettingVector3 ControllerOffsetL = new("Lコントローラーのオフセット", new Vector3(-1f,-0.5f,-1f));
+        public static SettingVector3 ControllerOffsetR = new("Rコントローラーのオフセット", new Vector3(1f,-0.5f,-1f));
     }
     
     public class InGame

@@ -36,7 +36,10 @@ public class CustomCursor : MonoBehaviour
     [Header("Tracker")]
     [SerializeField]
     Transform trackerTransform;
-
+    
+    [SerializeField]
+    bool isSecondPlayer;
+    
     void Start()
     {
         // Cursor.visible = false; // 一時的なコメントアウト（後で戻す）
@@ -48,12 +51,18 @@ public class CustomCursor : MonoBehaviour
         {
             var trackerBarrelXAngle = 90f;
 
+            // 放水口をトラッカーの子とする
             gunBarrel.SetParent(trackerTransform);
+
             // gunBarrel.localPosition = new Vector3(0, -0.56f, 0.18f);
             gunBarrel.localPosition = new Vector3(0, 0, 0.5f);
             gunBarrel.localRotation = Quaternion.Euler(-29.003f + trackerBarrelXAngle, -0.196f, 0);
 
             cursorRect.gameObject.SetActive(false);
+        }
+        else if(isSecondPlayer)
+        {
+            gameObject.SetActive(false);            
         }
     }
 
@@ -140,7 +149,6 @@ public class CustomCursor : MonoBehaviour
 
         Destroy(proj, 2f);
     }
-
 
     void CreateLineBetween(GameObject from, GameObject to)
     {
