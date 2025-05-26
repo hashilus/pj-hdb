@@ -36,10 +36,10 @@ public class CustomCursor : MonoBehaviour
     [Header("Tracker")]
     [SerializeField]
     Transform trackerTransform;
-    
+
     [SerializeField]
     bool isSecondPlayer;
-    
+
     void Start()
     {
         // Cursor.visible = false; // 一時的なコメントアウト（後で戻す）
@@ -51,9 +51,7 @@ public class CustomCursor : MonoBehaviour
         {
             var trackerBarrelXAngle = 90f;
 
-            // 放水口をトラッカーの子とする
             gunBarrel.SetParent(trackerTransform);
-
             // gunBarrel.localPosition = new Vector3(0, -0.56f, 0.18f);
             gunBarrel.localPosition = new Vector3(0, 0, 0.5f);
             gunBarrel.localRotation = Quaternion.Euler(-29.003f + trackerBarrelXAngle, -0.196f, 0);
@@ -68,7 +66,32 @@ public class CustomCursor : MonoBehaviour
 
     void Update()
     {
-        if (!Settings.System.IsUseTracker)
+        if (Settings.System.IsUseTracker)
+        {
+            if(!isSecondPlayer)
+            {
+                if(Input.GetButton("Fire1"))
+                {
+                    StartShooting();
+                }
+                else if(Input.GetButtonUp("Fire1"))
+                {
+                    StopShooting();
+                }
+            }
+            else
+            {
+                if(Input.GetButton("Fire2"))
+                {
+                    StartShooting();
+                }
+                else if(Input.GetButtonUp("Fire2"))
+                {
+                    StopShooting();
+                }
+            }
+        }
+        else
         {
             // マウスの移動  
             Vector2 delta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
@@ -76,36 +99,42 @@ public class CustomCursor : MonoBehaviour
             currentPos.x = Mathf.Clamp(currentPos.x, 0, Screen.width);
             currentPos.y = Mathf.Clamp(currentPos.y, 0, Screen.height);
             cursorRect.position = currentPos;
-        }
-
-
-        // 射撃時に煙を出す
-        shootTimer += Time.deltaTime;
-        if (Input.GetMouseButton(0) && shootTimer >= shootInterval)
-        {
-            ShootProjectile();
-            shootTimer = 0f;
 
             // 射撃時に煙を出す
-            var emission = gunsmoke.emission;
-            emission.rateOverTime = 8f;
-            emission = gas.emission;
-            emission.rateOverTime = 10f;
-            emission = water.emission;
-            emission.rateOverTime = 60f;
-            water.Play();
+            shootTimer += Time.deltaTime;
+            if (Input.GetMouseButton(0) && shootTimer >= shootInterval)
+            {
+                StartShooting();
+            }
+            
+            if (Input.GetMouseButtonUp(0))
+            {
+                StopShooting();
+            }
+        }
+    }
 
-        }
-        else if (!Input.GetMouseButton(0))
-        {
-            // 射撃時に煙を出す
-            var emission = gunsmoke.emission;
-            emission.rateOverTime = 0f;
-            emission = gas.emission;
-            emission.rateOverTime = 0f;
-            emission = water.emission;
-            emission.rateOverTime = 0f;
-        }
+    void StartShooting()
+    {
+        ShootProjectile();
+        shootTimer = 0f;
+
+        var emission = gunsmoke.emission;
+        emission.rateOverTime = 8f;
+        emission = gas.emission;
+        emission.rateOverTime = 10f;
+        emission = water.emission;
+        emission.rateOverTime = 60f;
+    }
+
+    void StopShooting()
+    {
+        var emission = gunsmoke.emission;
+        emission.rateOverTime = 0f;
+        emission = gas.emission;
+        emission.rateOverTime = 0f;
+        emission = water.emission;
+        emission.rateOverTime = 0f;
     }
   
     void ShootProjectile()
