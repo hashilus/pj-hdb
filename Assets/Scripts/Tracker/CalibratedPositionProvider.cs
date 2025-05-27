@@ -21,6 +21,9 @@ public class CalibratedPositionProvider : MonoBehaviour
     Vector3 trackingBeforPos;
     Quaternion trackingBeforRot;
     bool isLost;
+    float lostCheckTime;
+
+    const float LOST_CHECK_DURATION = 1f;
 
     Vector3 ControllerOffset => isLController ? Settings.Calibration.ControllerOffsetL : Settings.Calibration.ControllerOffsetR;
     
@@ -43,33 +46,35 @@ public class CalibratedPositionProvider : MonoBehaviour
 
     void Update()
     {
-        // isLost = trackingBeforPos == trackingTransform.position && trackingBeforRot == trackingTransform.rotation;
-        // if (isLost)
-        // {
-        //     Debug.Log("LOST");
-        // }
-
-        // trackingBeforPos = trackingTransform.position;
-        // trackingBeforRot = trackingTransform.rotation;
+        LostCheck();
         
-        // if (Input.GetKeyDown(KeyCode.C))
-        // {
-        //     trackingOrgPos = trackingTransform.position;
-        //     trackingOrgRot = trackingTransform.rotation;
-        //     controller.gameObject.SetActive(true);
-
-        //     AirBlowPermission.SetPlayerSelection(
-        //         isLController ? AirBlowPermission.PlayerSelection.Player2 : AirBlowPermission.PlayerSelection.Player1,
-        //         true
-        //     );
-        // }
-
         controller.rotation = controllerOrgTransform.rotation * RotationDiff();
-
         controller.position = controllerOrgTransform.TransformPoint(
                                 PositionDiff() * Settings.Calibration.TrackerTransferCoefficient 
                                 + ControllerOffset
                             );
+    }
+
+    void LostCheck()
+    {
+        if (trackingBeforPos == trackingTransform.position && trackingBeforRot == trackingTransform.rotation)
+        {
+            lostCheckTime += Time.deltaTime;
+            if (lostCheckTime >= LOST_CHECK_DURATION)
+            {
+                if(!isLost) Debug.Log("LOST");
+                isLost = true;
+            }
+        }
+        else
+        {
+            lostCheckTime = 0f;
+            if(isLost) Debug.Log("LOST reset");
+            isLost = false;
+        }
+
+        trackingBeforPos = trackingTransform.position;
+        trackingBeforRot = trackingTransform.rotation;
     }
 
     Vector3 PositionDiff()
@@ -92,13 +97,13 @@ public class CalibratedPositionProvider : MonoBehaviour
 
     public void Calibrate()
     {
-            trackingOrgPos = trackingTransform.position;
-            trackingOrgRot = trackingTransform.rotation;
-            controller.gameObject.SetActive(true);
+        trackingOrgPos = trackingTransform.position;
+        trackingOrgRot = trackingTransform.rotation;
+        controller.gameObject.SetActive(true);
 
-            AirBlowPermission.SetPlayerSelection(
-                isLController ? AirBlowPermission.PlayerSelection.Player2 : AirBlowPermission.PlayerSelection.Player1,
-                true
-            );
+        AirBlowPermission.SetPlayerSelection(
+            isLController ? AirBlowPermission.PlayerSelection.Player2 : AirBlowPermission.PlayerSelection.Player1,
+            true
+        );
     }
 }
