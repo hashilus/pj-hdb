@@ -77,7 +77,10 @@ public class CustomCursor : MonoBehaviour
     {
         if (Settings.System.IsUseTracker)
         {
-            TrackerShooting(isSecondPlayer ? "Fire2" : "Fire1");
+            if (AirBlowPermission.CanBlow(isSecondPlayer ? AirBlowPermission.PlayerSelection.Player2 : AirBlowPermission.PlayerSelection.Player1))
+            {
+                TrackerShooting(isSecondPlayer ? "Fire2" : "Fire1");
+            }
         }
         else
         {
