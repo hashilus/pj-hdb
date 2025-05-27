@@ -54,17 +54,17 @@ public class CalibratedPositionProvider : MonoBehaviour
         trackingBeforPos = trackingTransform.position;
         trackingBeforRot = trackingTransform.rotation;
         
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            trackingOrgPos = trackingTransform.position;
-            trackingOrgRot = trackingTransform.rotation;
-            controller.gameObject.SetActive(true);
+        // if (Input.GetKeyDown(KeyCode.C))
+        // {
+        //     trackingOrgPos = trackingTransform.position;
+        //     trackingOrgRot = trackingTransform.rotation;
+        //     controller.gameObject.SetActive(true);
 
-            AirBlowPermission.SetPlayerSelection(
-                isLController ? AirBlowPermission.PlayerSelection.Player2 : AirBlowPermission.PlayerSelection.Player1,
-                true
-            );
-        }
+        //     AirBlowPermission.SetPlayerSelection(
+        //         isLController ? AirBlowPermission.PlayerSelection.Player2 : AirBlowPermission.PlayerSelection.Player1,
+        //         true
+        //     );
+        // }
 
         controller.rotation = controllerOrgTransform.rotation * RotationDiff();
 
@@ -96,5 +96,17 @@ public class CalibratedPositionProvider : MonoBehaviour
         Vector3 eulerAngles = diff.eulerAngles;
         // Y軸回転のみを反転させる
         return Quaternion.Euler(eulerAngles.x, -eulerAngles.y, eulerAngles.z);
+    }
+
+    public void Calibrate()
+    {
+            trackingOrgPos = trackingTransform.position;
+            trackingOrgRot = trackingTransform.rotation;
+            controller.gameObject.SetActive(true);
+
+            AirBlowPermission.SetPlayerSelection(
+                isLController ? AirBlowPermission.PlayerSelection.Player2 : AirBlowPermission.PlayerSelection.Player1,
+                true
+            );
     }
 }
