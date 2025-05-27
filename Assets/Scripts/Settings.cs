@@ -8,6 +8,11 @@ public partial class Settings
         // public static SettingFloat NextPlayWaitTime = new("体験終了後、ファンファーレを流すまでの待機時間（sec）※5秒単位推奨", 10f);
         // public static SettingFloat MouseCursorHiddenTime = new("マウスカーソルを動かさない時に非表示とする時間（sec）", 1.5f);
         public static SettingBool IsUseTracker = new("トラッカーを使用するかどうか", false);
+        public static SettingString HACCAddressL = new("HACC(L)のIPアドレス", "127.0.0.1");
+        public static SettingInt HACCPortL = new("HACC(L)のポート", 5555);
+        public static SettingString HACCAddressR = new("HACC(R)のIPアドレス", "127.0.0.1");
+        public static SettingInt HACCPortR = new("HACC(R)のポート", 5555);
+        public static SettingFloat AirBlowToWeakenWait = new("空気吹きを弱めるまでの待機時間(秒)", 2f);
     }
 
     public class Calibration
@@ -20,12 +25,8 @@ public partial class Settings
         // public static SettingFloat AllowableDiffAngle = new ("許容誤差(角度)", 2f);
         
      
-        public static SettingFloat TrackerTransferCoefficient = new ("トラッカーの移動量をどれだけ空間内に反映かの係数", 1f);
+        public static SettingFloat TrackerTransferCoefficient = new ("トラッカーの移動量をどれだけ空間内に反映するかの係数", 1f);
         public static SettingVector3 ControllerOffsetL = new("Lコントローラーのオフセット", new Vector3(-1f,-0.5f,-1f));
         public static SettingVector3 ControllerOffsetR = new("Rコントローラーのオフセット", new Vector3(1f,-0.5f,-1f));
-    }
-    
-    public class InGame
-    {
     }
 }

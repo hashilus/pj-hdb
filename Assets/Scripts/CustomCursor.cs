@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class CustomCursor : MonoBehaviour
 {
@@ -40,6 +39,9 @@ public class CustomCursor : MonoBehaviour
     [SerializeField]
     bool isSecondPlayer;
 
+    [SerializeField]
+    AirController airController;
+
     void Start()
     {
         // Cursor.visible = false; // 一時的なコメントアウト（後で戻す）
@@ -52,14 +54,21 @@ public class CustomCursor : MonoBehaviour
             var trackerBarrelXAngle = 90f;
 
             gunBarrel.SetParent(trackerTransform);
-            // gunBarrel.localPosition = new Vector3(0, -0.56f, 0.18f);
             gunBarrel.localPosition = new Vector3(0, 0, 0.5f);
             gunBarrel.localRotation = Quaternion.Euler(-29.003f + trackerBarrelXAngle, -0.196f, 0);
 
             cursorRect.gameObject.SetActive(false);
+
+            // HACCの初期化
+            airController.Init(
+                isSecondPlayer ? Settings.System.HACCAddressL : Settings.System.HACCAddressR, 
+                isSecondPlayer ? Settings.System.HACCPortL : Settings.System.HACCPortR
+                );
+    
         }
         else if(isSecondPlayer)
         {
+            // マウス時は2プレイヤーを無効
             gameObject.SetActive(false);            
         }
     }
@@ -68,28 +77,7 @@ public class CustomCursor : MonoBehaviour
     {
         if (Settings.System.IsUseTracker)
         {
-            if(!isSecondPlayer)
-            {
-                if(Input.GetButton("Fire1"))
-                {
-                    StartShooting();
-                }
-                else if(Input.GetButtonUp("Fire1"))
-                {
-                    StopShooting();
-                }
-            }
-            else
-            {
-                if(Input.GetButton("Fire2"))
-                {
-                    StartShooting();
-                }
-                else if(Input.GetButtonUp("Fire2"))
-                {
-                    StopShooting();
-                }
-            }
+            TrackerShooting(isSecondPlayer ? "Fire2" : "Fire1");
         }
         else
         {
@@ -104,7 +92,7 @@ public class CustomCursor : MonoBehaviour
             shootTimer += Time.deltaTime;
             if (Input.GetMouseButton(0) && shootTimer >= shootInterval)
             {
-                StartShooting();
+                Shooting();
             }
             
             if (Input.GetMouseButtonUp(0))
@@ -114,7 +102,26 @@ public class CustomCursor : MonoBehaviour
         }
     }
 
-    void StartShooting()
+    void TrackerShooting(string buttonName)
+    {
+        if(Input.GetButtonDown(buttonName))
+        {
+            airController.StartBlow();
+        }
+
+        if(Input.GetButton(buttonName))
+        {
+            Shooting();
+        }
+                
+        if(Input.GetButtonUp(buttonName))
+        {
+            airController.StopBlow();
+            StopShooting();
+        }
+    }
+
+    void Shooting()
     {
         ShootProjectile();
         shootTimer = 0f;
