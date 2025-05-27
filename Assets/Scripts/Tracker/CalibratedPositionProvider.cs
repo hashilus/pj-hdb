@@ -7,7 +7,6 @@ public class CalibratedPositionProvider : MonoBehaviour
     [SerializeField]
     Transform trackingTransform;
     
-    [SerializeField]
     Transform controllerOrgTransform;
     
     [SerializeField]
@@ -48,11 +47,10 @@ public class CalibratedPositionProvider : MonoBehaviour
         // if (isLost)
         // {
         //     Debug.Log("LOST");
-        //     return;
         // }
 
-        trackingBeforPos = trackingTransform.position;
-        trackingBeforRot = trackingTransform.rotation;
+        // trackingBeforPos = trackingTransform.position;
+        // trackingBeforRot = trackingTransform.rotation;
         
         // if (Input.GetKeyDown(KeyCode.C))
         // {
@@ -72,21 +70,13 @@ public class CalibratedPositionProvider : MonoBehaviour
                                 PositionDiff() * Settings.Calibration.TrackerTransferCoefficient 
                                 + ControllerOffset
                             );
-
-        // Debug.Log("controllerOrgTransform.name : " + controllerOrgTransform.gameObject.name);
-        // Debug.Log("controllerOrgTransform.position : " + controllerOrgTransform.position);
-        // Debug.Log("controllerOrgTransform.TransformPoint(PositionDiff() * Settings.Calibration.TrackerTransferCoefficient) : " + controllerOrgTransform.TransformPoint(PositionDiff() * Settings.Calibration.TrackerTransferCoefficient));
-        // Debug.Log("Settings.Calibration.ControllerOffset : " + Settings.Calibration.ControllerOffset);
-        // Debug.Log("controller.position : " + controller.position);
-        // Debug.Log("--------------------------------");
-
     }
 
     Vector3 PositionDiff()
     {
         var diff = trackingTransform.position - trackingOrgPos;
 
-        // X軸とZ軸を反転させる
+        // 座標変換（X軸とZ軸を反転させる）
         return new Vector3(-diff.x, diff.y, -diff.z);
     }
 
@@ -94,8 +84,10 @@ public class CalibratedPositionProvider : MonoBehaviour
     {
         Quaternion diff = Quaternion.Inverse(trackingTransform.rotation * Quaternion.Inverse(trackingOrgRot));
         Vector3 eulerAngles = diff.eulerAngles;
-        // Y軸回転のみを反転させる
-        return Quaternion.Euler(eulerAngles.x, -eulerAngles.y, eulerAngles.z);
+        return Quaternion.Euler(
+            eulerAngles.x+Settings.Calibration.ControllerXRotationOffset, 
+            -eulerAngles.y, // 座標変換（Y軸回転を反転させる）
+            eulerAngles.z);
     }
 
     public void Calibrate()
