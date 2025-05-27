@@ -59,6 +59,11 @@ public class CalibratedPositionProvider : MonoBehaviour
             trackingOrgPos = trackingTransform.position;
             trackingOrgRot = trackingTransform.rotation;
             controller.gameObject.SetActive(true);
+
+            AirBlowPermission.SetPlayerSelection(
+                isLController ? AirBlowPermission.PlayerSelection.Player2 : AirBlowPermission.PlayerSelection.Player1,
+                true
+            );
         }
 
         controller.rotation = controllerOrgTransform.rotation * RotationDiff();
