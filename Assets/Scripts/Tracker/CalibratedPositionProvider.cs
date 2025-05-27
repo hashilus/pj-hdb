@@ -23,8 +23,6 @@ public class CalibratedPositionProvider : MonoBehaviour
     bool isLost;
     float lostCheckTime;
 
-    const float LOST_CHECK_DURATION = 1f;
-
     Vector3 ControllerOffset => isLController ? Settings.Calibration.ControllerOffsetL : Settings.Calibration.ControllerOffsetR;
     
     void Start()
@@ -60,7 +58,7 @@ public class CalibratedPositionProvider : MonoBehaviour
         if (trackingBeforPos == trackingTransform.position && trackingBeforRot == trackingTransform.rotation)
         {
             lostCheckTime += Time.deltaTime;
-            if (lostCheckTime >= LOST_CHECK_DURATION)
+            if (lostCheckTime >= Settings.System.TrackerLostCheckDuration)
             {
                 if(!isLost) Debug.Log("LOST");
                 isLost = true;
