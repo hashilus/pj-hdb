@@ -52,7 +52,7 @@ public class TimeManager : MonoBehaviour
 
     public void AddBonusTime(float bonus)
     {
-        //currentTime += bonus;
+        currentTime++;
         if (OnTimeUpdated != null)
             OnTimeUpdated(currentTime);
     }

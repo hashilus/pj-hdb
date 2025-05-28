@@ -24,6 +24,13 @@ public class StageController : MonoBehaviour
         {
             checkpoints[0].SetLightActive(true);
         }
+
+        if (timeline != null)
+        {
+            timeline.time = 0.0;
+            timeline.Evaluate();     // ‘¦À‚É‰ŠúƒtƒŒ[ƒ€‚Ö”½‰f
+            timeline.Stop();         // Ä¶ó‘Ô‚É“ü‚ç‚È‚¢‚æ‚¤‚É‚·‚é
+        }
     }
 
     private void Update()
