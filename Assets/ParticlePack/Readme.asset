@@ -1,29 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcf7219bab7fe46a1ad266029b2fee19, type: 3}
-  m_Name: Readme
-  m_EditorClassIdentifier: 
-  icon: {fileID: 2800000, guid: cfa6d60f1f958ba46a105ca98716c259, type: 3}
-  title: Particle Pack
-  sections:
-  - heading: パーティクルパックとは？
-    text: パーティクルパックは、ゲームに簡単に追加したり、UnityのShurikenパーティクルシステムについて詳しく学んだりできるサンプルエフェクトのコレクションです。W、A、S、Dキーとマウスを使って、サンプルの一人称視点シーンを探索してみましょう。パーティクルシステムを確認すると、各エフェクトの詳細情報が表示されます。
-    linkText: 
-    url: 
-  - heading: How do I use it?
-    text: これらのサンプルをご自身のプロジェクトで使用するには、エフェクトのフォルダを選択し、上部バーの「アセット」メニューから「パッケージのエクスポート」コマンドを使用してください。エフェクトによっては、「Shared」フォルダを追加したり、エクスポートウィンドウから不要なスクリプトを削除したりする必要があるかもしれません。エフェクトのエクスポートが完了したら、「アセット」メニューから「パッケージのインポート」→「カスタムパッケージ」オプションを選択して、このパッケージをご自身のプロジェクトにインポートしてください。
-    linkText: 
-    url: 
-  - heading: Got feedback?
-    text: 'Let us know what you think or ask any questions you might have on our FORUM. '
-    linkText: Forum Thread
-    url: https://forum.unity.com/threads/new-particle-pack.548347/
-  loadedLayout: 1
+version https://git-lfs.github.com/spec/v1
+oid sha256:23ff5632516458e953b7193eb3afaf4fed47a687da3df395e3032c4129181cad
+size 2088
