@@ -29,4 +29,12 @@ public partial class Settings
         public static SettingVector3 ControllerOffsetR = new("Rコントローラーのオフセット", new Vector3(1f,-0.5f,-1f));
         public static SettingFloat ControllerXRotationOffset = new("コントローラーのX軸回転オフセット", -5f);
     }
+
+    public class ControllerAngle
+    {
+        public static SettingFloat XAxisMinAngle = new("コントローラーのX軸最小角度", -45f);
+        public static SettingFloat XAxisMaxAngle = new("コントローラーのX軸最大角度", 45f);
+        public static SettingFloat YAxisMinAngle = new("コントローラーのY軸最小角度", -45f);
+        public static SettingFloat YAxisMaxAngle = new("コントローラーのY軸最大角度", 45f);
+    }
 }

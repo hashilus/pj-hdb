@@ -162,6 +162,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8370324987915538366}
   - component: {fileID: 8955388829029716596}
+  - component: {fileID: 9063460347214698436}
   m_Layer: 0
   m_Name: CalibratedPositionProvider
   m_TagString: Untagged
@@ -197,8 +198,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trackingTransform: {fileID: 86841432782353778}
-  controllerOrgTransform: {fileID: 7920651022450081116}
   controller: {fileID: 4784648056786493642}
+  isLController: 0
+--- !u!114 &9063460347214698436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2529648477684636207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b8618e052c646f44b90309a1ade72a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTransform: {fileID: 4784648056786493642}
   isLController: 0
 --- !u!1 &3510793635299709782
 GameObject:

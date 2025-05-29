@@ -36,6 +36,13 @@ public class CalibratedPositionProvider : MonoBehaviour
             gameObject.SetActive(false);
         }
 
+        if(CalibrationPositionHolder.Instance.IsCalibrated)
+        {
+            trackingOrgPos = CalibrationPositionHolder.Instance.GetPosition(isLController ? CalibrationPositionHolder.PlayerSelection.Player2 : CalibrationPositionHolder.PlayerSelection.Player1);
+            trackingOrgRot = CalibrationPositionHolder.Instance.GetRotation(isLController ? CalibrationPositionHolder.PlayerSelection.Player2 : CalibrationPositionHolder.PlayerSelection.Player1);
+            controller.gameObject.SetActive(true);
+        }
+
         // 遅延させないと値が拾えない
         StartCoroutine(Delay(() => trackingTransform.gameObject.SetActive(true), 1f));
     }
@@ -98,6 +105,16 @@ public class CalibratedPositionProvider : MonoBehaviour
         trackingOrgPos = trackingTransform.position;
         trackingOrgRot = trackingTransform.rotation;
         controller.gameObject.SetActive(true);
+
+        CalibrationPositionHolder.Instance.SetPosition(
+            isLController ? CalibrationPositionHolder.PlayerSelection.Player2 : CalibrationPositionHolder.PlayerSelection.Player1,
+            trackingOrgPos
+        );
+        CalibrationPositionHolder.Instance.SetRotation(
+            isLController ? CalibrationPositionHolder.PlayerSelection.Player2 : CalibrationPositionHolder.PlayerSelection.Player1,
+            trackingOrgRot
+        );
+        CalibrationPositionHolder.Instance.IsCalibrated = true;
 
         AirBlowPermission.SetPlayerSelection(
             isLController ? AirBlowPermission.PlayerSelection.Player2 : AirBlowPermission.PlayerSelection.Player1,
