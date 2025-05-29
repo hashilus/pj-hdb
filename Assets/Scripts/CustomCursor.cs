@@ -47,7 +47,7 @@ public class CustomCursor : MonoBehaviour
     
     void Start()
     {
-        // Cursor.visible = false; // 一時的なコメントアウト（後で戻す）
+        Cursor.visible = false;
         Vector2 screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
         currentPos = screenCenter;
         cursorRect.position = screenCenter;
