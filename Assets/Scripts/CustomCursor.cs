@@ -42,6 +42,9 @@ public class CustomCursor : MonoBehaviour
     [SerializeField]
     AirController airController;
 
+    [SerializeField]
+    ReticleController reticle;
+    
     void Start()
     {
         // Cursor.visible = false; // 一時的なコメントアウト（後で戻す）
@@ -175,6 +178,7 @@ public class CustomCursor : MonoBehaviour
         if (destroyer != null)
         {
             destroyer.particlePrefab = hitParticlePrefab;
+            destroyer.Reticle = reticle;
         }
 
         float timeSinceLastShot = Time.time - lastShotTime;

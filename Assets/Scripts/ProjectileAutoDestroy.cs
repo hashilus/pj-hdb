@@ -12,6 +12,8 @@ public class ProjectileAutoDestroy : MonoBehaviour
     private SphereCollider sphereCol;
     private ReticleController reticle;
 
+    public ReticleController Reticle { set => reticle = value; }
+
     private float originalRadius;
     private bool hasCollided = false; // ← これが重要
 
@@ -20,8 +22,6 @@ public class ProjectileAutoDestroy : MonoBehaviour
         sphereCol = GetComponent<SphereCollider>();
         if (sphereCol != null)
             originalRadius = sphereCol.radius;
-
-        reticle = FindObjectOfType<ReticleController>();
     }
 
     void OnCollisionEnter(Collision collision)
