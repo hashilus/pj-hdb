@@ -20,11 +20,16 @@ public class CalibratedPositionProvider : MonoBehaviour
 
     Vector3 trackingBeforPos;
     Quaternion trackingBeforRot;
+
     bool isLost;
     float lostCheckTime;
 
     Vector3 ControllerOffset => isLController ? Settings.Calibration.ControllerOffsetL : Settings.Calibration.ControllerOffsetR;
     
+    CalibrationPositionHolder.PlayerSelection playerSelection => isLController
+        ? CalibrationPositionHolder.PlayerSelection.Player2
+        : CalibrationPositionHolder.PlayerSelection.Player1;
+
     void Start()
     {
         controllerOrgTransform = Camera.main.transform;
@@ -38,8 +43,8 @@ public class CalibratedPositionProvider : MonoBehaviour
 
         if(CalibrationPositionHolder.Instance.IsCalibrated)
         {
-            trackingOrgPos = CalibrationPositionHolder.Instance.GetPosition(isLController ? CalibrationPositionHolder.PlayerSelection.Player2 : CalibrationPositionHolder.PlayerSelection.Player1);
-            trackingOrgRot = CalibrationPositionHolder.Instance.GetRotation(isLController ? CalibrationPositionHolder.PlayerSelection.Player2 : CalibrationPositionHolder.PlayerSelection.Player1);
+            trackingOrgPos = CalibrationPositionHolder.Instance.GetPosition(playerSelection);
+            trackingOrgRot = CalibrationPositionHolder.Instance.GetRotation(playerSelection);
             controller.gameObject.SetActive(true);
         }
 
@@ -99,21 +104,15 @@ public class CalibratedPositionProvider : MonoBehaviour
             -eulerAngles.y, // 座標変換（Y軸回転を反転させる）
             eulerAngles.z);
     }
-
+    
     public void Calibrate()
     {
         trackingOrgPos = trackingTransform.position;
         trackingOrgRot = trackingTransform.rotation;
         controller.gameObject.SetActive(true);
 
-        CalibrationPositionHolder.Instance.SetPosition(
-            isLController ? CalibrationPositionHolder.PlayerSelection.Player2 : CalibrationPositionHolder.PlayerSelection.Player1,
-            trackingOrgPos
-        );
-        CalibrationPositionHolder.Instance.SetRotation(
-            isLController ? CalibrationPositionHolder.PlayerSelection.Player2 : CalibrationPositionHolder.PlayerSelection.Player1,
-            trackingOrgRot
-        );
+        CalibrationPositionHolder.Instance.SetPosition(playerSelection, trackingOrgPos);
+        CalibrationPositionHolder.Instance.SetRotation(playerSelection, trackingOrgRot);
         CalibrationPositionHolder.Instance.IsCalibrated = true;
 
         AirBlowPermission.SetPlayerSelection(
