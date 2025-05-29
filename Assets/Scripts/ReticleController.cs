@@ -4,8 +4,7 @@ public class ReticleController : MonoBehaviour
 {
     public Camera mainCamera;
     public float autoHideDelay = 1f;
-    public float moveSmoothTime = 0.1f; // スムーズ移動速度
-    public float scaleSmoothTime = 0.1f; // スケール変更のスムーズ時間
+    public float moveSmoothTime = 0.001f; // スムーズ移動速度
 
     private float hideTimer = -1f;
     private bool isVisible = false;
@@ -43,10 +42,9 @@ public class ReticleController : MonoBehaviour
 
             // カメラからの距離に応じてスケールを調整
             float distance = Vector3.Distance(mainCamera.transform.position, transform.position);
+
             float targetScale = CalculateScaleForDistance(distance);
-            float currentScale = transform.localScale.x;
-            float newScale = Mathf.SmoothDamp(currentScale, targetScale, ref scaleVelocity, scaleSmoothTime);
-            transform.localScale = Vector3.one * newScale;
+            transform.localScale = Vector3.one * targetScale;
 
             // 表示タイマー
             if (Time.time > hideTimer)
