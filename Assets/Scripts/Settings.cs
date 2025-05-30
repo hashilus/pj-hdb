@@ -13,6 +13,7 @@ public partial class Settings
         public static SettingFloat AirBlowToWeakenWait = new("空気吹きを弱めるまでの待機時間(秒)", 2f);
         public static SettingFloat TrackerLostCheckDuration = new("トラッカーが見失われたとみなすまでの時間(秒)", 1f);
         public static SettingFloat TargetScreenSize = new("レティクルの画面上での目標サイズ（画面の割合）", 0.23f);
+        public static SettingFloat ReticleMoveTime = new("レティクルの移動時間", 0.1f);
     }
 
     public class Calibration
