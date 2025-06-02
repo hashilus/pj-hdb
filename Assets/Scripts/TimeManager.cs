@@ -12,6 +12,7 @@ public class TimeManager : MonoBehaviour
     public Action<float> OnTimeUpdated; // UI表示更新用
 
     public TextMesh dispTime;
+    public TextMesh dispTimeDecimal;
 
     void Start()
     {
@@ -22,6 +23,9 @@ public class TimeManager : MonoBehaviour
     void Update()
     {
         dispTime.text = currentTime.ToString("000");
+        string timeStr = currentTime.ToString("F1");
+        string[] parts = timeStr.Split('.');
+        dispTimeDecimal.text = parts[1];
 
         if (!isCountingDown) return;
 

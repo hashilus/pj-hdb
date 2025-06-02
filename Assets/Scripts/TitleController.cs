@@ -11,6 +11,21 @@ public class TitleController : MonoBehaviour
 
     public StageController stageController;
 
+    public bool isStarting = false; // スタートボタンが押されたかどうか
+
+    public int player1StartCount;
+    public int player2StartCount;
+
+    public int startupnumber;
+
+    public TextMesh debug_1pHit;
+    public TextMesh debug_2pHit;
+
+    float gameStartingTimer = 10.0f;
+
+    public GameObject player1Timer;
+    public GameObject player2Timer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,11 +38,41 @@ public class TitleController : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (player1StartCount > startupnumber)
+        {
+            player1Timer.SetActive(true);
+            gameStartingTimer -= Time.deltaTime; // タイマーを減らす
+        }
+
+        if (player2StartCount > startupnumber)
+        {
+            player2Timer.SetActive(true);
+            gameStartingTimer -= Time.deltaTime; // タイマーを減らす
+        }
+
+        if(player1StartCount > startupnumber && player2StartCount > startupnumber)
+        {
+            isStarting = true;
+        }
+
+        if(gameStartingTimer < 0)
+        {
+            isStarting = true;
+        }
+
+        debug_1pHit.text = player1StartCount.ToString();
+        debug_2pHit.text = player2StartCount.ToString();
+
+
+        if (Input.GetKeyDown(KeyCode.Space) || isStarting)
         {
             stageController.timeline.Play();
             title_objects.SetActive(false);
             ui_objects.SetActive(true);
+            isStarting = false; 
+            gameStartingTimer　=10f; // タイマーをリセット
+            player1StartCount = 0; // スタートカウントをリセット
+            player2StartCount = 0; // スタートカウントをリセット
         }
 
     }

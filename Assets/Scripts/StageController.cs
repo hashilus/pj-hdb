@@ -45,6 +45,8 @@ public class StageController : MonoBehaviour
             Application.Quit();
         }
 
+
+
     }
 
     /// <summary>
