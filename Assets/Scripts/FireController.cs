@@ -29,6 +29,9 @@ public class FireController : MonoBehaviour
     public float smokeStopDelay = 2f;    // 消火後にEmission止めるまでの秒数
     public float destroyDelay = 5f;      // 完全消滅までの秒数
 
+    [Header("Small Particle")]
+    public ParticleSystem smallfireParticle;
+
     public Checkpoint checkpoint; // Inspectorでなくコードから設定
 
     private ParticleSystem.EmissionModule smokeEmission;
@@ -42,6 +45,7 @@ public class FireController : MonoBehaviour
 
     private void Start()
     {
+        maxScale = transform.localScale; // 初期スケールを最大スケールに設定
         life = initialLife;
         transform.localScale = maxScale;
 
@@ -118,20 +122,25 @@ public class FireController : MonoBehaviour
 
         if (fireParticle != null)
         {
-            var fireEmission = fireParticle.emission;
-            fireEmission.rateOverTime = new ParticleSystem.MinMaxCurve(0f);
+            fireParticle.gameObject.SetActive(false);
         }
 
         if (emberParticle != null)
         {
-            var emberEmission = emberParticle.emission;
-            emberEmission.rateOverTime = new ParticleSystem.MinMaxCurve(0f);
+            emberParticle.gameObject.SetActive(false);
+        }
+
+        if (smallfireParticle != null)
+        {
+            smallfireParticle.transform.parent = null; // 親を外す
+            smallfireParticle.gameObject.SetActive(true);
+            Destroy(smallfireParticle.gameObject, 2f); // 2秒後に消す
         }
 
         if (checkpoint != null)
             checkpoint.NotifyFireExtinguished(this);
 
-        StartCoroutine(HandleSmokeFadeOut());
+        //StartCoroutine(HandleSmokeFadeOut());
     }
 
 

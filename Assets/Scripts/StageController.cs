@@ -45,8 +45,6 @@ public class StageController : MonoBehaviour
             Application.Quit();
         }
 
-
-
     }
 
     /// <summary>
@@ -94,7 +92,12 @@ public class StageController : MonoBehaviour
         }
         else
         {
+            //エンディング（評価画面）
             Debug.Log("すべてのチェックポイントをクリアしました！");
+
+
+
+
         }
     }
 }

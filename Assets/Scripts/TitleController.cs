@@ -23,6 +23,9 @@ public class TitleController : MonoBehaviour
 
     float gameStartingTimer = 10.0f;
 
+    public GameObject player1Ready;
+    public GameObject player2Ready;
+
     public GameObject player1Timer;
     public GameObject player2Timer;
 
@@ -40,14 +43,18 @@ public class TitleController : MonoBehaviour
 
         if (player1StartCount > startupnumber)
         {
-            player1Timer.SetActive(true);
+            player2Timer.SetActive(true);
+            player1Ready.SetActive(true);
             gameStartingTimer -= Time.deltaTime; // タイマーを減らす
+            player2StartCount = startupnumber - 1;
         }
 
         if (player2StartCount > startupnumber)
         {
-            player2Timer.SetActive(true);
+            player1Timer.SetActive(true);
+            player2Ready.SetActive(true);
             gameStartingTimer -= Time.deltaTime; // タイマーを減らす
+            player1StartCount = startupnumber - 1;
         }
 
         if(player1StartCount > startupnumber && player2StartCount > startupnumber)

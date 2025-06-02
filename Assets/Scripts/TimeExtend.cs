@@ -30,6 +30,11 @@ public class TimeExtendDisplay : MonoBehaviour
     /// </summary>
     public void ShowExtend(int amount)
     {
+        if(amount == 0)
+        {
+            return;
+        }
+
         if (extendRoutine != null)
             StopCoroutine(extendRoutine);
 
