@@ -45,6 +45,15 @@ public class CustomCursor : MonoBehaviour
     [SerializeField]
     ReticleController reticle;
     
+    Vector3 barrelPosition => Settings.System.IsUseTracker 
+            ? trackerTransform.position 
+            : cameraTransform.position + cameraTransform.TransformDirection(Vector3.down * 0.3f);
+
+    Vector3 barrelDirection => (Settings.System.IsUseTracker
+            ? new Ray(barrelPosition, trackerTransform.forward)
+            : Camera.main.ScreenPointToRay(currentPos))
+            .direction;
+
     void Start()
     {
         Cursor.visible = false;
@@ -78,6 +87,9 @@ public class CustomCursor : MonoBehaviour
 
     void Update()
     {
+        // 銃身を方向を更新
+        gunBarrel.rotation = Quaternion.LookRotation(barrelDirection, Vector3.up);
+
         if (Settings.System.IsUseTracker)
         {
             if (AirBlowPermission.CanBlow(isSecondPlayer ? AirBlowPermission.PlayerSelection.Player2 : AirBlowPermission.PlayerSelection.Player1))
@@ -129,6 +141,7 @@ public class CustomCursor : MonoBehaviour
 
     void Shooting()
     {
+
         ShootProjectile();
         shootTimer = 0f;
 
@@ -149,29 +162,15 @@ public class CustomCursor : MonoBehaviour
         emission = water.emission;
         emission.rateOverTime = 0f;
     }
-  
+
     void ShootProjectile()
-    {        
-        Vector3 origin = Settings.System.IsUseTracker 
-            ? trackerTransform.position 
-            : cameraTransform.position + cameraTransform.TransformDirection(Vector3.down * 0.3f);
-
-        Ray ray = Settings.System.IsUseTracker
-            ? new Ray(origin, trackerTransform.forward)
-            : Camera.main.ScreenPointToRay(currentPos);
-
-        // 銃身をRayの方向に向ける（回転はしない）
-        if (gunBarrel != null)
-        {
-            gunBarrel.rotation = Quaternion.LookRotation(ray.direction, Vector3.up);
-        }
-
-        GameObject proj = Instantiate(projectilePrefab, origin, Quaternion.identity);
+    {
+        GameObject proj = Instantiate(projectilePrefab, barrelPosition, Quaternion.identity);
 
         Rigidbody rb = proj.GetComponent<Rigidbody>();
         if (rb != null)
         {
-            rb.AddForce(ray.direction.normalized * shootForce);
+            rb.AddForce(barrelDirection.normalized * shootForce);
         }
 
         var destroyer = proj.GetComponent<ProjectileAutoDestroy>();

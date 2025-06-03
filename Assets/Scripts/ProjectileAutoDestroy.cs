@@ -38,8 +38,8 @@ public class ProjectileAutoDestroy : MonoBehaviour
         }
 
         // レティクル表示（初回のみ）
-        if (reticle != null)
-            reticle.ShowAt(transform.position);
+        // if (reticle != null)
+        //     reticle.ShowAt(transform.position);
 
         // 拡大コライダー処理
         if (sphereCol != null)

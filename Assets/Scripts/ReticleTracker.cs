@@ -3,26 +3,22 @@ using UnityEngine;
 public class ReticleTracker : MonoBehaviour
 {
     [SerializeField]
-    private Transform controllerTransform;
+    Transform controllerTransform;
 
     [SerializeField]
-    // private ReticleController reticleController;
-    private Transform reticleTransform;
+    float predictionTime = 2f; // 予測時間（秒）
 
     [SerializeField]
-    private float predictionTime = 2f; // 予測時間（秒）
+    float projectileSpeed = 20f; // 発射体の初速
 
     [SerializeField]
-    private float projectileSpeed = 20f; // 発射体の初速
+    int predictionSteps = 20; // 予測の分割数
 
     [SerializeField]
-    private int predictionSteps = 20; // 予測の分割数
+    ReticleController reticleController;
 
-    private void Update()
+    void Update()
     {
-        if (controllerTransform == null || reticleTransform == null)
-            return;
-
         // 発射体の初期位置と速度を設定
         Vector3 startPosition = controllerTransform.position;
         Vector3 initialVelocity = controllerTransform.forward * projectileSpeed;
@@ -30,12 +26,10 @@ public class ReticleTracker : MonoBehaviour
         // 予測軌道を計算
         Vector3 predictedPosition = PredictTrajectory(startPosition, initialVelocity);
 
-        // 予測位置にレティクルを表示
-        // reticleController.UpdatePosition(predictedPosition);
-        reticleTransform.position = predictedPosition;
+        reticleController.ShowAt(predictedPosition);
     }
 
-    private Vector3 PredictTrajectory(Vector3 startPosition, Vector3 initialVelocity)
+    Vector3 PredictTrajectory(Vector3 startPosition, Vector3 initialVelocity)
     {
         Vector3 currentPosition = startPosition;
         Vector3 currentVelocity = initialVelocity;
@@ -62,7 +56,7 @@ public class ReticleTracker : MonoBehaviour
     }
 
     // デバッグ用：予測軌道を可視化
-    private void OnDrawGizmos()
+    void OnDrawGizmos()
     {
         if (controllerTransform == null)
             return;
@@ -82,4 +76,4 @@ public class ReticleTracker : MonoBehaviour
             Gizmos.DrawLine(previousPosition, currentPosition);
         }
     }
-} 
+}

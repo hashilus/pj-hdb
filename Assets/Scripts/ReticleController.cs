@@ -31,7 +31,7 @@ public class ReticleController : MonoBehaviour
 
     void Update()
     {
-        if (isVisible)
+        // if (isVisible)
         {
             // カメラの向きに合わせる
             transform.forward = mainCamera.transform.forward;
@@ -45,9 +45,9 @@ public class ReticleController : MonoBehaviour
             float targetScale = CalculateScaleForDistance(distance);
             transform.localScale = Vector3.one * targetScale;
 
-            // 表示タイマー
-            if (Time.time > hideTimer)
-                SetVisible(false);
+            // // 表示タイマー
+            // if (Time.time > hideTimer)
+            //     SetVisible(false);
         }
     }
 
