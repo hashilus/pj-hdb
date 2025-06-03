@@ -9,9 +9,6 @@ public class ReticleTracker : MonoBehaviour
     float predictionTime = 2f; // 予測時間（秒）
 
     [SerializeField]
-    float projectileSpeed = 20f; // 発射体の初速
-
-    [SerializeField]
     int predictionSteps = 20; // 予測の分割数
 
     [SerializeField]
@@ -21,12 +18,12 @@ public class ReticleTracker : MonoBehaviour
     {
         // 発射体の初期位置と速度を設定
         Vector3 startPosition = controllerTransform.position;
-        Vector3 initialVelocity = controllerTransform.forward * projectileSpeed;
+        Vector3 initialVelocity = controllerTransform.forward * Settings.System.ReticleProjectileSpeed;
 
         // 予測軌道を計算
         Vector3 predictedPosition = PredictTrajectory(startPosition, initialVelocity);
 
-        reticleController.ShowAt(predictedPosition);
+        reticleController.ShowAt(predictedPosition + Settings.System.ReticleOffset);
     }
 
     Vector3 PredictTrajectory(Vector3 startPosition, Vector3 initialVelocity)
@@ -62,7 +59,7 @@ public class ReticleTracker : MonoBehaviour
             return;
 
         Vector3 startPosition = controllerTransform.position;
-        Vector3 initialVelocity = controllerTransform.forward * projectileSpeed;
+        Vector3 initialVelocity = controllerTransform.forward * Settings.System.ReticleProjectileSpeed;
         Vector3 currentPosition = startPosition;
         Vector3 currentVelocity = initialVelocity;
         float timeStep = predictionTime / predictionSteps;
