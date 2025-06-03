@@ -5,15 +5,10 @@ public class ReticleController : MonoBehaviour
     public Camera mainCamera;
     public float autoHideDelay = 1f;
 
-    private float hideTimer = -1f;
-    private bool isVisible = false;
-
     private Renderer rend;
-    private Vector3 originalScale;
 
     private Vector3 targetPosition;
     private Vector3 velocity = Vector3.zero;
-    private float scaleVelocity = 0f;
 
     void Awake()
     {
@@ -24,31 +19,22 @@ public class ReticleController : MonoBehaviour
         if (mainCamera == null)
             mainCamera = Camera.main;
 
-        originalScale = transform.localScale;
-        SetVisible(false);
         targetPosition = transform.position;
     }
 
     void Update()
     {
-        // if (isVisible)
-        {
-            // カメラの向きに合わせる
-            transform.forward = mainCamera.transform.forward;
+        // カメラの向きに合わせる
+        transform.forward = mainCamera.transform.forward;
 
-            // スムーズに移動
-            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, Settings.System.ReticleMoveTime);
+        // スムーズに移動
+        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, Settings.System.ReticleMoveTime);
 
-            // カメラからの距離に応じてスケールを調整
-            float distance = Vector3.Distance(mainCamera.transform.position, transform.position);
+        // カメラからの距離に応じてスケールを調整
+        float distance = Vector3.Distance(mainCamera.transform.position, transform.position);
 
-            float targetScale = CalculateScaleForDistance(distance);
-            transform.localScale = Vector3.one * targetScale;
-
-            // // 表示タイマー
-            // if (Time.time > hideTimer)
-            //     SetVisible(false);
-        }
+        float targetScale = CalculateScaleForDistance(distance);
+        transform.localScale = Vector3.one * targetScale;
     }
 
     private float CalculateScaleForDistance(float distance)
@@ -62,14 +48,5 @@ public class ReticleController : MonoBehaviour
     public void ShowAt(Vector3 worldPosition)
     {
         targetPosition = worldPosition;
-        SetVisible(true);
-        hideTimer = Time.time + autoHideDelay;
-    }
-
-    private void SetVisible(bool visible)
-    {
-        isVisible = visible;
-        if (rend != null)
-            rend.enabled = visible;
     }
 }
