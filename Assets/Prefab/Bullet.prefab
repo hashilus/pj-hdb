@@ -148,5 +148,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particlePrefab: {fileID: 1722726733478836, guid: c1c88308ebb5d2541a282905b854ee4c, type: 3}
   spawnChance: 0.393
-  impactRadiusMultiplier: 3
-  impactDuration: 0.2

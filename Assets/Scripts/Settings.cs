@@ -34,5 +34,7 @@ public partial class Settings
     public class Bullet
     {
         public static SettingFloat RadiusFactor = new("弾のサイズ係数", 1.0f);
+        public static SettingFloat ImpactRadiusFactor = new("ヒット時の弾のサイズ係数", 1.2f);
+        public static SettingFloat ImpactDuration = new("ヒット後の弾の寿命 (秒)", 0.2f);
     }
 }
