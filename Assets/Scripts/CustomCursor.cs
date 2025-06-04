@@ -26,7 +26,6 @@ public class CustomCursor : MonoBehaviour
     private Vector2 currentPos;
     private float shootTime;
     private GameObject lastProjectile = null;
-    private float lastShotTime = 0f;
 
     public ParticleSystem gunsmoke;
     public ParticleSystem gas;
@@ -182,14 +181,13 @@ public class CustomCursor : MonoBehaviour
             destroyer.Reticle = reticle;
         }
 
-        float timeSinceLastShot = Time.time - lastShotTime;
+        float timeSinceLastShot = Time.time - shootTime;
         if (enableLineRendering && lastProjectile != null && timeSinceLastShot <= 0.5f)
         {
             CreateLineBetween(lastProjectile, proj);
         }
 
         lastProjectile = proj;
-        lastShotTime = Time.time;
 
         Destroy(proj, 2f);
     }
