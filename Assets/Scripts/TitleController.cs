@@ -31,6 +31,9 @@ public class TitleController : MonoBehaviour
     public GameObject player1Timer;
     public GameObject player2Timer;
 
+    bool start1P_Confirmed;
+    bool start2P_Confirmed;
+
     void Start()
     {
         title_objects.SetActive(true);
@@ -45,7 +48,11 @@ public class TitleController : MonoBehaviour
             player2Timer.SetActive(true);
             player1Ready.SetActive(true);
             gameStartingTimer -= Time.deltaTime;
-            player2StartCount = startupnumber - 1;
+            if (!start1P_Confirmed)
+            {
+                player2StartCount = startupnumber - 1;
+            }
+            start1P_Confirmed = true;
         }
 
         if (player2StartCount > startupnumber)
@@ -53,7 +60,11 @@ public class TitleController : MonoBehaviour
             player1Timer.SetActive(true);
             player2Ready.SetActive(true);
             gameStartingTimer -= Time.deltaTime;
-            player1StartCount = startupnumber - 1;
+            if (!start2P_Confirmed)
+            {
+                player1StartCount = startupnumber - 1;
+            }
+            start2P_Confirmed = true;
         }
 
         if (player1StartCount > startupnumber && player2StartCount > startupnumber)

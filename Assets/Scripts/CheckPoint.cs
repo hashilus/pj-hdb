@@ -116,5 +116,12 @@ public class Checkpoint : MonoBehaviour
         // ‘¼‚ÌƒNƒŠƒAˆ—
     }
 
+    // Œ»İc‚Á‚Ä‚¢‚é‰Î‚ÌŒÂ”‚ğ•Ô‚·
+    public int GetCurrentFireCount()
+    {
+        return this.transform.childCount;
+    }
+
+
 
 }

@@ -14,9 +14,6 @@ public class StageController : MonoBehaviour
     [Header("メインTimeline")]
     public PlayableDirector timeline;
 
-    [Header("オールクリア後Timeline")]
-    public PlayableDirector after_timeline;
-
     private int currentIndex = 0;
 
     public bool isReset;
@@ -50,13 +47,6 @@ public class StageController : MonoBehaviour
             timeline.Stop();
         }
 
-        if (after_timeline != null)
-        {
-            after_timeline.stopped += OnAfterTimelineStopped;
-            after_timeline.time = 0.0;
-            after_timeline.Evaluate();
-            after_timeline.Stop();
-        }
     }
 
     private void Update()
@@ -130,8 +120,8 @@ public class StageController : MonoBehaviour
         else
         {
             // エンディング（クリア後Timeline）
-            Debug.Log("すべてのチェックポイントをクリアしました！ オールクリアTimeline開始");
-            after_timeline?.Play();
+            Debug.Log("すべてのチェックポイントをクリアしました！");
+            timeline.Play();
         }
     }
 
@@ -156,4 +146,12 @@ public class StageController : MonoBehaviour
         // ここは今後 Title に戻す／UI表示する場所になる
         // 例: titleController.ResetTitle() を呼ぶ など
     }
+
+    public void ReloadScene()
+    {
+        Debug.Log("StageController → ReloadScene() 実行 → シーンリセット");
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
 }
