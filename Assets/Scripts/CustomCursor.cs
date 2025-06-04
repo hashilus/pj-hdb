@@ -167,6 +167,7 @@ public class CustomCursor : MonoBehaviour
         }
 
         GameObject proj = Instantiate(projectilePrefab, origin, Quaternion.identity);
+        proj.transform.localScale *= Settings.Bullet.RadiusFactor;
 
         Rigidbody rb = proj.GetComponent<Rigidbody>();
         if (rb != null)

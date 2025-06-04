@@ -30,4 +30,9 @@ public partial class Settings
         public static SettingFloat YAxisMinAngle = new("コントローラーのY軸最小角度", -45f);
         public static SettingFloat YAxisMaxAngle = new("コントローラーのY軸最大角度", 45f);
     }
+
+    public class Bullet
+    {
+        public static SettingFloat RadiusFactor = new("弾のサイズ係数", 1.0f);
+    }
 }
