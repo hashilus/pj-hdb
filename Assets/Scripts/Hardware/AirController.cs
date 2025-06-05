@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class AirController : MonoBehaviour
 {
+    [SerializeField]
+    bool isLController;
+
     public enum Flow
     {
         Air0,
@@ -21,11 +24,8 @@ public class AirController : MonoBehaviour
     {
         if (!Settings.System.IsUseTracker) return;
 
-        var player = GetComponentInParent<Player>();
-        var isLeft = player.ID == PlayerID.Player1;
-
-        var haccAddress = isLeft ? Settings.System.HACCAddressL : Settings.System.HACCAddressR;
-        var haccPort = isLeft ? Settings.System.HACCPortL : Settings.System.HACCPortR;
+        var haccAddress = isLController ? Settings.System.HACCAddressL : Settings.System.HACCAddressR;
+        var haccPort = isLController ? Settings.System.HACCPortL : Settings.System.HACCPortR;
 
         Init(haccAddress, haccPort);
     }
@@ -73,6 +73,8 @@ public class AirController : MonoBehaviour
 
     void OnDestroy()
     {
+        if (!Settings.System.IsUseTracker) return;
+
         StopBlow();
     }
 }
