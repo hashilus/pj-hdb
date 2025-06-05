@@ -19,12 +19,7 @@ namespace Hashilus.Setting
         public override void OnGUI()
         {
 #if UNITY_EDITOR
-            Value = (T)(object)EditorGUILayout.EnumPopup(Description, (Enum)(object)Value);
-            if (!Value.Equals(previousValue))
-            {
-                Settings.SaveAsUserLocal();
-                previousValue = Value;
-            }
+            SaveValueOnGUI((T)(object)EditorGUILayout.EnumPopup(Description, (Enum)(object)Value));
 #endif
         }
     }

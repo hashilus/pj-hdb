@@ -27,7 +27,7 @@ namespace Hashilus.Setting
             }
             catch
             {
-                Debug.LogWarning(Key + "の値" + valueString + "が" + typeof(ValueT).Name + "として読み込めなかったため" + DefaultValue + "を使用します。");
+                Debug.LogWarning($"{Key}の値{valueString}が{typeof(ValueT).Name}として読み込めなかったため{DefaultValue.ToString()}を使用します。");
                 Value = DefaultValue;
             }
 
@@ -49,6 +49,28 @@ namespace Hashilus.Setting
         }
 
         public abstract void OnGUI();
+
+#if UNITY_EDITOR
+        protected void SaveValueOnGUI(ValueT value)
+        {
+            if (!value.Equals(previousValue))
+            {
+                Value = value;
+                Settings.SaveAsUserLocal();
+                Settings.Load();
+                if (!value.Equals(Value))
+                {
+                    var postscript = "";
+                    if (value.Equals(DefaultValue) && !Value.Equals(DefaultValue))
+                    {
+                        postscript = "グローバル設定がデフォルト値と異なるため、一度「デフォルト設定で書き出し」をおすすめします。";
+                    }
+                    Debug.LogWarning($"{Key}の値を{value}に変更できませんでした。現在の値は{Value}です。{postscript}");
+                }
+                previousValue = Value;
+            }
+        }
+#endif
 
         public override string ToString()
         {

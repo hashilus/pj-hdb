@@ -38,10 +38,17 @@ namespace Hashilus.Setting
             var group = SettingsReaderWriter.GetFieldHierarchy<Settings>();
             WalkGroupOnGUI(group, "Settings");
 
-            if (GUILayout.Button("デフォルト設定で書き出し（テンプレート生成用）"))
+            if (GUILayout.Button("デフォルト設定で書き出し（テンプレート生成用 / ユーザーローカル設定は残ります）"))
             {
                 Settings.Reset();
                 Settings.Save();
+                Settings.Load();
+            }
+
+            if (GUILayout.Button("ユーザーローカル設定（このウィンドウで変更した設定）を削除"))
+            {
+                Settings.RemoveUserLocal();
+                Settings.Load();
             }
 
             GUILayout.EndScrollView();

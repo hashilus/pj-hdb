@@ -7,7 +7,7 @@ namespace Hashilus.Setting
 {
     public class SettingTimeSpan : SettingField<TimeSpan>
     {
-        public float TotalSeconds { get { return (float)Value.TotalSeconds; } }
+        public float TotalSeconds => (float)Value.TotalSeconds;
 
         public SettingTimeSpan(string description, TimeSpan defaultValue) : base(description + "(分:秒 / 秒)", defaultValue) { }
 
@@ -33,17 +33,11 @@ namespace Hashilus.Setting
 
             try
             {
-                Value = Parse(inputValue);
+                SaveValueOnGUI(Parse(inputValue));
             }
             catch
             {
-                Value = previousValue;
-            }
-
-            if (!Value.Equals(previousValue))
-            {
-                Settings.SaveAsUserLocal();
-                previousValue = Value;
+                //L.Warn(LogPlace.Setting, $"{Key}の値{inputValue}が{typeof(TimeSpan).Name}として読み込めませんでした。");
             }
 #endif
         }
@@ -52,7 +46,7 @@ namespace Hashilus.Setting
         {
             if (Value.TotalMinutes >= 1f)
             {
-                return Value.Minutes + ":" + Value.Seconds.ToString("00");
+                return $"{((int)Value.TotalMinutes).ToString()}:{Value.Seconds:00}";
             }
             else
             {

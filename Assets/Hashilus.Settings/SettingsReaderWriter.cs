@@ -4,7 +4,6 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Xml;
-using UnityEngine;
 
 namespace Hashilus.Setting
 {
@@ -49,12 +48,12 @@ namespace Hashilus.Setting
                     }
                     catch (Exception e)
                     {
-                        Debug.LogError("設定ファイル" + pathWithoutExtension + ".xml の読み込みに失敗しました\n" + e);
+                        UnityEngine.Debug.LogError("設定ファイル" + pathWithoutExtension + ".xml の読み込みに失敗しました\n" + e);
                     }
                 }
                 else if (!allowNoFile)
                 {
-                    Debug.LogError("設定ファイル" + pathWithoutExtension + ".xml が存在しません");
+                    UnityEngine.Debug.LogError("設定ファイル" + pathWithoutExtension + ".xml が存在しません");
                 }
             }
 
@@ -113,6 +112,30 @@ namespace Hashilus.Setting
             foreach (var childGroup in group.childGroups)
             {
                 WalkingSave(childGroup, pathWithoutExtension, writerSettings, saveModifiedOnly);
+            }
+        }
+
+        public static void Remove<StaticSettingT>(string path)
+        {
+            var pathWithoutExtension = Path.Combine(Path.GetDirectoryName(path), Path.GetFileNameWithoutExtension(path));
+
+            var group = GetFieldHierarchy<StaticSettingT>();
+            WalkingRemove(group, pathWithoutExtension);
+        }
+
+        static void WalkingRemove(SettingFieldGroup group, string pathWithoutExtension)
+        {
+            var suffix = string.IsNullOrEmpty(group.name) ? "" : "." + group.name;
+            pathWithoutExtension += suffix;
+
+            if (File.Exists(pathWithoutExtension + ".xml"))
+            {
+                File.Delete(pathWithoutExtension + ".xml");
+            }
+
+            foreach (var childGroup in group.childGroups)
+            {
+                WalkingRemove(childGroup, pathWithoutExtension);
             }
         }
 

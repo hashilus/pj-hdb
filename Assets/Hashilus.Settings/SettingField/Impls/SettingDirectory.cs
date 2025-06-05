@@ -51,12 +51,7 @@ namespace Hashilus.Setting
         public override void OnGUI()
         {
 #if UNITY_EDITOR
-            Value = EditorGUILayout.TextField(Description, Value);
-            if (!Value.Equals(previousValue))
-            {
-                Settings.SaveAsUserLocal();
-                previousValue = Value;
-            }
+            SaveValueOnGUI(EditorGUILayout.TextField(Description, Value));
 #endif
         }
     }

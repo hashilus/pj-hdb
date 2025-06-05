@@ -1,13 +1,29 @@
 ﻿using Hashilus.Setting;
+using System.IO;
 using System.Text;
 using UnityEngine;
 
 public partial class Settings
 {
     public const string FileName = "settings.xml";
-    public const string GlobalSettingsPath = "Settings/" + FileName;
-    public const string AppLocalSettingsPath = "AppLocalSettings/" + FileName;
-    public const string UserLocalSettingsPath = "UserLocalSettings/" + FileName;
+
+    const string globalSettingsPath = "Settings/" + FileName;
+    const string appLocalSettingsPath = "AppLocalSettings/" + FileName;
+    const string userLocalSettingsPath = "UserLocalSettings/" + FileName;
+
+#if UNITY_ANDROID && !UNITY_EDITOR
+    public static string GlobalSettingsPath => Path.Combine(Application.persistentDataPath, globalSettingsPath);
+    public static string AppLocalSettingsPath => Path.Combine(Application.persistentDataPath, appLocalSettingsPath);
+    public static string UserLocalSettingsPath => Path.Combine(Application.persistentDataPath, userLocalSettingsPath);
+#elif UNITY_IOS && !UNITY_EDITOR
+    public static string GlobalSettingsPath => Path.Combine(Application.persistentDataPath, globalSettingsPath);
+    public static string AppLocalSettingsPath => Path.Combine(Application.persistentDataPath, appLocalSettingsPath);
+    public static string UserLocalSettingsPath => Path.Combine(Application.persistentDataPath, userLocalSettingsPath);
+#else
+    public static string GlobalSettingsPath => globalSettingsPath;
+    public static string AppLocalSettingsPath => appLocalSettingsPath;
+    public static string UserLocalSettingsPath => userLocalSettingsPath;
+#endif
 
 #if UNITY_EDITOR
     public static bool editorLoadFinished;
@@ -37,6 +53,16 @@ public partial class Settings
         SettingsReaderWriter.Save<Settings>(UserLocalSettingsPath, saveModifiedOnly: true);
     }
 
+    public static void Remove()
+    {
+        SettingsReaderWriter.Remove<Settings>(GlobalSettingsPath);
+    }
+
+    public static void RemoveUserLocal()
+    {
+        SettingsReaderWriter.Remove<Settings>(UserLocalSettingsPath);
+    }
+
     static void LogSettingFileContent()
     {
         var sb = new StringBuilder();
@@ -46,7 +72,7 @@ public partial class Settings
         var group = SettingsReaderWriter.GetFieldHierarchy<Settings>();
         WalkLogSettingGroup(group, 0, sb);
 
-        Debug.Log(sb.ToString());
+        UnityEngine.Debug.Log(sb.ToString());
     }
 
     static void WalkLogSettingGroup(SettingsReaderWriter.SettingFieldGroup group, int indent, StringBuilder sb)
