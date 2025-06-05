@@ -44,5 +44,6 @@ public partial class Settings
     {
         public static SettingFloat ShootingForceFactor = new("発射時の力の係数", 1.0f);
         public static SettingFloat ShootingInterval = new("連射間隔 (秒)", 0.05f);
+        public static SettingFloat AngleCorrection = new("左右移動に対する角度補正 (度/m)", 0.0f);
     }
 }

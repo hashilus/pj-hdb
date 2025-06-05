@@ -64,7 +64,7 @@ public class PlayerGun : MonoBehaviour
 
     void UpdatePoseByTracker()
     {
-
+        //CorrectAngle();
     }
 
     void UpdateButtonByTracker()
@@ -99,7 +99,11 @@ public class PlayerGun : MonoBehaviour
 
     void UpdatePoseByMouse(bool isInputForThisPlayer)
     {
+        if (!isInputForThisPlayer) return;
 
+        transform.localRotation = Quaternion.identity;
+
+        CorrectAngle();
     }
 
     void UpdateButtonByMouse(bool isInputForThisPlayer)
@@ -112,6 +116,15 @@ public class PlayerGun : MonoBehaviour
         {
             isShooting = false;
         }
+    }
+
+    void CorrectAngle()
+    {
+        var center = Camera.main.transform;
+        var placement = center.transform.InverseTransformPoint(transform.position).x;
+        var correctionAngle = Quaternion.Euler(0f, placement * Settings.Gun.AngleCorrection, 0f);
+
+        transform.localRotation *= correctionAngle;
     }
 
     void UpdateShooting()
