@@ -3,8 +3,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField]
-    PlayerType playerType;
-    public PlayerType Type => playerType;
+    PlayerID playerID;
+    public PlayerID ID => playerID;
 
     public PlayerBarrel Barrel { get; private set; }
 

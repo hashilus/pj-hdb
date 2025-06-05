@@ -4,7 +4,10 @@ public class PlayerBarrel : MonoBehaviour
 {
     [Header("Shooting")]
     [SerializeField]
-    GameObject bulletPrefab;
+    Bullet bulletPrefab;
+
+    [SerializeField]
+    Transform shootingOrigin;
 
     [SerializeField]
     float shootingForce = 500.0f;
@@ -13,9 +16,6 @@ public class PlayerBarrel : MonoBehaviour
     float shootingInterval = 0.05f;
 
     [Header("Effects")]
-    [SerializeField]
-    GameObject hitParticlePrefab;
-
     [SerializeField]
     ParticleSystem smokeParticle;
 
@@ -40,20 +40,29 @@ public class PlayerBarrel : MonoBehaviour
         Player = GetComponentInParent<Player>();
     }
 
+    void Start()
+    {
+        StopShootingEffect();
+    }
+
     void Update()
     {
         if (Settings.System.IsUseTracker)
         {
-            UpdatePoseByTracker();
-            UpdateButtonByTracker();
+            UpdateByTracker();
         }
         else
         {
-            UpdatePoseByMouse();
-            UpdateButtonByMouse();
+            UpdateByMouse();
         }
 
         UpdateShooting();
+    }
+
+    void UpdateByTracker()
+    {
+        UpdatePoseByTracker();
+        UpdateButtonByTracker();
     }
 
     void UpdatePoseByTracker()
@@ -63,10 +72,10 @@ public class PlayerBarrel : MonoBehaviour
 
     void UpdateButtonByTracker()
     {
-        var playerSection = Player.Type == PlayerType.Player1
+        var playerSection = Player.ID == PlayerID.Player1
             ? AirBlowPermission.PlayerSelection.Player1
             : AirBlowPermission.PlayerSelection.Player2;
-        var buttonName = Player.Type == PlayerType.Player1 ? "Fire1" : "Fire2";
+        var buttonName = Player.ID == PlayerID.Player1 ? "Fire1" : "Fire2";
 
         if (AirBlowPermission.CanBlow(playerSection))
         {
@@ -81,13 +90,31 @@ public class PlayerBarrel : MonoBehaviour
         }
     }
 
-    void UpdatePoseByMouse()
+    void UpdateByMouse()
     {
+        var altPressed = Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt);
+        var inputPlayer = altPressed ? PlayerID.Player2 : PlayerID.Player1;
+        var isInputForThisPlayer = Player.ID == inputPlayer;
+
+        UpdatePoseByMouse(isInputForThisPlayer);
+        UpdateButtonByMouse(isInputForThisPlayer);
     }
 
-    void UpdateButtonByMouse()
+    void UpdatePoseByMouse(bool isInputForThisPlayer)
     {
 
+    }
+
+    void UpdateButtonByMouse(bool isInputForThisPlayer)
+    {
+        if (isInputForThisPlayer)
+        {
+            isShooting = Input.GetMouseButton(0);
+        }
+        else
+        {
+            isShooting = false;
+        }
     }
 
     void UpdateShooting()
@@ -112,6 +139,14 @@ public class PlayerBarrel : MonoBehaviour
 
     void ShootBullet()
     {
+        var bullet = Instantiate(bulletPrefab, shootingOrigin.position, shootingOrigin.rotation);
+        bullet.Shooter = Player.ID;
+
+        bullet.transform.localScale *= Settings.Bullet.RadiusFactor;
+        bullet.GetComponent<Renderer>().enabled = Settings.Bullet.ShowCollider;
+
+        var rigidbody = bullet.GetComponent<Rigidbody>();
+        rigidbody.AddForce(transform.forward * shootingForce);
     }
 
     void StartShootingEffect()

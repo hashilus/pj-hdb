@@ -22,7 +22,7 @@ public class AirController : MonoBehaviour
         if (!Settings.System.IsUseTracker) return;
 
         var player = GetComponentInParent<Player>();
-        var isLeft = player.Type == PlayerType.Player1;
+        var isLeft = player.ID == PlayerID.Player1;
 
         var haccAddress = isLeft ? Settings.System.HACCAddressL : Settings.System.HACCAddressR;
         var haccPort = isLeft ? Settings.System.HACCPortL : Settings.System.HACCPortR;

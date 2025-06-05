@@ -4907,6 +4907,37 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1 &5426089279637959286
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 561991093028413411}
+  m_Layer: 0
+  m_Name: ShootingOrigin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &561991093028413411
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5426089279637959286}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1115411961802498507}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5709320577171314034
 GameObject:
   m_ObjectHideFlags: 0
@@ -4952,7 +4983,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f49753ded241f314eb0f6b12b4eef53f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerType: 0
+  playerID: 0
 --- !u!1 &6861087415839202043
 GameObject:
   m_ObjectHideFlags: 0
@@ -5066,6 +5097,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 561991093028413411}
   - {fileID: 9192736164895446672}
   - {fileID: 904734306987410963}
   m_Father: {fileID: 6207400184632365079}
@@ -5082,10 +5114,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e36d24c40a9c8e4aa84308563c9f65e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 2165083526909644396, guid: 284534c2d74adef448c5565b287e1f79, type: 3}
+  bulletPrefab: {fileID: 3790188787501253079, guid: 284534c2d74adef448c5565b287e1f79, type: 3}
+  shootingOrigin: {fileID: 561991093028413411}
   shootingForce: 500
   shootingInterval: 0.05
-  hitParticlePrefab: {fileID: 1722726733478836, guid: c1c88308ebb5d2541a282905b854ee4c, type: 3}
   smokeParticle: {fileID: 4026774612375530942}
   gasParticle: {fileID: 4007336009320940734}
   waterParticle: {fileID: 3678288785315869188}
