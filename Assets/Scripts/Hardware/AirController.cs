@@ -1,6 +1,6 @@
+using System.Collections;
 using System.Net.Sockets;
 using UnityEngine;
-using System.Collections;
 
 public class AirController : MonoBehaviour
 {
@@ -10,14 +10,27 @@ public class AirController : MonoBehaviour
         Air1,
         Air2
     }
-    
+
     UdpClient udpClient;
     Coroutine air1Coroutine;
 
     string host;
     int port;
 
-    public void Init(string host, int port)
+    void Start()
+    {
+        if (!Settings.System.IsUseTracker) return;
+
+        var player = GetComponentInParent<Player>();
+        var isLeft = player.Type == PlayerType.Player1;
+
+        var haccAddress = isLeft ? Settings.System.HACCAddressL : Settings.System.HACCAddressR;
+        var haccPort = isLeft ? Settings.System.HACCPortL : Settings.System.HACCPortR;
+
+        Init(haccAddress, haccPort);
+    }
+
+    void Init(string host, int port)
     {
         this.host = host;
         this.port = port;
@@ -30,7 +43,7 @@ public class AirController : MonoBehaviour
         {
             StopCoroutine(air1Coroutine);
         }
-        
+
         SendUDP(Flow.Air2);
         air1Coroutine = StartCoroutine(SendAir1AfterDelay());
     }
