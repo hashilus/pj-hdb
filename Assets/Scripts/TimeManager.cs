@@ -1,17 +1,23 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System;
 
 public class TimeManager : MonoBehaviour
 {
-    public float startTime = 300f; // 初期残り時間（秒）
+    public float startTime = 300f;
     private float currentTime;
 
     private bool isCountingDown = false;
 
     public Action OnGameOver;
-    public Action<float> OnTimeUpdated; // UI表示更新用
+    public Action<float> OnTimeUpdated;
 
     public TextMesh dispTime;
+    public TextMesh dispTimeDecimal;
+    public TextMesh dispTime2;
+    public TextMesh dispTimeDecimal2;
+
+    public GameObject fireparticle;
 
     void Start()
     {
@@ -22,21 +28,29 @@ public class TimeManager : MonoBehaviour
     void Update()
     {
         dispTime.text = currentTime.ToString("000");
+        string timeStr = currentTime.ToString("F1");
+        string[] parts = timeStr.Split('.');
+        dispTimeDecimal.text = parts[1];
+
+        dispTime2.text = dispTime.text;
+        dispTimeDecimal2.text = dispTimeDecimal.text;
 
         if (!isCountingDown) return;
 
         currentTime -= Time.deltaTime;
 
-        if (OnTimeUpdated != null)
-            OnTimeUpdated(currentTime);
+        OnTimeUpdated?.Invoke(currentTime);
 
         if (currentTime <= 0f)
         {
             currentTime = 0f;
             isCountingDown = false;
             Debug.Log("Game Over!");
+            fireparticle.SetActive(true);
             FindObjectOfType<MaterialFader>().StartFade();
             OnGameOver?.Invoke();
+
+            StartCoroutine(ReloadAfterDelay(10f)); // ここ追加！
         }
     }
 
@@ -52,13 +66,20 @@ public class TimeManager : MonoBehaviour
 
     public void AddBonusTime(float bonus)
     {
-        currentTime++;
-        if (OnTimeUpdated != null)
-            OnTimeUpdated(currentTime);
+        currentTime += bonus; // ←ここ1加算じゃなくて bonus 加算した方が自然
+        OnTimeUpdated?.Invoke(currentTime);
     }
 
     public float GetCurrentTime()
     {
         return currentTime;
+    }
+
+    private System.Collections.IEnumerator ReloadAfterDelay(float delaySeconds)
+    {
+        yield return new WaitForSeconds(delaySeconds);
+
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.buildIndex);
     }
 }

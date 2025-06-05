@@ -7,6 +7,9 @@ public class FireController : MonoBehaviour
     public ParticleSystem fireParticle;
     private ParticleSystem.EmissionModule fireEmission;
 
+    public ParticleSystem smallfireParticle;
+    public Checkpoint checkpoint; // Inspectorでなくコードから設定
+
     [Header("Ember Particle")]
     public ParticleSystem emberParticle;
     private ParticleSystem.EmissionModule emberEmission;
@@ -29,8 +32,6 @@ public class FireController : MonoBehaviour
     public float smokeStopDelay = 2f;    // 消火後にEmission止めるまでの秒数
     public float destroyDelay = 5f;      // 完全消滅までの秒数
 
-    public Checkpoint checkpoint; // Inspectorでなくコードから設定
-
     private ParticleSystem.EmissionModule smokeEmission;
 
     private bool extinguished = false;
@@ -42,6 +43,7 @@ public class FireController : MonoBehaviour
 
     private void Start()
     {
+        maxScale = transform.localScale; // 初期スケールを最大スケールに設定
         life = initialLife;
         transform.localScale = maxScale;
 
@@ -118,26 +120,30 @@ public class FireController : MonoBehaviour
 
         if (fireParticle != null)
         {
-            var fireEmission = fireParticle.emission;
-            fireEmission.rateOverTime = new ParticleSystem.MinMaxCurve(0f);
+            fireParticle.gameObject.SetActive(false);
         }
 
         if (emberParticle != null)
         {
-            var emberEmission = emberParticle.emission;
-            emberEmission.rateOverTime = new ParticleSystem.MinMaxCurve(0f);
+            emberParticle.gameObject.SetActive(false);
+        }
+
+        if (smallfireParticle != null)
+        {
+            smallfireParticle.gameObject.SetActive(true);
+            Destroy(smallfireParticle.gameObject, 2f); // 2秒後に消す
         }
 
         if (checkpoint != null)
             checkpoint.NotifyFireExtinguished(this);
 
+        GetComponent<AudioSource>().Play(); // 消火音声を再生
         StartCoroutine(HandleSmokeFadeOut());
     }
 
 
     IEnumerator HandleSmokeFadeOut()
     {
-        // wait before stopping emission
         yield return new WaitForSeconds(smokeStopDelay);
 
         if (smokeParticle != null)
@@ -145,9 +151,13 @@ public class FireController : MonoBehaviour
             smokeEmission.rateOverTime = 0f;
         }
 
-        // wait again before destruction
         yield return new WaitForSeconds(destroyDelay);
 
+        Invoke(nameof(DestroySelf), 0f);
+    }
+
+    private void DestroySelf()
+    {
         Destroy(gameObject);
     }
 }
