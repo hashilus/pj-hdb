@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerGun : MonoBehaviour
 {
@@ -69,10 +69,9 @@ public class PlayerGun : MonoBehaviour
 
     void UpdateButtonByTracker()
     {
-        var playerSection = Player.ID == PlayerID.Player1
-            ? AirBlowPermission.PlayerSelection.Player1
-            : AirBlowPermission.PlayerSelection.Player2;
-        var buttonName = Player.ID == PlayerID.Player1 ? "Fire1" : "Fire2";
+        var isHardwarePlayer1 = Player.ID == PlayerID.Player2; // ハードウェアの Player1 はゲーム内と左右逆
+        var playerSection = isHardwarePlayer1 ? AirBlowPermission.PlayerSelection.Player1 : AirBlowPermission.PlayerSelection.Player2;
+        var buttonName = isHardwarePlayer1 ? "Fire1" : "Fire2";
 
         if (AirBlowPermission.CanBlow(playerSection))
         {
