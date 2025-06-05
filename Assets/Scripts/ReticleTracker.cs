@@ -43,7 +43,8 @@ public class ReticleTracker : MonoBehaviour
 
             // 地面や壁との衝突をチェック
             RaycastHit hit;
-            if (Physics.Raycast(currentPosition - currentVelocity * timeStep, currentVelocity.normalized, out hit, currentVelocity.magnitude * timeStep))
+            int layerMask = ~(1 << 6); // レイヤー6を無視するマスクを作成
+            if (Physics.Raycast(currentPosition - currentVelocity * timeStep, currentVelocity.normalized, out hit, currentVelocity.magnitude * timeStep, layerMask))
             {
                 return hit.point;
             }

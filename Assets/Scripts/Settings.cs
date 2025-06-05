@@ -13,16 +13,16 @@ public partial class Settings
         public static SettingFloat AirBlowToWeakenWait = new("空気吹きを弱めるまでの待機時間(秒)", 2f);
         public static SettingFloat TrackerLostCheckDuration = new("トラッカーが見失われたとみなすまでの時間(秒)", 1f);
         public static SettingFloat TargetScreenSize = new("レティクルの画面上での目標サイズ（画面の割合）", 0.23f);
-        public static SettingFloat ReticleMoveTime = new("レティクルの移動時間", 0.1f);
+        public static SettingFloat ReticleMoveTime = new("レティクルの移動時間", 0.25f);
         public static SettingFloat ReticleProjectileSpeed = new("レティクルの位置を予測する為の発射体の初速", 11.5f);  
         public static SettingVector3 ReticleOffset = new("レティクルのオフセット", new Vector3(0, 0.2f, 0));
     }
 
     public class Calibration
     {
-        public static SettingFloat TrackerTransferCoefficient = new ("トラッカーの移動量をどれだけ空間内に反映するかの係数", 1f);
-        public static SettingVector3 ControllerOffsetL = new("Lコントローラーのオフセット", new Vector3(-1f,-0.5f,-1f));
-        public static SettingVector3 ControllerOffsetR = new("Rコントローラーのオフセット", new Vector3(1f,-0.5f,-1f));
+        public static SettingFloat TrackerTransferCoefficient = new ("トラッカーの移動量をどれだけ空間内に反映するかの係数", 0.05f);
+        public static SettingVector3 ControllerOffsetL = new("Lコントローラーのオフセット", new Vector3(-0.1f,-1f,-1.4f));
+        public static SettingVector3 ControllerOffsetR = new("Rコントローラーのオフセット", new Vector3(0.1f,-1f,-1.4f));
         public static SettingFloat ControllerXRotationOffset = new("コントローラーのX軸回転オフセット", -5f);
     }
 
