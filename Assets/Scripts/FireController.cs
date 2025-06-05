@@ -7,6 +7,9 @@ public class FireController : MonoBehaviour
     public ParticleSystem fireParticle;
     private ParticleSystem.EmissionModule fireEmission;
 
+    public ParticleSystem smallfireParticle;
+    public Checkpoint checkpoint; // Inspectorでなくコードから設定
+
     [Header("Ember Particle")]
     public ParticleSystem emberParticle;
     private ParticleSystem.EmissionModule emberEmission;
@@ -28,11 +31,6 @@ public class FireController : MonoBehaviour
     public ParticleSystem smokeParticle; // 事前にアタッチ
     public float smokeStopDelay = 2f;    // 消火後にEmission止めるまでの秒数
     public float destroyDelay = 5f;      // 完全消滅までの秒数
-
-    [Header("Small Particle")]
-    public ParticleSystem smallfireParticle;
-
-    public Checkpoint checkpoint; // Inspectorでなくコードから設定
 
     private ParticleSystem.EmissionModule smokeEmission;
 
@@ -132,7 +130,6 @@ public class FireController : MonoBehaviour
 
         if (smallfireParticle != null)
         {
-            smallfireParticle.transform.parent = null; // 親を外す
             smallfireParticle.gameObject.SetActive(true);
             Destroy(smallfireParticle.gameObject, 2f); // 2秒後に消す
         }
@@ -140,13 +137,13 @@ public class FireController : MonoBehaviour
         if (checkpoint != null)
             checkpoint.NotifyFireExtinguished(this);
 
-        //StartCoroutine(HandleSmokeFadeOut());
+        GetComponent<AudioSource>().Play(); // 消火音声を再生
+        StartCoroutine(HandleSmokeFadeOut());
     }
 
 
     IEnumerator HandleSmokeFadeOut()
     {
-        // wait before stopping emission
         yield return new WaitForSeconds(smokeStopDelay);
 
         if (smokeParticle != null)
@@ -154,9 +151,13 @@ public class FireController : MonoBehaviour
             smokeEmission.rateOverTime = 0f;
         }
 
-        // wait again before destruction
         yield return new WaitForSeconds(destroyDelay);
 
+        Invoke(nameof(DestroySelf), 0f);
+    }
+
+    private void DestroySelf()
+    {
         Destroy(gameObject);
     }
 }

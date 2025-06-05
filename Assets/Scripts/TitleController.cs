@@ -34,6 +34,13 @@ public class TitleController : MonoBehaviour
     bool start1P_Confirmed;
     bool start2P_Confirmed;
 
+    [Header("メインカメラオブジェクト")]
+    public GameObject camPlayer;
+    public Transform camPosition;
+
+    bool isPlayed = false;
+
+
     void Start()
     {
         title_objects.SetActive(true);
@@ -42,6 +49,13 @@ public class TitleController : MonoBehaviour
 
     void Update()
     {
+        if (!isPlayed)
+        {
+            //カメラ位置をタイトル画面位置に固定
+            camPlayer.transform.position = camPosition.position;
+            camPlayer.transform.rotation = camPosition.rotation;
+        }
+
         // ★ プレイヤー判定ロジックはそのままでOK
         if (player1StartCount > startupnumber)
         {
@@ -84,10 +98,14 @@ public class TitleController : MonoBehaviour
         if ((Input.GetKeyDown(KeyCode.Space) || isStarting) && !startTriggered)
         {
             startTriggered = true;
+            isPlayed = true;
 
             // ① Title画面を閉じる
             title_objects.SetActive(false);
             ui_objects.SetActive(true);
+            //カメラ位置をリセット
+            camPlayer.transform.localPosition = Vector3.zero;
+            camPlayer.transform.localRotation = Quaternion.identity;
 
             // ② StageController に pre_timeline 再生を任せる
             if (stageController != null && stageController.pre_timeline != null)
