@@ -1,7 +1,7 @@
 using Hashilus.Setting;
 using UnityEngine;
 
-public partial class Settings   
+public partial class Settings
 {
     public class System
     {
@@ -16,9 +16,9 @@ public partial class Settings
 
     public class Calibration
     {
-        public static SettingFloat TrackerTransferCoefficient = new ("トラッカーの移動量をどれだけ空間内に反映するかの係数", 1f);
-        public static SettingVector3 ControllerOffsetL = new("Lコントローラーのオフセット", new Vector3(-1f,-0.5f,-1f));
-        public static SettingVector3 ControllerOffsetR = new("Rコントローラーのオフセット", new Vector3(1f,-0.5f,-1f));
+        public static SettingFloat TrackerTransferCoefficient = new("トラッカーの移動量をどれだけ空間内に反映するかの係数", 1f);
+        public static SettingVector3 ControllerOffsetL = new("Lコントローラーのオフセット", new Vector3(-1f, -0.5f, -1f));
+        public static SettingVector3 ControllerOffsetR = new("Rコントローラーのオフセット", new Vector3(1f, -0.5f, -1f));
         public static SettingFloat ControllerXRotationOffset = new("コントローラーのX軸回転オフセット", -5f);
     }
 
