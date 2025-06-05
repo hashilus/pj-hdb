@@ -170,6 +170,10 @@ public class CustomCursor : MonoBehaviour
         proj.transform.localScale *= Settings.Bullet.RadiusFactor;
         proj.GetComponent<Renderer>().enabled = Settings.Bullet.ShowCollider;
 
+        // スタートの回転体に当てるための仮対処
+        var playerName = gameObject.name.Contains("2p") ? "2P" : "1P";
+        proj.name = $"Bullet{playerName}";
+
         Rigidbody rb = proj.GetComponent<Rigidbody>();
         if (rb != null)
         {
