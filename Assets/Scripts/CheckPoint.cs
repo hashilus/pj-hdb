@@ -18,6 +18,10 @@ public class Checkpoint : MonoBehaviour
 
     public float bonusTime = 10f; // このCPをクリアしたら追加される時間
 
+    public TextMesh debugCountText; // デバッグ用の表示
+
+    int firesCount = 0;
+
     void Awake()
     {
         fires.Clear();
@@ -26,6 +30,7 @@ public class Checkpoint : MonoBehaviour
             fires.Add(fire);
             fire.AssignCheckpoint(this); // FireController 側に自分を登録
         }
+        firesCount = fires.Count;
 
         SetLightActive(false);
     }
@@ -33,11 +38,15 @@ public class Checkpoint : MonoBehaviour
     public void NotifyFireExtinguished(FireController fc)
     {
         // 呼ばれるたびにチェック
+        firesCount--;
+        debugCountText.text = "残り" + firesCount.ToString();
         CheckIfCleared();
     }
 
+
     public void ActivateCheckpoint()
     {
+        debugCountText.text = "残り" + fires.Count.ToString();
         SetLightActive(true);
         if (forceClearCoroutine != null)
             StopCoroutine(forceClearCoroutine);
@@ -106,6 +115,13 @@ public class Checkpoint : MonoBehaviour
 
         // 他のクリア処理
     }
+
+    // 現在残っている火の個数を返す
+    public int GetCurrentFireCount()
+    {
+        return this.transform.childCount;
+    }
+
 
 
 }

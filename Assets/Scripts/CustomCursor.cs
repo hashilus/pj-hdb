@@ -24,9 +24,8 @@ public class CustomCursor : MonoBehaviour
     public Transform gunBarrel;
 
     private Vector2 currentPos;
-    private float shootTimer;
+    private float shootTime;
     private GameObject lastProjectile = null;
-    private float lastShotTime = 0f;
 
     public ParticleSystem gunsmoke;
     public ParticleSystem gas;
@@ -95,8 +94,7 @@ public class CustomCursor : MonoBehaviour
             cursorRect.position = currentPos;
 
             // 射撃時に煙を出す
-            shootTimer += Time.deltaTime;
-            if (Input.GetMouseButton(0) && shootTimer >= shootInterval)
+            if (Input.GetMouseButton(0))
             {
                 Shooting();
             }
@@ -129,8 +127,10 @@ public class CustomCursor : MonoBehaviour
 
     void Shooting()
     {
+        if (Time.time < shootTime + shootInterval) return;
+
         ShootProjectile();
-        shootTimer = 0f;
+        shootTime = Time.time;
 
         var emission = gunsmoke.emission;
         emission.rateOverTime = 8f;
@@ -167,6 +167,12 @@ public class CustomCursor : MonoBehaviour
         }
 
         GameObject proj = Instantiate(projectilePrefab, origin, Quaternion.identity);
+        proj.transform.localScale *= Settings.Bullet.RadiusFactor;
+        proj.GetComponent<Renderer>().enabled = Settings.Bullet.ShowCollider;
+
+        // スタートの回転体に当てるための仮対処
+        var playerName = gameObject.name.Contains("2p") ? "2P" : "1P";
+        proj.name = $"Bullet{playerName}";
 
         Rigidbody rb = proj.GetComponent<Rigidbody>();
         if (rb != null)
@@ -181,14 +187,13 @@ public class CustomCursor : MonoBehaviour
             destroyer.Reticle = reticle;
         }
 
-        float timeSinceLastShot = Time.time - lastShotTime;
+        float timeSinceLastShot = Time.time - shootTime;
         if (enableLineRendering && lastProjectile != null && timeSinceLastShot <= 0.5f)
         {
             CreateLineBetween(lastProjectile, proj);
         }
 
         lastProjectile = proj;
-        lastShotTime = Time.time;
 
         Destroy(proj, 2f);
     }
