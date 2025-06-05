@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerBarrel : MonoBehaviour
+public class PlayerGun : MonoBehaviour
 {
     [Header("Shooting")]
     [SerializeField]
@@ -11,9 +11,6 @@ public class PlayerBarrel : MonoBehaviour
 
     [SerializeField]
     float shootingForce = 500.0f;
-
-    [SerializeField]
-    float shootingInterval = 0.05f;
 
     [Header("Effects")]
     [SerializeField]
@@ -123,7 +120,7 @@ public class PlayerBarrel : MonoBehaviour
         {
             if (!isPrevShooting) { StartShootingEffect(); }
 
-            if (Time.time >= shootTime + shootingInterval)
+            if (Time.time >= shootTime + Settings.Gun.ShootingInterval)
             {
                 shootTime = Time.time;
                 ShootBullet();
@@ -146,7 +143,7 @@ public class PlayerBarrel : MonoBehaviour
         bullet.GetComponent<Renderer>().enabled = Settings.Bullet.ShowCollider;
 
         var rigidbody = bullet.GetComponent<Rigidbody>();
-        rigidbody.AddForce(transform.forward * shootingForce);
+        rigidbody.AddForce(transform.forward * shootingForce * Settings.Gun.ShootingForceFactor);
     }
 
     void StartShootingEffect()

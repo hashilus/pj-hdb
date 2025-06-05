@@ -39,4 +39,10 @@ public partial class Settings
         public static SettingFloat ImpactDuration = new("ヒット後の弾のサイズ変更継続時間 (秒)", 0.2f);
         public static SettingBool ShowCollider = new("弾のコライダを表示するか", false);
     }
+
+    public class Gun
+    {
+        public static SettingFloat ShootingForceFactor = new("発射時の力の係数", 1.0f);
+        public static SettingFloat ShootingInterval = new("連射間隔 (秒)", 0.05f);
+    }
 }

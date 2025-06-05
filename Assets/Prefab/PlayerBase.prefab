@@ -5078,7 +5078,7 @@ GameObject:
   - component: {fileID: 1115411961802498507}
   - component: {fileID: 2568718049524169150}
   m_Layer: 0
-  m_Name: Barrel
+  m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5117,7 +5117,6 @@ MonoBehaviour:
   bulletPrefab: {fileID: 3790188787501253079, guid: 284534c2d74adef448c5565b287e1f79, type: 3}
   shootingOrigin: {fileID: 561991093028413411}
   shootingForce: 500
-  shootingInterval: 0.05
   smokeParticle: {fileID: 4026774612375530942}
   gasParticle: {fileID: 4007336009320940734}
   waterParticle: {fileID: 3678288785315869188}

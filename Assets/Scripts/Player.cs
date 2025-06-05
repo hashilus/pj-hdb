@@ -6,10 +6,10 @@ public class Player : MonoBehaviour
     PlayerID playerID;
     public PlayerID ID => playerID;
 
-    public PlayerBarrel Barrel { get; private set; }
+    public PlayerGun Gun { get; private set; }
 
     void Awake()
     {
-        Barrel = GetComponentInChildren<PlayerBarrel>();
+        Gun = GetComponentInChildren<PlayerGun>();
     }
 }
