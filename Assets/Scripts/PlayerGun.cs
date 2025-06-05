@@ -32,6 +32,10 @@ public class PlayerGun : MonoBehaviour
     bool isPrevShooting;
     float shootTime;
 
+    Vector2 prevNormalizedMousePosition;
+    Vector3 targetLocalPosition;
+    Quaternion targetLocalRotation;
+
     void Awake()
     {
         Player = GetComponentInParent<Player>();
@@ -53,18 +57,19 @@ public class PlayerGun : MonoBehaviour
             UpdateByMouse();
         }
 
+        UpdatePose();
         UpdateShooting();
     }
 
     void UpdateByTracker()
     {
-        UpdatePoseByTracker();
+        UpdateTargetPoseByTracker();
         UpdateButtonByTracker();
     }
 
-    void UpdatePoseByTracker()
+    void UpdateTargetPoseByTracker()
     {
-        //CorrectAngle();
+        //
     }
 
     void UpdateButtonByTracker()
@@ -92,17 +97,35 @@ public class PlayerGun : MonoBehaviour
         var inputPlayer = altPressed ? PlayerID.Player2 : PlayerID.Player1;
         var isInputForThisPlayer = Player.ID == inputPlayer;
 
-        UpdatePoseByMouse(isInputForThisPlayer);
+        UpdateTargetPoseByMouse(isInputForThisPlayer);
         UpdateButtonByMouse(isInputForThisPlayer);
     }
 
-    void UpdatePoseByMouse(bool isInputForThisPlayer)
+    void UpdateTargetPoseByMouse(bool isInputForThisPlayer)
     {
         if (!isInputForThisPlayer) return;
 
-        transform.localRotation = Quaternion.identity;
+        var viewportMousePosition = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+        var normalizedMousePosition = new Vector2(
+            viewportMousePosition.x * 2.0f - 1.0f,
+            viewportMousePosition.y * 2.0f - 1.0f);
 
-        CorrectAngle();
+        var deltaMousePosition = normalizedMousePosition - prevNormalizedMousePosition;
+        prevNormalizedMousePosition = normalizedMousePosition;
+
+        if (Input.GetMouseButton(1))
+        {
+
+        }
+        else
+        {
+            var x = normalizedMousePosition.x * Settings.Gun.MovingRange.Value.x;
+            var y = Mathf.Clamp(
+                targetLocalPosition.y + deltaMousePosition.y * Settings.Gun.VirticalMovingSensitivity,
+                -Settings.Gun.MovingRange.Value.y,
+                Settings.Gun.MovingRange.Value.y);
+            targetLocalPosition = new Vector3(x, y, 0f);
+        }
     }
 
     void UpdateButtonByMouse(bool isInputForThisPlayer)
@@ -115,6 +138,17 @@ public class PlayerGun : MonoBehaviour
         {
             isShooting = false;
         }
+    }
+
+    void UpdatePose()
+    {
+        transform.SetLocalPositionAndRotation(
+            Vector3.Lerp(transform.localPosition, targetLocalPosition, Settings.Gun.MovingInterpolation),
+            Quaternion.Slerp(transform.localRotation, targetLocalRotation, Settings.Gun.RotationInterpolation));
+
+        CorrectAngle();
+
+        targetLocalPosition.y = Mathf.Lerp(targetLocalPosition.y, 0.0f, Settings.Gun.VirticalRestoringInterpolation);
     }
 
     void CorrectAngle()

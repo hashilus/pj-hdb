@@ -44,6 +44,11 @@ public partial class Settings
     {
         public static SettingFloat ShootingForceFactor = new("発射時の力の係数", 1.0f);
         public static SettingFloat ShootingInterval = new("連射間隔 (秒)", 0.05f);
+        public static SettingVector2 MovingRange = new("銃の移動範囲 (m)", new Vector2(1.0f, 0.1f));
+        public static SettingFloat VirticalMovingSensitivity = new("銃の上下移動感度", 0.3f);
+        public static SettingFloat VirticalRestoringInterpolation = new("銃の上下位置減衰係数 (0～1)", 0.02f);
+        public static SettingFloat MovingInterpolation = new("銃の移動補間係数 (0～1)", 0.9f);
+        public static SettingFloat RotationInterpolation = new("銃の回転補間係数 (0～1)", 0.95f);
         public static SettingFloat AngleCorrection = new("左右移動に対する角度補正 (度/m)", 0.0f);
     }
 }
