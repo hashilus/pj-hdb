@@ -5,7 +5,7 @@ using UnityEngine;
 public partial class Settings
 {
     public const string FileName = "settings.xml";
-    public const string GlobalSettingsPath = "../Settings/" + FileName;
+    public const string GlobalSettingsPath = "Settings/" + FileName;
     public const string AppLocalSettingsPath = "AppLocalSettings/" + FileName;
     public const string UserLocalSettingsPath = "UserLocalSettings/" + FileName;
 

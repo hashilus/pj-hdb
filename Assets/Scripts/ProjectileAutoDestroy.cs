@@ -6,9 +6,6 @@ public class ProjectileAutoDestroy : MonoBehaviour
     [Range(0f, 1f)]
     public float spawnChance = 0.5f;
 
-    public float impactRadiusMultiplier = 3f;
-    public float impactDuration = 0.2f;
-
     private SphereCollider sphereCol;
     private ReticleController reticle;
 
@@ -52,8 +49,8 @@ public class ProjectileAutoDestroy : MonoBehaviour
 
     System.Collections.IEnumerator ExpandColliderTemporarily()
     {
-        sphereCol.radius = originalRadius * impactRadiusMultiplier;
-        yield return new WaitForSeconds(impactDuration);
+        sphereCol.radius = originalRadius * Settings.Bullet.ImpactRadiusFactor;
+        yield return new WaitForSeconds(Settings.Bullet.ImpactDuration);
         if (sphereCol != null)
             sphereCol.radius = originalRadius;
     }
