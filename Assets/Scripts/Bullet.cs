@@ -3,12 +3,6 @@
 public class Bullet : MonoBehaviour
 {
     [SerializeField]
-    float lifetime = 2.0f;
-
-    [SerializeField]
-    float lifetimeOnHit = 1.0f;
-
-    [SerializeField]
     GameObject hitParticlePrefab;
 
     [SerializeField]
@@ -26,7 +20,7 @@ public class Bullet : MonoBehaviour
     {
         sphereCollider = GetComponent<SphereCollider>();
 
-        Destroy(gameObject, lifetime);
+        Destroy(gameObject, Settings.Bullet.Lifetime);
     }
 
     void OnCollisionEnter(Collision collision)
@@ -44,7 +38,7 @@ public class Bullet : MonoBehaviour
         // 拡大コライダー処理
         StartCoroutine(ExpandColliderTemporarily());
 
-        Destroy(gameObject, lifetimeOnHit);
+        Destroy(gameObject, Settings.Bullet.LifetimeOnHit);
     }
 
     System.Collections.IEnumerator ExpandColliderTemporarily()
