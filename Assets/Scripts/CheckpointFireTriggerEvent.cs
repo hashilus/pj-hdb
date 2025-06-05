@@ -44,14 +44,15 @@ public class CheckpointFireTriggerEvent : MonoBehaviour
             if (entry.targetCheckpoint == null)
                 continue;
 
-            int currentFireCount = entry.targetCheckpoint.GetCurrentFireCount();
+            // š Alive Fire ‚Ì”‚Å”»’è
+            int currentFireCount = entry.targetCheckpoint.GetAliveFireCount();
 
             if (currentFireCount <= entry.fireCountThreshold)
             {
                 if (entry.triggerObject != null)
                 {
                     entry.triggerObject.SetActive(true);
-                    Debug.Log($"[CheckpointFireTriggerEvent] {gameObject.name} ¨ Trigger ”­“®: {entry.triggerObject.name} (FireCount={currentFireCount} <= {entry.fireCountThreshold})");
+                    Debug.Log($"[CheckpointFireTriggerEvent] {gameObject.name} ¨ Trigger ”­“®: {entry.triggerObject.name} (AliveFireCount={currentFireCount} <= {entry.fireCountThreshold})");
                 }
 
                 if (entry.oneShot)

@@ -13,6 +13,8 @@ public class DirectedExplosionController : MonoBehaviour
 
     public bool start;
 
+    bool playOnce;
+
     void Start()
     {
         explosionParticle.SetActive(false);
@@ -26,10 +28,11 @@ public class DirectedExplosionController : MonoBehaviour
 
     private void Update()
     {
-        if (start)
+        if (start && !playOnce)
         {
             TriggerExplosion();
             start = false;
+            playOnce = true; // ˆê“x‚¾‚¯”š”j‚ğƒgƒŠƒK[
         }
     }
 
