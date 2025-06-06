@@ -24,6 +24,9 @@ public class PlayerGun : MonoBehaviour
 
     [Header("Tracker")]
     [SerializeField]
+    Transform calibratedTracker;
+
+    [SerializeField]
     AirController airController;
 
     public Player Player { get; private set; }
@@ -32,9 +35,13 @@ public class PlayerGun : MonoBehaviour
     bool isPrevShooting;
     float shootTime;
 
-    Vector2 prevNormalizedMousePosition;
     Vector3 targetLocalPosition;
     Quaternion targetLocalRotation;
+
+    Vector2 prevNormalizedMousePosition;
+    Vector3 prevCameraLocalTrackerPosition;
+
+    static float NormalizeAngle(float angle) => Mathf.Repeat(angle + 180f, 360f) - 180f;
 
     void Awake()
     {
@@ -69,7 +76,20 @@ public class PlayerGun : MonoBehaviour
 
     void UpdateTargetPoseByTracker()
     {
-        //
+        var cameraLocalTrackerPosition = Camera.main.transform.InverseTransformPoint(calibratedTracker.position);
+        var cameraLocalTrackerRotation = Quaternion.Inverse(Camera.main.transform.rotation) * calibratedTracker.rotation;
+
+        var deltaTrackerPosition = cameraLocalTrackerPosition - prevCameraLocalTrackerPosition;
+        prevCameraLocalTrackerPosition = cameraLocalTrackerPosition;
+
+        var x = cameraLocalTrackerPosition.x * Settings.Gun.MovingRange.Value.x;
+        var y = Mathf.Clamp(
+            targetLocalPosition.y + deltaTrackerPosition.y * Settings.Gun.TrackerVirticalMovingSensitivity,
+            -Settings.Gun.MovingRange.Value.y,
+            Settings.Gun.MovingRange.Value.y);
+        targetLocalPosition = new Vector3(x, y, 0f);
+
+        targetLocalRotation = cameraLocalTrackerRotation;
     }
 
     void UpdateButtonByTracker()
@@ -123,8 +143,8 @@ public class PlayerGun : MonoBehaviour
             euler.y += deltaMousePosition.x * Settings.Gun.MouseRotationSensitivity;
             euler.x -= deltaMousePosition.y * Settings.Gun.MouseRotationSensitivity;
 
-            euler.x = Mathf.Clamp(euler.x, Settings.Gun.VerticalLimitAngle.Value.x, Settings.Gun.VerticalLimitAngle.Value.y);
-            euler.y = Mathf.Clamp(euler.y, Settings.Gun.HorizontalLimitAngle.Value.x, Settings.Gun.HorizontalLimitAngle.Value.y);
+            euler.x = Mathf.Clamp(euler.x, Settings.Gun.HorizontalLimitAngle.Value.x, Settings.Gun.HorizontalLimitAngle.Value.y);
+            euler.y = Mathf.Clamp(euler.y, Settings.Gun.VerticalLimitAngle.Value.x, Settings.Gun.VerticalLimitAngle.Value.y);
 
             targetLocalRotation = Quaternion.Euler(euler);
         }
@@ -140,8 +160,6 @@ public class PlayerGun : MonoBehaviour
             targetLocalRotation = Quaternion.identity;
         }
     }
-
-    static float NormalizeAngle(float angle) => Mathf.Repeat(angle + 180f, 360f) - 180f;
 
     void UpdateButtonByMouse(bool isInputForThisPlayer)
     {
