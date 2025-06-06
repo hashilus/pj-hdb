@@ -20,6 +20,8 @@ public class AirController : MonoBehaviour
     string host;
     int port;
 
+    string[] airCommands = new string[] { "air 0", "air 1", "air 2" };
+
     void Start()
     {
         if (!Settings.System.IsUseTracker) return;
@@ -35,6 +37,27 @@ public class AirController : MonoBehaviour
         this.host = host;
         this.port = port;
         udpClient = new UdpClient();
+        StopBlow();
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            SendUDP(Flow.Air0);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SendUDP(Flow.Air1);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SendUDP(Flow.Air2);
+        }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            SendMistUDP();
+        }
     }
 
     public void StartBlow()
@@ -67,7 +90,23 @@ public class AirController : MonoBehaviour
 
     void SendUDP(Flow flow)
     {
-        byte[] sendBytes = System.Text.Encoding.UTF8.GetBytes(flow.ToString());
+        if(udpClient == null)
+        {
+            return;
+        }
+
+        byte[] sendBytes = System.Text.Encoding.UTF8.GetBytes(airCommands[(int)flow]);
+        udpClient.Send(sendBytes, sendBytes.Length, host, port);
+    }
+
+    void SendMistUDP()
+    {
+        if(udpClient == null)
+        {
+            return;
+        }
+        
+        byte[] sendBytes = System.Text.Encoding.UTF8.GetBytes("mist 1000");
         udpClient.Send(sendBytes, sendBytes.Length, host, port);
     }
 
