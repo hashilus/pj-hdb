@@ -115,18 +115,33 @@ public class PlayerGun : MonoBehaviour
 
         if (Input.GetMouseButton(1))
         {
+            var euler = targetLocalRotation.eulerAngles;
+            euler.x = NormalizeAngle(euler.x);
+            euler.y = NormalizeAngle(euler.y);
+            euler.z = NormalizeAngle(euler.z);
 
+            euler.y += deltaMousePosition.x * Settings.Gun.MouseRotationSensitivity;
+            euler.x -= deltaMousePosition.y * Settings.Gun.MouseRotationSensitivity;
+
+            euler.x = Mathf.Clamp(euler.x, Settings.Gun.VerticalLimitAngle.Value.x, Settings.Gun.VerticalLimitAngle.Value.y);
+            euler.y = Mathf.Clamp(euler.y, Settings.Gun.HorizontalLimitAngle.Value.x, Settings.Gun.HorizontalLimitAngle.Value.y);
+
+            targetLocalRotation = Quaternion.Euler(euler);
         }
         else
         {
             var x = normalizedMousePosition.x * Settings.Gun.MovingRange.Value.x;
             var y = Mathf.Clamp(
-                targetLocalPosition.y + deltaMousePosition.y * Settings.Gun.VirticalMovingSensitivity,
+                targetLocalPosition.y + deltaMousePosition.y * Settings.Gun.MouseVirticalMovingSensitivity,
                 -Settings.Gun.MovingRange.Value.y,
                 Settings.Gun.MovingRange.Value.y);
             targetLocalPosition = new Vector3(x, y, 0f);
+
+            targetLocalRotation = Quaternion.identity;
         }
     }
+
+    static float NormalizeAngle(float angle) => Mathf.Repeat(angle + 180f, 360f) - 180f;
 
     void UpdateButtonByMouse(bool isInputForThisPlayer)
     {
