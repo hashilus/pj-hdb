@@ -91,7 +91,15 @@ public class PlayerGun : MonoBehaviour
             Settings.Gun.MovingRange.Value.y);
         targetLocalPosition = new Vector3(x, y, 0f);
 
-        targetLocalRotation = cameraLocalTrackerRotation;
+        var euler = cameraLocalTrackerRotation.eulerAngles;
+        euler.x = NormalizeAngle(euler.x);
+        euler.y = NormalizeAngle(euler.y);
+        euler.z = NormalizeAngle(euler.z);
+
+        euler.x = Mathf.Clamp(euler.x, Settings.Gun.HorizontalLimitAngle.Value.x, Settings.Gun.HorizontalLimitAngle.Value.y);
+        euler.y = Mathf.Clamp(euler.y, Settings.Gun.VerticalLimitAngle.Value.x, Settings.Gun.VerticalLimitAngle.Value.y);
+
+        targetLocalRotation = Quaternion.Euler(euler);
     }
 
     void UpdateButtonByTracker()
