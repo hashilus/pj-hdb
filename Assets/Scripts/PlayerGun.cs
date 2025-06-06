@@ -50,6 +50,8 @@ public class PlayerGun : MonoBehaviour
 
     void Start()
     {
+        transform.GetLocalPositionAndRotation(out targetLocalPosition, out targetLocalRotation);
+
         StopShootingEffect();
     }
 
