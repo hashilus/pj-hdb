@@ -4,6 +4,9 @@ using System.Collections;
 
 public class Checkpoint : MonoBehaviour
 {
+
+    public int checkPointNo; // チェックポイント番号
+
     public System.Action<Checkpoint> onCleared;
     private bool isCleared = false;
     
@@ -16,7 +19,7 @@ public class Checkpoint : MonoBehaviour
 
     private List<FireController> fires = new List<FireController>();
 
-    public float bonusTime = 10f; // このCPをクリアしたら追加される時間
+    public float bonusTime; // このCPをクリアしたら追加される時間
 
     public TextMesh debugCountText; // デバッグ用の表示
 
@@ -31,8 +34,8 @@ public class Checkpoint : MonoBehaviour
             fire.AssignCheckpoint(this); // FireController 側に自分を登録
         }
         firesCount = fires.Count;
-
         SetLightActive(false);
+        bonusTime = SettingsManager.Instance.settings.checkpointExtendTimes[checkPointNo - 1];
     }
 
     public void NotifyFireExtinguished(FireController fc)

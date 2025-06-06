@@ -49,7 +49,7 @@ public class FireController : MonoBehaviour
     private void Start()
     {
         maxScale = transform.localScale; // 初期スケールを最大スケールに設定
-        life = initialLife;
+        life = initialLife * SettingsManager.Instance.settings.fireLifeScale;
         transform.localScale = maxScale;
 
         if (fireLight != null)
