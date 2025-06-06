@@ -16,10 +16,10 @@ public partial class Settings
 
     public class Calibration
     {
-        public static SettingFloat TrackerTransferCoefficient = new("トラッカーの移動量をどれだけ空間内に反映するかの係数", 1f);
-        public static SettingVector3 ControllerOffsetL = new("Lコントローラーのオフセット", new Vector3(-1f, -0.5f, -1f));
-        public static SettingVector3 ControllerOffsetR = new("Rコントローラーのオフセット", new Vector3(1f, -0.5f, -1f));
-        public static SettingFloat ControllerXRotationOffset = new("コントローラーのX軸回転オフセット", -5f);
+        public static SettingFloat TrackerTransferCoefficient = new("トラッカーの移動量をどれだけ空間内に反映するかの係数", 0.9f);
+        public static SettingVector3 ControllerOffsetL = new("Lコントローラーのオフセット", new Vector3(-0.2f, -0.8f, -0.7f));
+        public static SettingVector3 ControllerOffsetR = new("Rコントローラーのオフセット", new Vector3(0.2f, -0.8f, -0.7f));
+        public static SettingFloat ControllerXRotationOffset = new("コントローラーのX軸回転オフセット", 0f);
     }
 
     public class ControllerAngle
