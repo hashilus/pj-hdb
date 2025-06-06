@@ -32,6 +32,11 @@ public class FireController : MonoBehaviour
     public float smokeStopDelay = 2f;    // 消火後にEmission止めるまでの秒数
     public float destroyDelay = 5f;      // 完全消滅までの秒数
 
+    [Header("Reflection Probe (Optional)")]
+    public ReflectionProbe reflectionProbeToUpdate;
+
+    public AudioSource fireSE;
+
     private ParticleSystem.EmissionModule smokeEmission;
 
     private bool extinguished = false;
@@ -102,6 +107,12 @@ public class FireController : MonoBehaviour
         {
             Extinguish();
         }
+        // 燃焼音ボリューム (Lifeに比例)
+        if (fireSE != null)
+        {
+            fireSE.volume = Mathf.Clamp01(life / initialLife);
+        }
+
     }
     public void ForceExtinguish()
     {
@@ -114,6 +125,13 @@ public class FireController : MonoBehaviour
     void Extinguish()
     {
         if (extinguished) return;
+
+        // Reflection Probe を更新（オプション）
+        if (reflectionProbeToUpdate != null)
+        {
+            Debug.Log($"FireController: Updating ReflectionProbe → {reflectionProbeToUpdate.gameObject.name}");
+            reflectionProbeToUpdate.RenderProbe();
+        }
 
         extinguished = true;
         Debug.Log("Extinguishing fire: " + gameObject.name);

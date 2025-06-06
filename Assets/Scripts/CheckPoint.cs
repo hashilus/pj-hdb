@@ -122,6 +122,19 @@ public class Checkpoint : MonoBehaviour
         return this.transform.childCount;
     }
 
+    public int GetAliveFireCount()
+    {
+        int count = 0;
+        foreach (Transform child in transform)
+        {
+            FireController fire = child.GetComponent<FireController>();
+            if (fire != null && fire.life > 0f)
+            {
+                count++;
+            }
+        }
 
+        return count;
+    }
 
 }
