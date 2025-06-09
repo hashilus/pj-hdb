@@ -41,6 +41,9 @@ public class FireController : MonoBehaviour
 
     private bool extinguished = false;
 
+    public TextMesh debugText;
+
+
     public void AssignCheckpoint(Checkpoint cp)
     {
         checkpoint = cp;
@@ -48,8 +51,13 @@ public class FireController : MonoBehaviour
 
     private void Start()
     {
+        if (!SettingsManager.Instance.settings.debugMode)
+        {
+            debugText.gameObject.SetActive(false);
+        }
+
         maxScale = transform.localScale; // 初期スケールを最大スケールに設定
-        life = initialLife * SettingsManager.Instance.settings.fireLifeScale;
+        life = initialLife * SettingsManager.Instance.settings.fireLifeScale1P; //2Pもあり
         transform.localScale = maxScale;
 
         if (fireLight != null)
@@ -70,14 +78,40 @@ public class FireController : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        debugText.text = life.ToString();
+    }
 
     private void OnCollisionEnter(Collision collision)
+{
+    if (collision.gameObject.CompareTag("Water") && !extinguished)
     {
-        if (collision.gameObject.CompareTag("Water") && !extinguished)
+        float damageMultiplier = 1.0f;
+
+        // どの Collider に当たったかを調べる
+        Collider myCollider = collision.GetContact(0).thisCollider;
+
+        if (myCollider != null)
         {
-            ReduceLife(1f);
+            if (myCollider is BoxCollider)
+            {
+                // 基底部 → 高ダメージ
+                damageMultiplier = 2.0f; // 例: 2倍早く消える
+            }
+            else if (myCollider is SphereCollider)
+            {
+                // 上部 → 通常ダメージ
+                damageMultiplier = 1.0f;
+            }
         }
+
+        ReduceLife(1f * damageMultiplier);
+
+        Destroy(collision.gameObject);
     }
+}
+
 
     void ReduceLife(float amount)
     {

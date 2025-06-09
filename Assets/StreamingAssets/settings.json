@@ -1,11 +1,14 @@
 {
     "initialTime": 90.0,
     "checkpointExtendTimes": [0, 10, 0, 10, 0, 0],
-    "fireLifeScale": 1.0,
+    "fireLifeScale1P": 1.0,
+    "fireLifeScale2P": 1.5,
     "resultThresholds": {
         "rankS": 35.0,
         "rankA": 30.0,
         "rankB": 25.0,
         "rankC": 20.0
-    }
+    },
+
+    "debugMode": true
 }

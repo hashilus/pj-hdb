@@ -2,8 +2,10 @@
 public class SettingsData
 {
     public float initialTime;
-    public float[] checkpointExtendTimes = new float[6]; // 6箇所固定
-    public float fireLifeScale = 1.0f;
+    public float[] checkpointExtendTimes = new float[6];
+
+    public float fireLifeScale1P = 1.0f;
+    public float fireLifeScale2P = 1.0f;
 
     [System.Serializable]
     public class ResultThresholds
@@ -15,4 +17,7 @@ public class SettingsData
     }
 
     public ResultThresholds resultThresholds = new ResultThresholds();
+
+    // ★ デバッグ用フラグ追加
+    public bool debugMode = false;
 }

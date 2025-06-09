@@ -43,6 +43,16 @@ public class TitleController : MonoBehaviour
 
     void Start()
     {
+        if (SettingsManager.Instance.settings.debugMode)
+        {
+            debug_1pHit.gameObject.SetActive(true);
+            debug_2pHit.gameObject.SetActive(true);
+        }
+        else
+        {
+            debug_1pHit.gameObject.SetActive(false);
+            debug_2pHit.gameObject.SetActive(false);
+        }
         title_objects.SetActive(true);
         ui_objects.SetActive(false);
     }

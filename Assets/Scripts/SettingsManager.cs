@@ -33,8 +33,6 @@ public class SettingsManager : MonoBehaviour
         {
             string json = File.ReadAllText(path);
             settings = JsonUtility.FromJson<SettingsData>(json);
-
-            Debug.Log($"Settings loaded: InitialTime={settings.initialTime}, FireLifeScale={settings.fireLifeScale}");
         }
         else
         {

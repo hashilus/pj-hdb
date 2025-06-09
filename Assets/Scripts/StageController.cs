@@ -17,8 +17,16 @@ public class StageController : MonoBehaviour
     private int currentIndex = 0;
 
     public bool isReset;
+
+    public GameObject debugText;
+
     void Start()
     {
+        if (!SettingsManager.Instance.settings.debugMode)
+        {
+            debugText.SetActive(false);
+        }
+
         // 最初のチェックポイントのライトだけONにする
         for (int i = 0; i < checkpoints.Count; i++)
         {
