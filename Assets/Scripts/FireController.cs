@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class FireController : MonoBehaviour
 {
@@ -36,6 +37,7 @@ public class FireController : MonoBehaviour
     public ReflectionProbe reflectionProbeToUpdate;
 
     public AudioSource fireSE;
+    public AudioSource fireExSE; //水が火にあたったときの音
 
     private ParticleSystem.EmissionModule smokeEmission;
 
@@ -189,7 +191,18 @@ public class FireController : MonoBehaviour
         if (checkpoint != null)
             checkpoint.NotifyFireExtinguished(this);
 
-        GetComponent<AudioSource>().Play(); // 消火音声を再生
+        //StageControllerのVoiceIntervalTimerが3を超えていれば再生できる（連発再生を防ぐ）
+        StageController stageController = FindObjectOfType<StageController>();
+        if (stageController.voiceIntervalTimer > 3)
+        {
+            //最後の1つの場合は鳴らさない
+            if (transform.parent.GetComponent<Checkpoint>().GetAliveFireCount() > 0)
+            {
+                GetComponent<AudioSource>().Play(); // 消火音声を再生
+            }
+            stageController.voiceIntervalTimer = 0;
+        }
+
         StartCoroutine(HandleSmokeFadeOut());
     }
 

@@ -18,6 +18,8 @@ public class StageController : MonoBehaviour
 
     public bool isReset;
 
+    public float voiceIntervalTimer;
+
     public GameObject debugText;
 
     void Start()
@@ -70,6 +72,8 @@ public class StageController : MonoBehaviour
         {
             Application.Quit();
         }
+
+        voiceIntervalTimer += Time.deltaTime;
     }
 
     // ★ 外部（TitleController）から呼ばれる
@@ -79,6 +83,7 @@ public class StageController : MonoBehaviour
         {
             Debug.Log("StageController → 導入Timeline開始 (StartGame呼び出し)");
             pre_timeline.Play();
+
         }
     }
 
@@ -137,7 +142,7 @@ public class StageController : MonoBehaviour
     private void OnPreTimelineStopped(PlayableDirector director)
     {
         Debug.Log("導入Timeline終了 → メインTimeline開始");
-        timeline?.Play();
+        timeline.Play();
     }
 
     // メインTimeline終了時（今は何もしないが拡張可）

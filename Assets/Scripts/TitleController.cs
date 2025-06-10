@@ -40,6 +40,8 @@ public class TitleController : MonoBehaviour
 
     bool isPlayed = false;
 
+    public AudioSource mainBGM;
+
 
     void Start()
     {
@@ -129,6 +131,9 @@ public class TitleController : MonoBehaviour
             gameStartingTimer = 10f;
             player1StartCount = 0;
             player2StartCount = 0;
+
+            mainBGM.Play();
+
         }
     }
 }
