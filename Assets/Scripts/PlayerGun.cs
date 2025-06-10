@@ -114,12 +114,13 @@ public class PlayerGun : MonoBehaviour
             return;
         }
 
-        if (Input.GetButtonDown(buttonName))
+        var isButtonPressed = Input.GetButton(buttonName);
+        if (isButtonPressed && !isShooting)
         {
             isShooting = true;
             airController.StartBlow();
         }
-        else if (Input.GetButtonUp(buttonName))
+        else if (!isButtonPressed && isShooting)
         {
             isShooting = false;
             airController.StopBlow();
