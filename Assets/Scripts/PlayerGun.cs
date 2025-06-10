@@ -48,6 +48,12 @@ public class PlayerGun : MonoBehaviour
         Player = GetComponentInParent<Player>();
     }
 
+    void OnDisable()
+    {
+        isShooting = false;
+        if (Settings.System.IsUseTracker) airController.StopBlow();
+    }
+
     void Start()
     {
         transform.GetLocalPositionAndRotation(out targetLocalPosition, out targetLocalRotation);
