@@ -108,16 +108,21 @@ public class PlayerGun : MonoBehaviour
         var playerSection = isHardwarePlayer1 ? AirBlowPermission.PlayerSelection.Player1 : AirBlowPermission.PlayerSelection.Player2;
         var buttonName = isHardwarePlayer1 ? "Fire1" : "Fire2";
 
-        if (AirBlowPermission.CanBlow(playerSection))
-        {
-            if (Input.GetButtonDown(buttonName)) { airController.StartBlow(); }
-            else if (Input.GetButtonUp(buttonName)) { airController.StopBlow(); }
-
-            isShooting = Input.GetButton(buttonName);
-        }
-        else
+        if (!AirBlowPermission.CanBlow(playerSection))
         {
             isShooting = false;
+            return;
+        }
+
+        if (Input.GetButtonDown(buttonName))
+        {
+            isShooting = true;
+            airController.StartBlow();
+        }
+        else if (Input.GetButtonUp(buttonName))
+        {
+            isShooting = false;
+            airController.StopBlow();
         }
     }
 
