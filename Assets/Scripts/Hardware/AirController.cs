@@ -7,6 +7,8 @@ public class AirController : MonoBehaviour
     [SerializeField]
     bool isLController;
 
+    public bool isMisting;
+
     public enum Flow
     {
         Air0,
@@ -54,9 +56,10 @@ public class AirController : MonoBehaviour
         {
             SendUDP(Flow.Air2);
         }
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.M) || isMisting)
         {
             SendMistUDP();
+            isMisting = false;
         }
     }
 
@@ -106,7 +109,7 @@ public class AirController : MonoBehaviour
             return;
         }
         
-        byte[] sendBytes = System.Text.Encoding.UTF8.GetBytes("mist 1000");
+        byte[] sendBytes = System.Text.Encoding.UTF8.GetBytes("mist 2000");
         udpClient.Send(sendBytes, sendBytes.Length, host, port);
     }
 
