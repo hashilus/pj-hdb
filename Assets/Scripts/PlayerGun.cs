@@ -22,6 +22,9 @@ public class PlayerGun : MonoBehaviour
     [SerializeField]
     ParticleSystem waterParticle;
 
+    [SerializeField]
+    Animator waterSoundAnimator;
+
     [Header("Tracker")]
     [SerializeField]
     Transform calibratedTracker;
@@ -46,6 +49,12 @@ public class PlayerGun : MonoBehaviour
     void Awake()
     {
         Player = GetComponentInParent<Player>();
+    }
+
+    void OnDisable()
+    {
+        isShooting = false;
+        if (Settings.System.IsUseTracker) airController.StopBlow();
     }
 
     void Start()
@@ -91,7 +100,15 @@ public class PlayerGun : MonoBehaviour
             Settings.Gun.MovingRange.Value.y);
         targetLocalPosition = new Vector3(x, y, 0f);
 
-        targetLocalRotation = cameraLocalTrackerRotation;
+        var euler = cameraLocalTrackerRotation.eulerAngles;
+        euler.x = NormalizeAngle(euler.x);
+        euler.y = NormalizeAngle(euler.y);
+        euler.z = NormalizeAngle(euler.z);
+
+        euler.x = Mathf.Clamp(euler.x, Settings.Gun.HorizontalLimitAngle.Value.x, Settings.Gun.HorizontalLimitAngle.Value.y);
+        euler.y = Mathf.Clamp(euler.y, Settings.Gun.VerticalLimitAngle.Value.x, Settings.Gun.VerticalLimitAngle.Value.y);
+
+        targetLocalRotation = Quaternion.Euler(euler);
     }
 
     void UpdateButtonByTracker()
@@ -100,16 +117,22 @@ public class PlayerGun : MonoBehaviour
         var playerSection = isHardwarePlayer1 ? AirBlowPermission.PlayerSelection.Player1 : AirBlowPermission.PlayerSelection.Player2;
         var buttonName = isHardwarePlayer1 ? "Fire1" : "Fire2";
 
-        if (AirBlowPermission.CanBlow(playerSection))
-        {
-            if (Input.GetButtonDown(buttonName)) { airController.StartBlow(); }
-            else if (Input.GetButtonUp(buttonName)) { airController.StopBlow(); }
-
-            isShooting = Input.GetButton(buttonName);
-        }
-        else
+        if (!AirBlowPermission.CanBlow(playerSection))
         {
             isShooting = false;
+            return;
+        }
+
+        var isButtonPressed = Input.GetButton(buttonName);
+        if (isButtonPressed && !isShooting)
+        {
+            isShooting = true;
+            airController.StartBlow();
+        }
+        else if (!isButtonPressed && isShooting)
+        {
+            isShooting = false;
+            airController.StopBlow();
         }
     }
 
@@ -237,6 +260,8 @@ public class PlayerGun : MonoBehaviour
 
         emission = waterParticle.emission;
         emission.rateOverTime = 60.0f;
+
+        waterSoundAnimator.SetBool("IsShooting", true);
     }
 
     void StopShootingEffect()
@@ -249,5 +274,7 @@ public class PlayerGun : MonoBehaviour
 
         emission = waterParticle.emission;
         emission.rateOverTime = 0f;
+
+        waterSoundAnimator.SetBool("IsShooting", false);
     }
 }
