@@ -42,6 +42,7 @@ public class TitleController : MonoBehaviour
 
     public AudioSource mainBGM;
 
+    public GameObject playerRoot;
 
     void Start()
     {
@@ -105,6 +106,11 @@ public class TitleController : MonoBehaviour
 
         debug_1pHit.text = player1StartCount.ToString();
         debug_2pHit.text = player2StartCount.ToString();
+
+        if (!isPlayed) {
+            playerRoot.SetActive(true);
+            playerRoot.transform.localPosition = Vector3.zero;
+        }
 
         // ★ スタート処理を一度だけ行うようにする
         if ((Input.GetKeyDown(KeyCode.Space) || isStarting) && !startTriggered)
