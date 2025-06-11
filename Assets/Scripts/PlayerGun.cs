@@ -23,7 +23,7 @@ public class PlayerGun : MonoBehaviour
     ParticleSystem waterParticle;
 
     [SerializeField]
-    AudioSource waterSound;
+    Animator waterSoundAnimator;
 
     [Header("Tracker")]
     [SerializeField]
@@ -261,9 +261,7 @@ public class PlayerGun : MonoBehaviour
         emission = waterParticle.emission;
         emission.rateOverTime = 60.0f;
 
-        waterSound.Stop();
-        waterSound.loop = true;
-        waterSound.Play();
+        waterSoundAnimator.SetBool("IsShooting", true);
     }
 
     void StopShootingEffect()
@@ -277,6 +275,6 @@ public class PlayerGun : MonoBehaviour
         emission = waterParticle.emission;
         emission.rateOverTime = 0f;
 
-        waterSound.loop = false;        
+        waterSoundAnimator.SetBool("IsShooting", false);
     }
 }
