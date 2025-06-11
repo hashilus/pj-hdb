@@ -14,8 +14,7 @@ public class MessageDispatcher<MessageBaseT>
     public void Dispatch(MessageBaseT message)
     {
         var handlers = handlerDict.GetOrDefault(message.GetType());
-        if (handlers == null) return;
-        handlers.ForEach(h => h.Dispatch(message));
+        handlers?.ForEach(h => h.Dispatch(message));
     }
 
     public void AddListener<MessageT>(Action<MessageT> handler) where MessageT : MessageBaseT
@@ -50,7 +49,7 @@ public class MessageDispatcher<MessageBaseT>
     {
         public readonly Action<MessageT> handler;
 
-        public Delegate WrappedHandler { get { return handler; } }
+        public Delegate WrappedHandler => handler;
 
         public HandlerWrapper(Action<MessageT> handler)
         {
@@ -78,8 +77,7 @@ public class MessageDispatcher<MessageBaseT, Arg1T>
     public void Dispatch(MessageBaseT message, Arg1T arg1)
     {
         var handlers = handlerDict.GetOrDefault(message.GetType());
-        if (handlers == null) return;
-        handlers.ForEach(h => h.Dispatch(message, arg1));
+        handlers?.ForEach(h => h.Dispatch(message, arg1));
     }
 
     public void AddListener<MessageT>(Action<MessageT, Arg1T> handler) where MessageT : MessageBaseT
@@ -114,7 +112,7 @@ public class MessageDispatcher<MessageBaseT, Arg1T>
     {
         public readonly Action<MessageT, Arg1T> handler;
 
-        public Delegate WrappedHandler { get { return handler; } }
+        public Delegate WrappedHandler => handler;
 
         public HandlerWrapper(Action<MessageT, Arg1T> handler)
         {
@@ -141,8 +139,7 @@ public class MessageDispatcher<MessageBaseT, Arg1T, Arg2T>
     public void Dispatch(MessageBaseT message, Arg1T arg1, Arg2T arg2)
     {
         var handlers = handlerDict.GetOrDefault(message.GetType());
-        if (handlers == null) return;
-        handlers.ForEach(h => h.Dispatch(message, arg1, arg2));
+        handlers?.ForEach(h => h.Dispatch(message, arg1, arg2));
     }
 
     public void AddListener<MessageT>(Action<MessageT, Arg1T, Arg2T> handler) where MessageT : MessageBaseT
@@ -177,7 +174,7 @@ public class MessageDispatcher<MessageBaseT, Arg1T, Arg2T>
     {
         public readonly Action<MessageT, Arg1T, Arg2T> handler;
 
-        public Delegate WrappedHandler { get { return handler; } }
+        public Delegate WrappedHandler => handler;
 
         public HandlerWrapper(Action<MessageT, Arg1T, Arg2T> handler)
         {
