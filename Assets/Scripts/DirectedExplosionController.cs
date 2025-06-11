@@ -15,6 +15,11 @@ public class DirectedExplosionController : MonoBehaviour
 
     bool playOnce;
 
+    public GameObject extendFire1;
+    public GameObject extendFire2;
+    public GameObject extendFire3;
+    public GameObject extendFire4;
+
     void Start()
     {
         explosionParticle.SetActive(false);
@@ -32,6 +37,10 @@ public class DirectedExplosionController : MonoBehaviour
         {
             TriggerExplosion();
             start = false;
+            extendFire1.SetActive(true);
+            extendFire2.SetActive(true);
+            extendFire3.SetActive(true);
+            extendFire4.SetActive(true);
             playOnce = true; // ˆê“x‚¾‚¯”š”j‚ğƒgƒŠƒK[
         }
     }

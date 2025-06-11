@@ -11,6 +11,7 @@ TagManager:
   - VentilationGrid
   - Anchor
   - Water
+  - Fire
   layers:
   - Default
   - TransparentFX

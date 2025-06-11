@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class FireController : MonoBehaviour
 {
@@ -36,10 +37,14 @@ public class FireController : MonoBehaviour
     public ReflectionProbe reflectionProbeToUpdate;
 
     public AudioSource fireSE;
+    public AudioSource fireExSE; //水が火にあたったときの音
 
     private ParticleSystem.EmissionModule smokeEmission;
 
     private bool extinguished = false;
+
+    public TextMesh debugText;
+
 
     public void AssignCheckpoint(Checkpoint cp)
     {
@@ -48,8 +53,13 @@ public class FireController : MonoBehaviour
 
     private void Start()
     {
+        if (!SettingsManager.Instance.settings.debugMode)
+        {
+            debugText.gameObject.SetActive(false);
+        }
+
         maxScale = transform.localScale; // 初期スケールを最大スケールに設定
-        life = initialLife;
+        life = initialLife * SettingsManager.Instance.settings.fireLifeScale1P; //2Pもあり
         transform.localScale = maxScale;
 
         if (fireLight != null)
@@ -70,14 +80,40 @@ public class FireController : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        debugText.text = life.ToString();
+    }
 
     private void OnCollisionEnter(Collision collision)
+{
+    if (collision.gameObject.CompareTag("Water") && !extinguished)
     {
-        if (collision.gameObject.CompareTag("Water") && !extinguished)
+        float damageMultiplier = 1.0f;
+
+        // どの Collider に当たったかを調べる
+        Collider myCollider = collision.GetContact(0).thisCollider;
+
+        if (myCollider != null)
         {
-            ReduceLife(1f);
+            if (myCollider is BoxCollider)
+            {
+                // 基底部 → 高ダメージ
+                damageMultiplier = 2.0f; // 例: 2倍早く消える
+            }
+            else if (myCollider is SphereCollider)
+            {
+                // 上部 → 通常ダメージ
+                damageMultiplier = 1.0f;
+            }
         }
+
+        ReduceLife(1f * damageMultiplier);
+
+        Destroy(collision.gameObject);
     }
+}
+
 
     void ReduceLife(float amount)
     {
@@ -155,7 +191,18 @@ public class FireController : MonoBehaviour
         if (checkpoint != null)
             checkpoint.NotifyFireExtinguished(this);
 
-        GetComponent<AudioSource>().Play(); // 消火音声を再生
+        //StageControllerのVoiceIntervalTimerが3を超えていれば再生できる（連発再生を防ぐ）
+        StageController stageController = FindObjectOfType<StageController>();
+        if (stageController.voiceIntervalTimer > 3)
+        {
+            //最後の1つの場合は鳴らさない
+            if (transform.parent.GetComponent<Checkpoint>().GetAliveFireCount() > 0)
+            {
+                GetComponent<AudioSource>().Play(); // 消火音声を再生
+            }
+            stageController.voiceIntervalTimer = 0;
+        }
+
         StartCoroutine(HandleSmokeFadeOut());
     }
 

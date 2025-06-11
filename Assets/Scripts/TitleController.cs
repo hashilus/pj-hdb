@@ -40,9 +40,21 @@ public class TitleController : MonoBehaviour
 
     bool isPlayed = false;
 
+    public AudioSource mainBGM;
+
 
     void Start()
     {
+        if (SettingsManager.Instance.settings.debugMode)
+        {
+            debug_1pHit.gameObject.SetActive(true);
+            debug_2pHit.gameObject.SetActive(true);
+        }
+        else
+        {
+            debug_1pHit.gameObject.SetActive(false);
+            debug_2pHit.gameObject.SetActive(false);
+        }
         title_objects.SetActive(true);
         ui_objects.SetActive(false);
     }
@@ -119,6 +131,9 @@ public class TitleController : MonoBehaviour
             gameStartingTimer = 10f;
             player1StartCount = 0;
             player2StartCount = 0;
+
+            mainBGM.Play();
+
         }
     }
 }

@@ -38,6 +38,19 @@ public class Bullet : MonoBehaviour
         // 拡大コライダー処理
         StartCoroutine(ExpandColliderTemporarily());
 
+        //火にヒットした時に消火SEを出す
+        if (collision.gameObject.CompareTag("Fire"))
+        {
+            var fire = collision.gameObject.GetComponent<FireController>();
+            if (fire)
+            {
+                if (!fire.fireExSE.isPlaying)
+                {
+                    fire.fireExSE.Play();
+                }
+            }
+        }
+
         Destroy(gameObject, Settings.Bullet.LifetimeOnHit);
     }
 

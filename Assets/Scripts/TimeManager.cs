@@ -14,14 +14,12 @@ public class TimeManager : MonoBehaviour
 
     public TextMesh dispTime;
     public TextMesh dispTimeDecimal;
-    public TextMesh dispTime2;
-    public TextMesh dispTimeDecimal2;
 
     public GameObject fireparticle;
 
     void Start()
     {
-        currentTime = startTime;
+        currentTime = SettingsManager.Instance.settings.initialTime;
         isCountingDown = false;
     }
 
@@ -31,9 +29,6 @@ public class TimeManager : MonoBehaviour
         string timeStr = currentTime.ToString("F1");
         string[] parts = timeStr.Split('.');
         dispTimeDecimal.text = parts[1];
-
-        dispTime2.text = dispTime.text;
-        dispTimeDecimal2.text = dispTimeDecimal.text;
 
         if (!isCountingDown) return;
 

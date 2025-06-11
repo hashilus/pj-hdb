@@ -4,50 +4,50 @@ using System.Collections;
 
 public class Checkpoint : MonoBehaviour
 {
+    public int checkPointNo; // チェックポイント番号
+
     public System.Action<Checkpoint> onCleared;
     private bool isCleared = false;
-    
+
     public float clearTimeLimit = 10f;
     private Coroutine forceClearCoroutine;
-
 
     [Header("ライト制御を行うか？")]
     public bool controlLights = true;
 
     private List<FireController> fires = new List<FireController>();
 
-    public float bonusTime = 10f; // このCPをクリアしたら追加される時間
+    public float bonusTime; // このCPをクリアしたら追加される時間
 
     public TextMesh debugCountText; // デバッグ用の表示
-
-    int firesCount = 0;
 
     void Awake()
     {
         fires.Clear();
-        foreach (var fire in GetComponentsInChildren<FireController>())
+
+        foreach (var fire in GetComponentsInChildren<FireController>(true)) // ← Active=false も含めて取得
         {
             fires.Add(fire);
             fire.AssignCheckpoint(this); // FireController 側に自分を登録
         }
-        firesCount = fires.Count;
 
         SetLightActive(false);
+
+        // ボーナスタイム取得
+        bonusTime = SettingsManager.Instance.settings.checkpointExtendTimes[checkPointNo - 1];
     }
 
     public void NotifyFireExtinguished(FireController fc)
     {
-        // 呼ばれるたびにチェック
-        firesCount--;
-        debugCountText.text = "残り" + firesCount.ToString();
+        debugCountText.text = "残り" + GetAliveFireCount().ToString();
         CheckIfCleared();
     }
 
-
     public void ActivateCheckpoint()
     {
-        debugCountText.text = "残り" + fires.Count.ToString();
+        debugCountText.text = "残り" + GetAliveFireCount().ToString();
         SetLightActive(true);
+
         if (forceClearCoroutine != null)
             StopCoroutine(forceClearCoroutine);
 
@@ -62,9 +62,9 @@ public class Checkpoint : MonoBehaviour
 
         foreach (var fire in fires)
         {
-            if (fire.life > 0)
+            if (fire != null && fire.life > 0f && fire.gameObject.activeInHierarchy)
             {
-                fire.ForceExtinguish(); // ← FireController側で用意（後述）
+                fire.ForceExtinguish(); // ← FireController 側で用意
             }
         }
 
@@ -76,9 +76,13 @@ public class Checkpoint : MonoBehaviour
         if (isCleared) return;
 
         float totalLife = 0f;
+
         foreach (var fire in fires)
         {
-            totalLife += Mathf.Max(0f, fire.life);
+            if (fire != null && fire.gameObject.activeInHierarchy)
+            {
+                totalLife += Mathf.Max(0f, fire.life);
+            }
         }
 
         if (totalLife <= 0f)
@@ -87,7 +91,7 @@ public class Checkpoint : MonoBehaviour
             Debug.Log($"{name}: 全FireのLifeが0。チェックポイントクリア！");
             onCleared?.Invoke(this);
             SetLightActive(false);
-            ClearCheckpoint(); // クリア処理
+            ClearCheckpoint();
         }
     }
 
@@ -116,19 +120,14 @@ public class Checkpoint : MonoBehaviour
         // 他のクリア処理
     }
 
-    // 現在残っている火の個数を返す
+    // 現在残っている火の個数を返す（単純な childCount は使わない！）
     public int GetCurrentFireCount()
     {
-        return this.transform.childCount;
-    }
-
-    public int GetAliveFireCount()
-    {
         int count = 0;
-        foreach (Transform child in transform)
+
+        foreach (var fire in fires)
         {
-            FireController fire = child.GetComponent<FireController>();
-            if (fire != null && fire.life > 0f)
+            if (fire != null)
             {
                 count++;
             }
@@ -137,4 +136,19 @@ public class Checkpoint : MonoBehaviour
         return count;
     }
 
+    // 現在 Alive な Fire の数を返す
+    public int GetAliveFireCount()
+    {
+        int count = 0;
+
+        foreach (var fire in fires)
+        {
+            if (fire != null && fire.gameObject.activeInHierarchy && fire.life > 0f)
+            {
+                count++;
+            }
+        }
+
+        return count;
+    }
 }
