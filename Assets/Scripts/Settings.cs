@@ -6,9 +6,9 @@ public partial class Settings
     public class System
     {
         public static SettingBool IsUseTracker = new("トラッカーを使用するかどうか", false);
-        public static SettingString HACCAddressL = new("HACC(L)のIPアドレス", "127.0.0.1");
+        public static SettingString HACCAddressL = new("HACC(L)のIPアドレス", "192.168.5.101");
         public static SettingInt HACCPortL = new("HACC(L)のポート", 5555);
-        public static SettingString HACCAddressR = new("HACC(R)のIPアドレス", "127.0.0.1");
+        public static SettingString HACCAddressR = new("HACC(R)のIPアドレス", "192.168.5.102");
         public static SettingInt HACCPortR = new("HACC(R)のポート", 5555);
         public static SettingFloat AirBlowToWeakenWait = new("空気吹きを弱めるまでの待機時間(秒)", 2f);
         public static SettingFloat TrackerLostCheckDuration = new("トラッカーが見失われたとみなすまでの時間(秒)", 1f);
