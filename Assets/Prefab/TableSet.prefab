@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4990767594306334193}
   m_Layer: 0
   m_Name: D_chair (4)
-  m_TagString: Untagged
+  m_TagString: DESK
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 1
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 6017584010296682530}
   m_Layer: 0
   m_Name: D_chair (5)
-  m_TagString: Untagged
+  m_TagString: DESK
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 1
@@ -594,7 +594,7 @@ GameObject:
   - component: {fileID: 3560232584324757433}
   m_Layer: 0
   m_Name: D_chair (3)
-  m_TagString: Untagged
+  m_TagString: DESK
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 1
@@ -1009,7 +1009,7 @@ GameObject:
   - component: {fileID: 9182441981500376957}
   m_Layer: 0
   m_Name: D_chair (7)
-  m_TagString: Untagged
+  m_TagString: DESK
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 1
@@ -1341,7 +1341,7 @@ GameObject:
   - component: {fileID: 7901316843340522656}
   m_Layer: 0
   m_Name: D_chair (6)
-  m_TagString: Untagged
+  m_TagString: DESK
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 1
@@ -1464,7 +1464,7 @@ GameObject:
   - component: {fileID: 1029564267146648515}
   m_Layer: 0
   m_Name: D_chair (1)
-  m_TagString: Untagged
+  m_TagString: DESK
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 1
@@ -1547,7 +1547,7 @@ GameObject:
   - component: {fileID: 1782884643719507188}
   m_Layer: 0
   m_Name: D_chair (2)
-  m_TagString: Untagged
+  m_TagString: DESK
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 1
@@ -1630,7 +1630,7 @@ GameObject:
   - component: {fileID: 3638481683253447921}
   m_Layer: 0
   m_Name: D_chair
-  m_TagString: Untagged
+  m_TagString: DESK
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 1
