@@ -9,6 +9,7 @@ public class CheckpointVoiceEvent : MonoBehaviour
     {
         public float triggerTime;      // 何秒後に鳴らすか
         public AudioClip voiceClip;    // 鳴らすクリップ
+        public GameObject activateObject; // ★再生時にActiveにするオブジェクト
     }
 
     [Header("Voiceイベントリスト")]
@@ -45,6 +46,12 @@ public class CheckpointVoiceEvent : MonoBehaviour
                 audioSource.Play();
 
                 Debug.Log($"[CheckpointVoiceEvent] {gameObject.name} → Voice 再生開始 ( {entry.triggerTime} 秒経過 ) → {entry.voiceClip.name}");
+            }
+
+            // ★GameObjectをActive化
+            if (entry.activateObject != null)
+            {
+                entry.activateObject.SetActive(true);
             }
 
             currentIndex++;

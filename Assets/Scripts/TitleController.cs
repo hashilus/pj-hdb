@@ -45,6 +45,7 @@ public class TitleController : MonoBehaviour
     public GameObject playerRoot;
 
     public GameObject calibrationUI;
+    private Coroutine startDelayCoroutine; // 追加: スタート遅延用
 
     void Start()
     {
@@ -60,6 +61,7 @@ public class TitleController : MonoBehaviour
         }
         title_objects.SetActive(true);
         ui_objects.SetActive(false);
+        if ((Input.GetKeyDown(KeyCode.Space) || isStarting) && !startTriggered)
         calibrationUI.SetActive(true);
     }
 
@@ -99,7 +101,10 @@ public class TitleController : MonoBehaviour
 
         if (player1StartCount > startupnumber && player2StartCount > startupnumber)
         {
-            isStarting = true;
+            if (startDelayCoroutine == null && !startTriggered)
+            {
+                startDelayCoroutine = StartCoroutine(StartGameAfterDelay(1f));
+            }
         }
 
         if (gameStartingTimer < 0)
@@ -144,5 +149,10 @@ public class TitleController : MonoBehaviour
             mainBGM.Play();
 
         }
+    }
+    private IEnumerator StartGameAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        isStarting = true;
     }
 }
