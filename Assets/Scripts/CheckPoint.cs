@@ -112,7 +112,7 @@ public class Checkpoint : MonoBehaviour
         if (time != null)
         {
             time.StopCountdown();
-            time.AddBonusTime(bonusTime);
+            //time.AddBonusTime(bonusTime);
         }
 
         FindObjectOfType<TimeExtendDisplay>().ShowExtend((int)bonusTime);
