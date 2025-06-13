@@ -6,7 +6,8 @@ namespace Hashilus.Setting
 {
     public class SettingBool : SettingField<bool>
     {
-        public SettingBool(string description, bool defaultValue) : base(description, defaultValue) { }
+        public SettingBool(string description, bool defaultValue) :
+            base(description + "(True, False)", defaultValue) { }
 
         protected override bool Parse(string valueString)
         {
