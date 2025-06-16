@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Bullet : MonoBehaviour
 {
@@ -23,13 +25,9 @@ public class Bullet : MonoBehaviour
     [SerializeField]
     float bowlHitSoundVolume = 0.30f;
 
-    [SerializeField]
-    AudioClip wallHitSound;
-
-    [SerializeField]
-    float wallHitSoundVolume = 1.0f;
-
     public PlayerID Shooter { get; set; }
+
+    public event Action<Bullet, GameObject> OnHit;
 
     SphereCollider sphereCollider;
     AudioSource audioSource;
@@ -63,10 +61,9 @@ public class Bullet : MonoBehaviour
             case "Fire":
                 PlayFireExtinguishSound(collision.gameObject);
                 break;
-            default:
-                PlayWallHitSound(collision.gameObject);
-                break;
         }
+
+        OnHit?.Invoke(this, collision.gameObject);
 
         Destroy(gameObject, Settings.Bullet.LifetimeOnHit);
     }
@@ -107,13 +104,6 @@ public class Bullet : MonoBehaviour
         int idx = Random.Range(0, bowlHitSounds.Length);
         audioSource.clip = bowlHitSounds[idx];
         audioSource.volume = bowlHitSoundVolume;
-        audioSource.Play();
-    }
-
-    void PlayWallHitSound(GameObject other)
-    {
-        audioSource.clip = wallHitSound;
-        audioSource.volume = wallHitSoundVolume;
         audioSource.Play();
     }
 
