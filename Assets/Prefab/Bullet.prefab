@@ -150,13 +150,13 @@ MonoBehaviour:
   hitParticlePrefab: {fileID: 1722726733478836, guid: c1c88308ebb5d2541a282905b854ee4c, type: 3}
   hitParticleLifetime: 1
   hitParticleSpawnChance: 0.4
-  deskhitSound:
+  deskHitSounds:
   - {fileID: 8300000, guid: 4e7400c9f605a86468433e60cc8635d4, type: 3}
   - {fileID: 8300000, guid: 9f612a160305c6f469060af52bb49d22, type: 3}
   - {fileID: 8300000, guid: 9c15318078d1b184785a1485d49331fc, type: 3}
   - {fileID: 8300000, guid: 96eec8be12389c849a0926d2dfaa2db2, type: 3}
   - {fileID: 8300000, guid: 82cf127225e7f7f45a92e93db4985af8, type: 3}
-  bowlhitSound:
+  bowlHitSounds:
   - {fileID: 8300000, guid: dd79515dcf996ee49aa4e55cc19d37b6, type: 3}
   - {fileID: 8300000, guid: 52e9a02303bdf884eac039c54499436d, type: 3}
   - {fileID: 8300000, guid: 92ac82907b7a02343856736da10ec6d7, type: 3}
