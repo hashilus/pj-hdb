@@ -15,7 +15,13 @@ public class Bullet : MonoBehaviour
     AudioClip[] deskHitSounds;
 
     [SerializeField]
+    float deskHitSoundVolume = 0.15f;
+
+    [SerializeField]
     AudioClip[] bowlHitSounds;
+
+    [SerializeField]
+    float bowlHitSoundVolume = 0.30f;
 
     public PlayerID Shooter { get; set; }
 
@@ -83,7 +89,7 @@ public class Bullet : MonoBehaviour
     {
         int idx = Random.Range(0, deskHitSounds.Length);
         audioSource.clip = deskHitSounds[idx];
-        audioSource.volume = 0.15f;
+        audioSource.volume = deskHitSoundVolume;
         audioSource.Play();
     }
 
@@ -91,7 +97,7 @@ public class Bullet : MonoBehaviour
     {
         int idx = Random.Range(0, bowlHitSounds.Length);
         audioSource.clip = bowlHitSounds[idx];
-        audioSource.volume = 0.30f;
+        audioSource.volume = bowlHitSoundVolume;
         audioSource.Play();
     }
 
