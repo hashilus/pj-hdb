@@ -90,6 +90,11 @@ public class CalibratedPositionProvider : MonoBehaviour
     Vector3 PositionDiff()
     {
         var diff = trackingTransform.position - trackingOrgPos;
+        
+        if (Settings.System.UsedSpaceCalibrator)
+        {
+            return diff;
+        }
 
         // 座標変換（X軸とZ軸を反転させる）
         return new Vector3(-diff.x, diff.y, -diff.z);
@@ -97,6 +102,11 @@ public class CalibratedPositionProvider : MonoBehaviour
 
     Quaternion RotationDiff()
     {
+        if (Settings.System.UsedSpaceCalibrator)
+        {
+            return trackingTransform.localRotation * Quaternion.Inverse(trackingOrgRot);
+        }
+        
         Quaternion diff = Quaternion.Inverse(trackingTransform.rotation * Quaternion.Inverse(trackingOrgRot));
         Vector3 eulerAngles = diff.eulerAngles;
         return Quaternion.Euler(
