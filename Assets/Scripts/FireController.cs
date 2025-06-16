@@ -59,7 +59,7 @@ public class FireController : MonoBehaviour
         }
 
         maxScale = transform.localScale; // 初期スケールを最大スケールに設定
-        life = initialLife * SettingsManager.Instance.settings.fireLifeScale1P; //2Pもあり
+
         transform.localScale = maxScale;
 
         if (fireLight != null)
@@ -79,6 +79,18 @@ public class FireController : MonoBehaviour
             emberEmission = emberParticle.emission;
 
     }
+
+    public void OnEnable()
+    {
+        // プレイヤー数による初期ライフを設定
+        if (SettingsManager.Instance.playingPlayerNumber == 2)
+        {
+            life = initialLife * SettingsManager.Instance.settings.fireLifeScale2P;
+        }else{
+            life = initialLife * SettingsManager.Instance.settings.fireLifeScale1P;
+        }
+    }
+
 
     private void Update()
     {
