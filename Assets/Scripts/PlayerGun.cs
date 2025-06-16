@@ -26,6 +26,9 @@ public class PlayerGun : MonoBehaviour
     Animator waterSoundAnimator;
 
     [SerializeField]
+    AudioSource waterHitSoundAudioSource;
+
+    [SerializeField]
     Animator waterHitSoundAnimator;
 
     [Header("Tracker")]
@@ -284,6 +287,7 @@ public class PlayerGun : MonoBehaviour
 
     void OnHitBullet(Bullet bullet, GameObject other)
     {
+        waterHitSoundAudioSource.transform.position = bullet.transform.position;
         waterHitSoundAnimator.SetTrigger("Hit");
     }
 }

@@ -5340,6 +5340,7 @@ MonoBehaviour:
   gasParticle: {fileID: 4007336009320940734}
   waterParticle: {fileID: 3678288785315869188}
   waterSoundAnimator: {fileID: 2719494381933536360}
+  waterHitSoundAudioSource: {fileID: 6438625912467227478}
   waterHitSoundAnimator: {fileID: 93904597990646492}
   calibratedTracker: {fileID: 0}
   airController: {fileID: 0}
