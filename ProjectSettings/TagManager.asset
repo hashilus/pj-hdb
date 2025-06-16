@@ -12,6 +12,8 @@ TagManager:
   - Anchor
   - Water
   - Fire
+  - DESK
+  - BOWL
   layers:
   - Default
   - TransparentFX

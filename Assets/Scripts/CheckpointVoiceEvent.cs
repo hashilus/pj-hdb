@@ -20,6 +20,9 @@ public class CheckpointVoiceEvent : MonoBehaviour
     private int currentIndex = 0;
     private bool isActive = false;
 
+    [SerializeField]
+    StageController stageController;
+
     private void OnEnable()
     {
         timer = 0f;
@@ -44,6 +47,7 @@ public class CheckpointVoiceEvent : MonoBehaviour
             {
                 audioSource.clip = entry.voiceClip;
                 audioSource.Play();
+                stageController.voiceIntervalTimer = 0f; // ★再生したらタイマーをリセット
 
                 Debug.Log($"[CheckpointVoiceEvent] {gameObject.name} → Voice 再生開始 ( {entry.triggerTime} 秒経過 ) → {entry.voiceClip.name}");
             }

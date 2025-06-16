@@ -16,6 +16,9 @@ public class Bullet : MonoBehaviour
     SphereCollider sphereCollider;
     bool hasCollided = false; // ← これが重要
 
+    public AudioClip[] deskhitSound; // ヒット時のサウンド
+    public AudioClip[] bowlhitSound; // ヒット時のサウンド
+    
     void Start()
     {
         sphereCollider = GetComponent<SphereCollider>();
@@ -37,6 +40,23 @@ public class Bullet : MonoBehaviour
 
         // 拡大コライダー処理
         StartCoroutine(ExpandColliderTemporarily());
+
+        AudioSource deskAudio = gameObject.GetComponent<AudioSource>();
+        if (collision.gameObject.CompareTag("DESK"))
+        {
+            int idx = Random.Range(0, deskhitSound.Length);
+            deskAudio.clip = deskhitSound[idx];
+            deskAudio.volume = 0.15f;
+            deskAudio.Play();
+        }
+
+        if (collision.gameObject.CompareTag("BOWL"))
+        {
+            int idx = Random.Range(0, bowlhitSound.Length);
+            deskAudio.clip = bowlhitSound[idx];
+            deskAudio.volume = 0.30f;
+            deskAudio.Play();
+        }
 
         //火にヒットした時に消火SEを出す
         if (collision.gameObject.CompareTag("Fire"))

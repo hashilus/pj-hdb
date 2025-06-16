@@ -47,6 +47,8 @@ public class TitleController : MonoBehaviour
     public GameObject calibrationUI;
     private Coroutine startDelayCoroutine; // 追加: スタート遅延用
 
+    public AudioClip startSound;
+
     void Start()
     {
         if (SettingsManager.Instance.settings.debugMode)
@@ -83,6 +85,8 @@ public class TitleController : MonoBehaviour
             if (!start1P_Confirmed)
             {
                 player2StartCount = startupnumber - 1;
+                GetComponent<AudioSource>().PlayOneShot(startSound);
+
             }
             start1P_Confirmed = true;
         }
@@ -95,6 +99,7 @@ public class TitleController : MonoBehaviour
             if (!start2P_Confirmed)
             {
                 player1StartCount = startupnumber - 1;
+                GetComponent<AudioSource>().PlayOneShot(startSound);
             }
             start2P_Confirmed = true;
         }
