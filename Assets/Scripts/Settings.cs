@@ -12,6 +12,7 @@ public partial class Settings
         public static SettingInt HACCPortR = new("HACC(R)のポート", 5555);
         public static SettingFloat AirBlowToWeakenWait = new("空気吹きを弱めるまでの待機時間(秒)", 2f);
         public static SettingFloat TrackerLostCheckDuration = new("トラッカーが見失われたとみなすまでの時間(秒)", 1f);
+        public static SettingBool UsedSpaceCalibrator = new("スペースキャリブレーターを使ってトラッカーのキャリブレーションを実施した【旧トラッカーでは必須】", false);
     }
 
     public class Calibration
