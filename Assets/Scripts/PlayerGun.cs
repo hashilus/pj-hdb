@@ -25,6 +25,12 @@ public class PlayerGun : MonoBehaviour
     [SerializeField]
     Animator waterSoundAnimator;
 
+    [SerializeField]
+    AudioSource waterHitSoundAudioSource;
+
+    [SerializeField]
+    Animator waterHitSoundAnimator;
+
     [Header("Tracker")]
     [SerializeField]
     Transform calibratedTracker;
@@ -242,6 +248,7 @@ public class PlayerGun : MonoBehaviour
     {
         var bullet = Instantiate(bulletPrefab, shootingOrigin.position, shootingOrigin.rotation);
         bullet.Shooter = Player.ID;
+        bullet.OnHit += OnHitBullet;
 
         bullet.transform.localScale *= Settings.Bullet.RadiusFactor;
         bullet.GetComponent<Renderer>().enabled = Settings.Bullet.ShowCollider;
@@ -276,5 +283,11 @@ public class PlayerGun : MonoBehaviour
         emission.rateOverTime = 0f;
 
         waterSoundAnimator.SetBool("IsShooting", false);
+    }
+
+    void OnHitBullet(Bullet bullet, GameObject other)
+    {
+        waterHitSoundAudioSource.transform.position = bullet.transform.position;
+        waterHitSoundAnimator.SetTrigger("Hit");
     }
 }
