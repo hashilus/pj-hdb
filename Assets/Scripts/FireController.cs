@@ -45,6 +45,7 @@ public class FireController : MonoBehaviour
 
     public TextMesh debugText;
 
+    public bool Setlife;
 
     public void AssignCheckpoint(Checkpoint cp)
     {
@@ -82,6 +83,11 @@ public class FireController : MonoBehaviour
 
     public void OnEnable()
     {
+        SetFireLife();
+    }
+
+    public void SetFireLife()
+    {
         // プレイヤー数による初期ライフを設定
         if (SettingsManager.Instance.playingPlayerNumber == 2)
         {
@@ -91,10 +97,16 @@ public class FireController : MonoBehaviour
         }
     }
 
-
     private void Update()
     {
         debugText.text = life.ToString();
+
+        if (Setlife)
+        {
+            SetFireLife();
+            Setlife = false; // 一度だけ設定する
+        }
+
     }
 
     private void OnCollisionEnter(Collision collision)

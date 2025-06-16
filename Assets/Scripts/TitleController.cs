@@ -53,6 +53,8 @@ public class TitleController : MonoBehaviour
     public GameObject player1root;
     public GameObject player2root;
 
+    public GameLogManager gameLogManager;
+
     void Start()
     {
         if (SettingsManager.Instance.settings.debugMode)
@@ -172,10 +174,12 @@ public class TitleController : MonoBehaviour
             }
             else {
 
-                SettingsManager.Instance.playingPlayerNumber = 1;
+                SettingsManager.Instance.playingPlayerNumber = 2;
             }
 
             Debug.Log($"TitleController: プレイヤー数設定完了 → {SettingsManager.Instance.playingPlayerNumber}人");
+
+            gameLogManager.RecordStartTime();
 
             mainBGM.Play();
 

@@ -5,7 +5,7 @@ using System;
 public class TimeManager : MonoBehaviour
 {
     public float startTime = 300f;
-    private float currentTime;
+    public float currentTime;
 
     private bool isCountingDown = false;
 
@@ -16,6 +16,8 @@ public class TimeManager : MonoBehaviour
     public TextMesh dispTimeDecimal;
 
     public GameObject fireparticle;
+
+    public GameLogManager gameLogManager;
 
     void Start()
     {
@@ -38,6 +40,8 @@ public class TimeManager : MonoBehaviour
 
         if (currentTime <= 0f)
         {
+            gameLogManager.SetRank("OVER");
+            gameLogManager.WriteLog();
             currentTime = 0f;
             isCountingDown = false;
             Debug.Log("Game Over!");
