@@ -156,10 +156,14 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9c15318078d1b184785a1485d49331fc, type: 3}
   - {fileID: 8300000, guid: 96eec8be12389c849a0926d2dfaa2db2, type: 3}
   - {fileID: 8300000, guid: 82cf127225e7f7f45a92e93db4985af8, type: 3}
+  deskHitSoundVolume: 0.15
   bowlHitSounds:
   - {fileID: 8300000, guid: dd79515dcf996ee49aa4e55cc19d37b6, type: 3}
   - {fileID: 8300000, guid: 52e9a02303bdf884eac039c54499436d, type: 3}
   - {fileID: 8300000, guid: 92ac82907b7a02343856736da10ec6d7, type: 3}
+  bowlHitSoundVolume: 0.3
+  wallHitSound: {fileID: 8300000, guid: 65280e4c8c6e33243bcdd979f42e83c1, type: 3}
+  wallHitSoundVolume: 1
 --- !u!82 &2486370494853624900
 AudioSource:
   m_ObjectHideFlags: 0

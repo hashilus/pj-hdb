@@ -23,6 +23,12 @@ public class Bullet : MonoBehaviour
     [SerializeField]
     float bowlHitSoundVolume = 0.30f;
 
+    [SerializeField]
+    AudioClip wallHitSound;
+
+    [SerializeField]
+    float wallHitSoundVolume = 1.0f;
+
     public PlayerID Shooter { get; set; }
 
     SphereCollider sphereCollider;
@@ -56,6 +62,9 @@ public class Bullet : MonoBehaviour
                 break;
             case "Fire":
                 PlayFireExtinguishSound(collision.gameObject);
+                break;
+            default:
+                PlayWallHitSound(collision.gameObject);
                 break;
         }
 
@@ -98,6 +107,13 @@ public class Bullet : MonoBehaviour
         int idx = Random.Range(0, bowlHitSounds.Length);
         audioSource.clip = bowlHitSounds[idx];
         audioSource.volume = bowlHitSoundVolume;
+        audioSource.Play();
+    }
+
+    void PlayWallHitSound(GameObject other)
+    {
+        audioSource.clip = wallHitSound;
+        audioSource.volume = wallHitSoundVolume;
         audioSource.Play();
     }
 
