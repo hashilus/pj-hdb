@@ -1,6 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
-using Unity.VisualScripting;
+﻿using System.Collections;
+using UnityEngine;
 
 public class FireController : MonoBehaviour
 {
@@ -86,33 +85,33 @@ public class FireController : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision)
-{
-    if (collision.gameObject.CompareTag("Water") && !extinguished)
     {
-        float damageMultiplier = 1.0f;
-
-        // どの Collider に当たったかを調べる
-        Collider myCollider = collision.GetContact(0).thisCollider;
-
-        if (myCollider != null)
+        if (collision.gameObject.CompareTag("Water") && !extinguished)
         {
-            if (myCollider is BoxCollider)
+            float damageMultiplier = 1.0f;
+
+            // どの Collider に当たったかを調べる
+            Collider myCollider = collision.GetContact(0).thisCollider;
+
+            if (myCollider != null)
             {
-                // 基底部 → 高ダメージ
-                damageMultiplier = 2.0f; // 例: 2倍早く消える
+                if (myCollider is BoxCollider)
+                {
+                    // 基底部 → 高ダメージ
+                    damageMultiplier = 2.0f; // 例: 2倍早く消える
+                }
+                else if (myCollider is SphereCollider)
+                {
+                    // 上部 → 通常ダメージ
+                    damageMultiplier = 1.0f;
+                }
             }
-            else if (myCollider is SphereCollider)
-            {
-                // 上部 → 通常ダメージ
-                damageMultiplier = 1.0f;
-            }
+
+            ReduceLife(1f * damageMultiplier);
+
+            Destroy(collision.gameObject);
         }
-
-        ReduceLife(1f * damageMultiplier);
-
-        Destroy(collision.gameObject);
     }
-}
 
 
     void ReduceLife(float amount)
