@@ -71,7 +71,6 @@ public class TitleController : MonoBehaviour
         }
         title_objects.SetActive(true);
         ui_objects.SetActive(false);
-        if ((Input.GetKeyDown(KeyCode.Space) || isStarting) && !startTriggered)
         calibrationUI.SetActive(true);
 
         //materialFader.FadeIn(); // フェードインを有効にする
