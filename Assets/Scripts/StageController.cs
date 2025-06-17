@@ -172,4 +172,5 @@ public class StageController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    public Checkpoint GetCurrentCheckPoint() => (currentIndex >= 0 && currentIndex < checkpoints.Count) ? checkpoints[currentIndex] : null;
 }

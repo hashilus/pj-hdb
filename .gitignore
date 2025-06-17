@@ -95,3 +95,6 @@ crashlytics-build.properties
 
 # Build Artifacts
 /MRS-Quest_BurstDebugInformation_DoNotShip/
+
+# Unity Recorder
+/[Rr]ecordings/
