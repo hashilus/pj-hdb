@@ -98,3 +98,7 @@ crashlytics-build.properties
 
 # Unity Recorder
 /[Rr]ecordings/
+
+# PlayLog
+/[Pp]layLog/
+
