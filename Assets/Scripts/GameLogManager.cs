@@ -74,7 +74,7 @@ public void WriteLog()
         playerNum = SettingsManager.Instance.playingPlayerNumber;
 
     // プレイ人数を含めてCSV行を作成
-    string line = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10}",
+        string line = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9}",
         date, startTimeStr, playerNum, s1, s2, s3, s4, s5, s6, rank);
 
     string logDir;

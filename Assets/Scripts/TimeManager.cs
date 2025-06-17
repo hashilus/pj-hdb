@@ -20,7 +20,7 @@ public class TimeManager : MonoBehaviour
     public GameLogManager gameLogManager;
 
     public MaterialFader materialFader;
-
+    public MaterialFader materialFaderBlack;
 
     void Start()
     {
@@ -49,10 +49,10 @@ public class TimeManager : MonoBehaviour
             isCountingDown = false;
             Debug.Log("Game Over!");
             fireparticle.SetActive(true);
-            materialFader.FadeIn(); // フェードアウトを有効にする
+            materialFader.FadeIn(); // 通常フェード
             OnGameOver?.Invoke();
 
-            StartCoroutine(ReloadAfterDelay(10f)); // ここ追加！
+            StartCoroutine(ReloadAfterDelay()); // 引数なしに変更
         }
     }
 
@@ -77,10 +77,21 @@ public class TimeManager : MonoBehaviour
         return currentTime;
     }
 
-    private System.Collections.IEnumerator ReloadAfterDelay(float delaySeconds)
+    private System.Collections.IEnumerator ReloadAfterDelay()
     {
-        yield return new WaitForSeconds(delaySeconds);
+        // 10秒待機
+        yield return new WaitForSeconds(10f);
 
+        // ブラックフェードアウト開始
+        if (materialFaderBlack != null)
+        {
+            materialFaderBlack.FadeIn();
+        }
+
+        // さらに3秒待機
+        yield return new WaitForSeconds(3f);
+
+        // シーンリロード
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.buildIndex);
     }
