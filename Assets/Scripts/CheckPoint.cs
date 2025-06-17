@@ -60,6 +60,11 @@ public class Checkpoint : MonoBehaviour
 
         Debug.Log($"{name}: 時間切れで強制消火を実行");
 
+        ForceClear();
+    }
+
+    public void ForceClear()
+    {
         foreach (var fire in fires)
         {
             if (fire != null && fire.life > 0f && fire.gameObject.activeInHierarchy)

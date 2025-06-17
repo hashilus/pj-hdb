@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class SkipController : MonoBehaviour
 {
+    [SerializeField]
+    StageController stageController;
+
     void Update()
     {
         var isShiftPressed = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
@@ -17,6 +20,12 @@ public class SkipController : MonoBehaviour
         else
         {
             Time.timeScale = 1.0f;
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            var checkPoint = stageController.GetCurrentCheckPoint();
+            checkPoint?.ForceClear();
         }
     }
 }
