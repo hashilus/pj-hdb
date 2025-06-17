@@ -19,6 +19,9 @@ public class TimeManager : MonoBehaviour
 
     public GameLogManager gameLogManager;
 
+    public MaterialFader materialFader;
+
+
     void Start()
     {
         currentTime = SettingsManager.Instance.settings.initialTime;
@@ -46,7 +49,7 @@ public class TimeManager : MonoBehaviour
             isCountingDown = false;
             Debug.Log("Game Over!");
             fireparticle.SetActive(true);
-            FindObjectOfType<MaterialFader>().StartFade();
+            materialFader.FadeIn(); // フェードアウトを有効にする
             OnGameOver?.Invoke();
 
             StartCoroutine(ReloadAfterDelay(10f)); // ここ追加！

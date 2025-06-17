@@ -53,6 +53,8 @@ public class TitleController : MonoBehaviour
     public GameObject player1root;
     public GameObject player2root;
 
+    public MaterialFader materialFader;
+
     public GameLogManager gameLogManager;
 
     void Start()
@@ -71,6 +73,8 @@ public class TitleController : MonoBehaviour
         ui_objects.SetActive(false);
         if ((Input.GetKeyDown(KeyCode.Space) || isStarting) && !startTriggered)
         calibrationUI.SetActive(true);
+
+        //materialFader.FadeIn(); // フェードインを有効にする
     }
 
     void Update()
@@ -174,7 +178,7 @@ public class TitleController : MonoBehaviour
             }
             else {
 
-                SettingsManager.Instance.playingPlayerNumber = 2;
+                SettingsManager.Instance.playingPlayerNumber = 1;
             }
 
             Debug.Log($"TitleController: プレイヤー数設定完了 → {SettingsManager.Instance.playingPlayerNumber}人");
