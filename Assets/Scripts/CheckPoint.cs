@@ -1,10 +1,10 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 
 public class Checkpoint : MonoBehaviour
 {
-    public int checkPointNo; // ƒ`ƒFƒbƒNƒ|ƒCƒ“ƒg”Ô†
+    public int checkPointNo; // ãƒã‚§ãƒƒã‚¯ãƒã‚¤ãƒ³ãƒˆç•ªå·
 
     public System.Action<Checkpoint> onCleared;
     private bool isCleared = false;
@@ -12,40 +12,40 @@ public class Checkpoint : MonoBehaviour
     public float clearTimeLimit = 10f;
     private Coroutine forceClearCoroutine;
 
-    [Header("ƒ‰ƒCƒg§Œä‚ğs‚¤‚©H")]
+    [Header("ãƒ©ã‚¤ãƒˆåˆ¶å¾¡ã‚’è¡Œã†ã‹ï¼Ÿ")]
     public bool controlLights = true;
 
     private List<FireController> fires = new List<FireController>();
 
-    public float bonusTime; // ‚±‚ÌCP‚ğƒNƒŠƒA‚µ‚½‚ç’Ç‰Á‚³‚ê‚éŠÔ
+    public float bonusTime; // ã“ã®CPã‚’ã‚¯ãƒªã‚¢ã—ãŸã‚‰è¿½åŠ ã•ã‚Œã‚‹æ™‚é–“
 
-    public TextMesh debugCountText; // ƒfƒoƒbƒO—p‚Ì•\¦
+    public TextMesh debugCountText; // ãƒ‡ãƒãƒƒã‚°ç”¨ã®è¡¨ç¤º
 
     void Awake()
     {
         fires.Clear();
 
-        foreach (var fire in GetComponentsInChildren<FireController>(true)) // © Active=false ‚àŠÜ‚ß‚Äæ“¾
+        foreach (var fire in GetComponentsInChildren<FireController>(true)) // â† Active=false ã‚‚å«ã‚ã¦å–å¾—
         {
             fires.Add(fire);
-            fire.AssignCheckpoint(this); // FireController ‘¤‚É©•ª‚ğ“o˜^
+            fire.AssignCheckpoint(this); // FireController å´ã«è‡ªåˆ†ã‚’ç™»éŒ²
         }
 
         SetLightActive(false);
 
-        // ƒ{[ƒiƒXƒ^ƒCƒ€æ“¾
+        // ãƒœãƒ¼ãƒŠã‚¹ã‚¿ã‚¤ãƒ å–å¾—
         bonusTime = SettingsManager.Instance.settings.checkpointExtendTimes[checkPointNo - 1];
     }
 
     public void NotifyFireExtinguished(FireController fc)
     {
-        debugCountText.text = "c‚è" + GetAliveFireCount().ToString();
+        debugCountText.text = "æ®‹ã‚Š" + GetAliveFireCount().ToString();
         CheckIfCleared();
     }
 
     public void ActivateCheckpoint()
     {
-        debugCountText.text = "c‚è" + GetAliveFireCount().ToString();
+        debugCountText.text = "æ®‹ã‚Š" + GetAliveFireCount().ToString();
         SetLightActive(true);
 
         if (forceClearCoroutine != null)
@@ -58,17 +58,17 @@ public class Checkpoint : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        Debug.Log($"{name}: ŠÔØ‚ê‚Å‹­§Á‰Î‚ğÀs");
+        Debug.Log($"{name}: æ™‚é–“åˆ‡ã‚Œã§å¼·åˆ¶æ¶ˆç«ã‚’å®Ÿè¡Œ");
 
         foreach (var fire in fires)
         {
             if (fire != null && fire.life > 0f && fire.gameObject.activeInHierarchy)
             {
-                fire.ForceExtinguish(); // © FireController ‘¤‚Å—pˆÓ
+                fire.ForceExtinguish(); // â† FireController å´ã§ç”¨æ„
             }
         }
 
-        CheckIfCleared(); // ”O‚Ì‚½‚ßƒ`ƒFƒbƒN
+        CheckIfCleared(); // å¿µã®ãŸã‚ãƒã‚§ãƒƒã‚¯
     }
 
     private void CheckIfCleared()
@@ -88,7 +88,7 @@ public class Checkpoint : MonoBehaviour
         if (totalLife <= 0f)
         {
             isCleared = true;
-            Debug.Log($"{name}: ‘SFire‚ÌLife‚ª0Bƒ`ƒFƒbƒNƒ|ƒCƒ“ƒgƒNƒŠƒAI");
+            Debug.Log($"{name}: å…¨Fireã®LifeãŒ0ã€‚ãƒã‚§ãƒƒã‚¯ãƒã‚¤ãƒ³ãƒˆã‚¯ãƒªã‚¢ï¼");
             onCleared?.Invoke(this);
             SetLightActive(false);
             ClearCheckpoint();
@@ -117,10 +117,10 @@ public class Checkpoint : MonoBehaviour
 
         FindObjectOfType<TimeExtendDisplay>().ShowExtend((int)bonusTime);
 
-        // ‘¼‚ÌƒNƒŠƒAˆ—
+        // ä»–ã®ã‚¯ãƒªã‚¢å‡¦ç†
     }
 
-    // Œ»İc‚Á‚Ä‚¢‚é‰Î‚ÌŒÂ”‚ğ•Ô‚·i’Pƒ‚È childCount ‚Íg‚í‚È‚¢Ij
+    // ç¾åœ¨æ®‹ã£ã¦ã„ã‚‹ç«ã®å€‹æ•°ã‚’è¿”ã™ï¼ˆå˜ç´”ãª childCount ã¯ä½¿ã‚ãªã„ï¼ï¼‰
     public int GetCurrentFireCount()
     {
         int count = 0;
@@ -136,7 +136,7 @@ public class Checkpoint : MonoBehaviour
         return count;
     }
 
-    // Œ»İ Alive ‚È Fire ‚Ì”‚ğ•Ô‚·
+    // ç¾åœ¨ Alive ãª Fire ã®æ•°ã‚’è¿”ã™
     public int GetAliveFireCount()
     {
         int count = 0;
