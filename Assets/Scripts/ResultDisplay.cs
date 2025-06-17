@@ -11,6 +11,8 @@ public class ResultDisplay : MonoBehaviour
     public GameObject rankBObject;
     public GameObject rankCObject;
 
+    public GameLogManager gameLogManager;
+
     private void OnEnable()
     {
         Debug.Log("ResultDisplay ¨ ‹N“®");
@@ -39,19 +41,25 @@ public class ResultDisplay : MonoBehaviour
         if (remainingTime >= thresholds.rankS)
         {
             SetRank("S");
+            gameLogManager.SetRank("S");
         }
         else if (remainingTime >= thresholds.rankA)
         {
             SetRank("A");
+            gameLogManager.SetRank("A");
         }
         else if (remainingTime >= thresholds.rankB)
         {
             SetRank("B");
+            gameLogManager.SetRank("B");
         }
         else
         {
             SetRank("C");
+            gameLogManager.SetRank("C");
         }
+
+        gameLogManager.WriteLog();
     }
 
     private void SetRank(string rank)

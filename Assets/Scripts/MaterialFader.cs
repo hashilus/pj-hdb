@@ -3,46 +3,97 @@ using System.Collections;
 
 public class MaterialFader : MonoBehaviour
 {
-    public Material targetMaterial;    // 対象マテリアル
+    public Material targetMaterial;
     public Color fromColor = Color.clear;
     public Color toColor = Color.black;
     public float duration = 1f;
 
-    private Coroutine fadeRoutine;
 
-    public GameObject failedText; // Game Over時に表示するテキスト
+    public bool fadeIn = false;   // Timelineから直接制御
+    public bool fadeOut = false;  // Timelineから直接制御
+
+    private bool prevFadeIn = false;
+    private bool prevFadeOut = false;
+
+    private Coroutine fadeRoutine;
+    public GameObject failedText;
 
     private void Start()
     {
-        failedText.SetActive(false); // 初期状態では非表示
-        targetMaterial.color = fromColor;
+        if (targetMaterial == null)
+        {
+            var renderer = GetComponent<Renderer>();
+            if (renderer != null)
+            {
+                targetMaterial = renderer.material;
+            }
+        }
+
+        if (failedText != null)
+        {
+            failedText.SetActive(false);
+        }
+        if (targetMaterial != null)
+        {
+            targetMaterial.color = fromColor;
+        }
 
     }
 
+    private void Update()
+    {
+        // fadeInがFalse→Trueになった瞬間だけ発火
+        if (!prevFadeIn && fadeIn)
+        {
+            FadeIn();
+        }
+        // fadeOutがFalse→Trueになった瞬間だけ発火
+        if (!prevFadeOut && fadeOut)
+        {
+            FadeOut();
+        }
+        prevFadeIn = fadeIn;
+        prevFadeOut = fadeOut;
+    }
 
-    public void StartFade()
+    public void FadeIn()
+    {
+        StartFade(fromColor, toColor);
+    }
+
+    public void FadeOut()
+    {
+        StartFade(toColor, fromColor);
+    }
+
+    private void StartFade(Color start, Color end)
     {
         if (fadeRoutine != null)
             StopCoroutine(fadeRoutine);
 
-        fadeRoutine = StartCoroutine(FadeRoutine());
+        fadeRoutine = StartCoroutine(FadeRoutine(start, end));
     }
 
-    private IEnumerator FadeRoutine()
+    private IEnumerator FadeRoutine(Color start, Color end)
     {
         float t = 0f;
+        if (targetMaterial == null)
+            yield break;
 
-        targetMaterial.color = fromColor;
+        targetMaterial.color = start;
 
         while (t < duration)
         {
             float progress = t / duration;
-            targetMaterial.color = Color.Lerp(fromColor, toColor, progress);
+            targetMaterial.color = Color.Lerp(start, end, progress);
             t += Time.deltaTime;
             yield return null;
         }
+        targetMaterial.color = end;
 
-        failedText.SetActive(true); // Game Over時に表示するテキストを有効化
-        targetMaterial.color = toColor;
+        if (failedText != null && end == toColor)
+        {
+            failedText.SetActive(true);
+        }
     }
 }

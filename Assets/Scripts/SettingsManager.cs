@@ -10,6 +10,8 @@ public class SettingsManager : MonoBehaviour
     [Header("設定ファイル名 (StreamingAssets内)")]
     public string settingsFileName = "settings.json";
 
+    public int playingPlayerNumber;
+
     private void Awake()
     {
         // Singletonパターン
@@ -23,6 +25,8 @@ public class SettingsManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         LoadSettings();
+
+        playingPlayerNumber = 0;
     }
 
     public void LoadSettings()

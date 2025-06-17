@@ -5,7 +5,7 @@ using System;
 public class TimeManager : MonoBehaviour
 {
     public float startTime = 300f;
-    private float currentTime;
+    public float currentTime;
 
     private bool isCountingDown = false;
 
@@ -16,6 +16,11 @@ public class TimeManager : MonoBehaviour
     public TextMesh dispTimeDecimal;
 
     public GameObject fireparticle;
+
+    public GameLogManager gameLogManager;
+
+    public MaterialFader materialFader;
+    public MaterialFader materialFaderBlack;
 
     void Start()
     {
@@ -38,14 +43,16 @@ public class TimeManager : MonoBehaviour
 
         if (currentTime <= 0f)
         {
+            gameLogManager.SetRank("OVER");
+            gameLogManager.WriteLog();
             currentTime = 0f;
             isCountingDown = false;
             Debug.Log("Game Over!");
             fireparticle.SetActive(true);
-            FindObjectOfType<MaterialFader>().StartFade();
+            materialFader.FadeIn(); // 通常フェード
             OnGameOver?.Invoke();
 
-            StartCoroutine(ReloadAfterDelay(10f)); // ここ追加！
+            StartCoroutine(ReloadAfterDelay()); // 引数なしに変更
         }
     }
 
@@ -70,10 +77,21 @@ public class TimeManager : MonoBehaviour
         return currentTime;
     }
 
-    private System.Collections.IEnumerator ReloadAfterDelay(float delaySeconds)
+    private System.Collections.IEnumerator ReloadAfterDelay()
     {
-        yield return new WaitForSeconds(delaySeconds);
+        // 10秒待機
+        yield return new WaitForSeconds(10f);
 
+        // ブラックフェードアウト開始
+        if (materialFaderBlack != null)
+        {
+            materialFaderBlack.FadeIn();
+        }
+
+        // さらに3秒待機
+        yield return new WaitForSeconds(3f);
+
+        // シーンリロード
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.buildIndex);
     }

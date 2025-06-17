@@ -44,6 +44,7 @@ public class FireController : MonoBehaviour
 
     public TextMesh debugText;
 
+    public bool Setlife;
 
     public void AssignCheckpoint(Checkpoint cp)
     {
@@ -58,7 +59,7 @@ public class FireController : MonoBehaviour
         }
 
         maxScale = transform.localScale; // 初期スケールを最大スケールに設定
-        life = initialLife * SettingsManager.Instance.settings.fireLifeScale1P; //2Pもあり
+
         transform.localScale = maxScale;
 
         if (fireLight != null)
@@ -79,9 +80,32 @@ public class FireController : MonoBehaviour
 
     }
 
+    public void OnEnable()
+    {
+        SetFireLife();
+    }
+
+    public void SetFireLife()
+    {
+        // プレイヤー数による初期ライフを設定
+        if (SettingsManager.Instance.playingPlayerNumber == 2)
+        {
+            life = initialLife * SettingsManager.Instance.settings.fireLifeScale2P;
+        }else{
+            life = initialLife * SettingsManager.Instance.settings.fireLifeScale1P;
+        }
+    }
+
     private void Update()
     {
         debugText.text = life.ToString();
+
+        if (Setlife)
+        {
+            SetFireLife();
+            Setlife = false; // 一度だけ設定する
+        }
+
     }
 
     private void OnCollisionEnter(Collision collision)

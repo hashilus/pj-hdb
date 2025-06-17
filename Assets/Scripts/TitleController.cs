@@ -49,6 +49,14 @@ public class TitleController : MonoBehaviour
 
     public AudioClip startSound;
 
+
+    public GameObject player1root;
+    public GameObject player2root;
+
+    public MaterialFader materialFader;
+
+    public GameLogManager gameLogManager;
+
     void Start()
     {
         if (SettingsManager.Instance.settings.debugMode)
@@ -63,8 +71,9 @@ public class TitleController : MonoBehaviour
         }
         title_objects.SetActive(true);
         ui_objects.SetActive(false);
-        if ((Input.GetKeyDown(KeyCode.Space) || isStarting) && !startTriggered)
         calibrationUI.SetActive(true);
+
+        //materialFader.FadeIn(); // フェードインを有効にする
     }
 
     void Update()
@@ -126,6 +135,12 @@ public class TitleController : MonoBehaviour
         }
 
         // ★ スタート処理を一度だけ行うようにする
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            start1P_Confirmed = true;
+        }
+
         if ((Input.GetKeyDown(KeyCode.Space) || isStarting) && !startTriggered)
         {
             startTriggered = true;
@@ -150,6 +165,24 @@ public class TitleController : MonoBehaviour
             gameStartingTimer = 10f;
             player1StartCount = 0;
             player2StartCount = 0;
+
+            //プレイヤーを確定する
+            player1root.SetActive(start1P_Confirmed);
+            player2root.SetActive(start2P_Confirmed);
+
+            //SettingsInstance にプレイヤー数を設定
+            if (start1P_Confirmed && start2P_Confirmed)
+            {
+                SettingsManager.Instance.playingPlayerNumber = 2;
+            }
+            else {
+
+                SettingsManager.Instance.playingPlayerNumber = 1;
+            }
+
+            Debug.Log($"TitleController: プレイヤー数設定完了 → {SettingsManager.Instance.playingPlayerNumber}人");
+
+            gameLogManager.RecordStartTime();
 
             mainBGM.Play();
 

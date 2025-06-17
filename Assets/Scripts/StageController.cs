@@ -22,6 +22,9 @@ public class StageController : MonoBehaviour
 
     public GameObject debugText;
 
+    [Header("ログ出力")]
+    public GameLogManager gameLogManager;
+
     void Start()
     {
         if (!SettingsManager.Instance.settings.debugMode)
@@ -113,6 +116,8 @@ public class StageController : MonoBehaviour
     private void OnCheckpointCleared(Checkpoint cp)
     {
         Debug.Log($"StageController: {cp.name} のクリアを受信");
+
+        gameLogManager.RecordStageClear(currentIndex + 1, FindObjectOfType<TimeManager>().currentTime);
 
         cp.onCleared -= OnCheckpointCleared;
         cp.SetLightActive(false);
