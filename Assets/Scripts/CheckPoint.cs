@@ -9,6 +9,8 @@ public class Checkpoint : MonoBehaviour
     public System.Action<Checkpoint> onCleared;
     private bool isCleared = false;
 
+    public bool IsActivated { get; private set; }
+
     public float clearTimeLimit = 10f;
     private Coroutine forceClearCoroutine;
 
@@ -46,6 +48,7 @@ public class Checkpoint : MonoBehaviour
     public void ActivateCheckpoint()
     {
         debugCountText.text = "残り" + GetAliveFireCount().ToString();
+        IsActivated = true;
         SetLightActive(true);
 
         if (forceClearCoroutine != null)

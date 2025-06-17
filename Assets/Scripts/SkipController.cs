@@ -25,7 +25,10 @@ public class SkipController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             var checkPoint = stageController.GetCurrentCheckPoint();
-            checkPoint?.ForceClear();
+            if (checkPoint != null && checkPoint.IsActivated)
+            {
+                checkPoint.ForceClear();
+            }
         }
     }
 }
