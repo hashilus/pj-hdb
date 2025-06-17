@@ -123,7 +123,9 @@ public class Checkpoint : MonoBehaviour
             //time.AddBonusTime(bonusTime);
         }
 
-        FindObjectOfType<TimeExtendDisplay>().ShowExtend((int)bonusTime);
+        // ここで毎回Settingsから取得
+        float currentBonusTime = SettingsManager.Instance.settings.checkpointExtendTimes[checkPointNo - 1];
+        FindObjectOfType<TimeExtendDisplay>().ShowExtend((int)currentBonusTime);
 
         // 他のクリア処理
     }
