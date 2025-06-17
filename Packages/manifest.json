@@ -18,6 +18,8 @@
     "com.unity.xr.interaction.toolkit": "3.1.1",
     "com.unity.xr.management": "4.5.0",
     "com.unity.xr.openxr": "1.14.3",
+    "jp.netsis.rubytext.abstractions": "https://github.com/jp-netsis/RubyTextAbstractions.git?path=/RubyTextAbstractions/PackageData#v0.2.0",
+    "jp.netsis.rubytmp": "https://github.com/jp-netsis/RubyTextMeshPro.git?path=/Assets/RubyTextMeshPro#v1.3.0",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
     "com.unity.modules.animation": "1.0.0",

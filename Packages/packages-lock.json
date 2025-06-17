@@ -352,6 +352,22 @@
       },
       "url": "https://packages.unity.com"
     },
+    "jp.netsis.rubytext.abstractions": {
+      "version": "https://github.com/jp-netsis/RubyTextAbstractions.git?path=/RubyTextAbstractions/PackageData#v0.2.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "95e0be193dde321a545d5327b71957980c993aa6"
+    },
+    "jp.netsis.rubytmp": {
+      "version": "https://github.com/jp-netsis/RubyTextMeshPro.git?path=/Assets/RubyTextMeshPro#v1.3.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.textmeshpro": "3.0.6"
+      },
+      "hash": "e475eea18346c70205ee51ad5b085fdbc2f13b80"
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,
