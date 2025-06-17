@@ -190,6 +190,286 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1150559387
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1150559388}
+  - component: {fileID: 1150559390}
+  - component: {fileID: 1150559389}
+  m_Layer: 5
+  m_Name: Text (RubyTMP) - Tips 7
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1150559388
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1150559387}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1366805357}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1150559389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1150559387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d07049f6d216504ca6e1d9c13e6d41b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: "<nobr>\u9AD8<space=-90.0075><voffset=1em><size=50%>\u305F\u304B</size></voffset><space=0.002502441></nobr>\u3044\u30D5\u30ED\u30A2\u306B<nobr>\u706B<space=-67.5075><voffset=1em><size=50%>\u3072</size></voffset><space=22.5025></nobr>\u304C<nobr>\u51FA<space=-67.5075><voffset=1em><size=50%>\u3067</size></voffset><space=22.5025></nobr>\u305F\u3068\u304D\u306F\u3001\u306F\u3057\u3054<nobr>\u8ECA<space=-90.0075><voffset=1em><size=50%>\u3057\u3083</size></voffset><space=0.002502441></nobr>\u3084\u30BF\u30EF\u30FC<nobr>\u8ECA<space=-90.0075><voffset=1em><size=50%>\u3057\u3083</size></voffset><space=0.002502441></nobr>\u3092<nobr>\u4F7F<space=-90.0075><voffset=1em><size=50%>\u3064\u304B</size></voffset><space=0.002502441></nobr>\u3063\u3066\u3001\n<nobr>\u4E0A<space=-90.0075><voffset=1em><size=50%>\u3046\u3048</size></voffset><space=0.002502441></nobr>\u306E\u307B\u3046\u304B\u3089<nobr>\u6C34<space=-90.0075><voffset=1em><size=50%>\u307F\u305A</size></voffset><space=0.002502441></nobr>\u3092\u304B\u3051\u308B\u300C<nobr>\u9AD8\u6240\u653E\u6C34<space=-360.0075><voffset=1em><size=50%>\u3053\u3046\u3057\u3087\u307B\u3046\u3059\u3044</size></voffset><space=0.002502441></nobr>\u300D\u3068\u3044\u3046<nobr>\u4F5C\u6226<space=-180.0075><voffset=1em><size=50%>\u3055\u304F\u305B\u3093</size></voffset><space=0.002494812></nobr>\u3092<nobr>\u4F7F<space=-90.0075><voffset=1em><size=50%>\u3064\u304B</size></voffset><space=0.002502441></nobr>\u3046\u3053\u3068\u304C\u3042\u308A\u307E\u3059\u3002"
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8daaf5cc2a20d4c4e948c21406d4873c, type: 2}
+  m_sharedMaterial: {fileID: 6646221812947265802, guid: 8daaf5cc2a20d4c4e948c21406d4873c, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 90
+  m_fontSizeBase: 90
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: -20
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+  _rubyVerticalOffset: 1em
+  _rubyScale: 0.5
+  _rubyLineHeight: 
+  _uneditedText: "<r=\u305F\u304B>\u9AD8</r>\u3044\u30D5\u30ED\u30A2\u306B<r=\u3072>\u706B</r>\u304C<r=\u3067>\u51FA</r>\u305F\u3068\u304D\u306F\u3001\u306F\u3057\u3054<r=\u3057\u3083>\u8ECA</r>\u3084\u30BF\u30EF\u30FC<r=\u3057\u3083>\u8ECA</r>\u3092<r=\u3064\u304B>\u4F7F</r>\u3063\u3066\u3001\n<r=\u3046\u3048>\u4E0A</r>\u306E\u307B\u3046\u304B\u3089<r=\u307F\u305A>\u6C34</r>\u3092\u304B\u3051\u308B\u300C<r=\u3053\u3046\u3057\u3087\u307B\u3046\u3059\u3044>\u9AD8\u6240\u653E\u6C34</r>\u300D\u3068\u3044\u3046<r=\u3055\u304F\u305B\u3093>\u4F5C\u6226</r>\u3092<r=\u3064\u304B>\u4F7F</r>\u3046\u3053\u3068\u304C\u3042\u308A\u307E\u3059\u3002"
+  _rubyShowType: 0
+  _rubyMargin: 10
+--- !u!222 &1150559390
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1150559387}
+  m_CullTransparentMesh: 1
+--- !u!1 &1170310619
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1170310620}
+  - component: {fileID: 1170310622}
+  - component: {fileID: 1170310621}
+  m_Layer: 5
+  m_Name: Text (RubyTMP) - Tips 6
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1170310620
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170310619}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1366805357}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1170310621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170310619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d07049f6d216504ca6e1d9c13e6d41b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: "<nobr>\u5929<space=-90.0075><voffset=1em><size=50%>\u3066\u3093</size></voffset><space=0.002502441></nobr>\u3077\u3089<nobr><space=22.4975>\u6CB9<space=-112.5075><voffset=1em><size=50%>\u3042\u3076\u3089</size></voffset><space=-22.4975></nobr>\u306E\u3088\u3046\u306A<nobr>\u706B<space=-67.5075><voffset=1em><size=50%>\u3072</size></voffset><space=22.5025></nobr>\u306B<nobr>\u6C34<space=-90.0075><voffset=1em><size=50%>\u307F\u305A</size></voffset><space=0.002502441></nobr>\u3092\u304B\u3051\u308B\u3068<nobr><space=22.4975>\u9006<space=-112.5075><voffset=1em><size=50%>\u304E\u3083\u304F</size></voffset><space=-22.4975></nobr>\u306B<nobr>\u5371\u967A<space=-157.5075><voffset=1em><size=50%>\u304D\u3051\u3093</size></voffset><space=22.50249></nobr>\u3067\u3059\u3002\n\u305D\u3093\u306A\u3068\u304D\u306F\u3001<nobr>\u6CE1<space=-90.0075><voffset=1em><size=50%>\u3042\u308F</size></voffset><space=0.002502441></nobr>\u3067<nobr>\u706B<space=-67.5075><voffset=1em><size=50%>\u3072</size></voffset><space=22.5025></nobr>\u3092\u304A\u304A\u3063\u3066<nobr>\u6D88<space=-67.5075><voffset=1em><size=50%>\u3051</size></voffset><space=22.5025></nobr>\u3059\u300C<nobr>\u6CE1\u653E\u6C34<space=-270.0075><voffset=1em><size=50%>\u3042\u308F\u307B\u3046\u3059\u3044</size></voffset><space=0.002502441></nobr>\u300D\u3092<nobr>\u4F7F<space=-90.0075><voffset=1em><size=50%>\u3064\u304B</size></voffset><space=0.002502441></nobr>\u3044\u307E\u3059\u3002"
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8daaf5cc2a20d4c4e948c21406d4873c, type: 2}
+  m_sharedMaterial: {fileID: 6646221812947265802, guid: 8daaf5cc2a20d4c4e948c21406d4873c, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 90
+  m_fontSizeBase: 90
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: -20
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+  _rubyVerticalOffset: 1em
+  _rubyScale: 0.5
+  _rubyLineHeight: 
+  _uneditedText: "<r=\u3066\u3093>\u5929</r>\u3077\u3089<r=\u3042\u3076\u3089>\u6CB9</r>\u306E\u3088\u3046\u306A<r=\u3072>\u706B</r>\u306B<r=\u307F\u305A>\u6C34</r>\u3092\u304B\u3051\u308B\u3068<r=\u304E\u3083\u304F>\u9006</r>\u306B<r=\u304D\u3051\u3093>\u5371\u967A</r>\u3067\u3059\u3002\n\u305D\u3093\u306A\u3068\u304D\u306F\u3001<r=\u3042\u308F>\u6CE1</r>\u3067<r=\u3072>\u706B</r>\u3092\u304A\u304A\u3063\u3066<r=\u3051>\u6D88</r>\u3059\u300C<r=\u3042\u308F\u307B\u3046\u3059\u3044>\u6CE1\u653E\u6C34</r>\u300D\u3092<r=\u3064\u304B>\u4F7F</r>\u3044\u307E\u3059\u3002"
+  _rubyShowType: 0
+  _rubyMargin: 10
+--- !u!222 &1170310622
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170310619}
+  m_CullTransparentMesh: 1
 --- !u!1 &1195987013
 GameObject:
   m_ObjectHideFlags: 0
@@ -481,7 +761,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.5019608}
+  m_Color: {r: 0.09803922, g: 0.11764706, b: 0.13725491, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -535,7 +815,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2003425599}
+  - {fileID: 1701681140}
   - {fileID: 2002055500}
+  - {fileID: 1491903890}
+  - {fileID: 1518794232}
+  - {fileID: 1170310620}
+  - {fileID: 1150559388}
   m_Father: {fileID: 1303815620}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -543,6 +828,426 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 320}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1491903889
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1491903890}
+  - component: {fileID: 1491903892}
+  - component: {fileID: 1491903891}
+  m_Layer: 5
+  m_Name: Text (RubyTMP) - Tips 4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1491903890
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1491903889}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1366805357}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1491903891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1491903889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d07049f6d216504ca6e1d9c13e6d41b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: "\u30DB\u30FC\u30B9\u304B\u3089<nobr>\u5C11<space=-90.0075><voffset=1em><size=50%>\u3059\u3053</size></voffset><space=0.002502441></nobr>\u3057\u3060\u3051<nobr>\u6C34<space=-90.0075><voffset=1em><size=50%>\u307F\u305A</size></voffset><space=0.002502441></nobr>\u3092\u30B7\u30E5\u30C3\u3068<nobr>\u51FA<space=-67.5075><voffset=1em><size=50%>\u3060</size></voffset><space=22.5025></nobr>\u3057\u3066\u3001<nobr>\u4E2D<space=-90.0075><voffset=1em><size=50%>\u306A\u304B</size></voffset><space=0.002502441></nobr>\u306E<nobr>\u71B1<space=-90.0075><voffset=1em><size=50%>\u306D\u3064</size></voffset><space=0.002502441></nobr>\u3084<nobr><space=22.4975>\u7159<space=-112.5075><voffset=1em><size=50%>\u3051\u3080\u308A</size></voffset><space=-22.4975></nobr>\u3092<nobr>\u4E0B<space=-67.5075><voffset=1em><size=50%>\u3055</size></voffset><space=22.5025></nobr>\u3052\u308B<nobr>\u65B9\u6CD5<space=-180.0075><voffset=1em><size=50%>\u307B\u3046\u307B\u3046</size></voffset><space=0.002494812></nobr>\u3092\n\u300C\u30D1\u30EB\u30B9\u30B7\u30E7\u30C3\u30C8\u300D\u3068\u3044\u3044\u307E\u3059\u3002<nobr>\u5F37<space=-90.0075><voffset=1em><size=50%>\u3064\u3088</size></voffset><space=0.002502441></nobr>\u3044<nobr>\u6C34<space=-90.0075><voffset=1em><size=50%>\u307F\u305A</size></voffset><space=0.002502441></nobr>\u3058\u3083\u306A\u3044\u306E\u304C\u30DD\u30A4\u30F3\u30C8\u3002"
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8daaf5cc2a20d4c4e948c21406d4873c, type: 2}
+  m_sharedMaterial: {fileID: 6646221812947265802, guid: 8daaf5cc2a20d4c4e948c21406d4873c, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 90
+  m_fontSizeBase: 90
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: -20
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+  _rubyVerticalOffset: 1em
+  _rubyScale: 0.5
+  _rubyLineHeight: 
+  _uneditedText: "\u30DB\u30FC\u30B9\u304B\u3089<r=\u3059\u3053>\u5C11</r>\u3057\u3060\u3051<r=\u307F\u305A>\u6C34</r>\u3092\u30B7\u30E5\u30C3\u3068<r=\u3060>\u51FA</r>\u3057\u3066\u3001<r=\u306A\u304B>\u4E2D</r>\u306E<r=\u306D\u3064>\u71B1</r>\u3084<r=\u3051\u3080\u308A>\u7159</r>\u3092<r=\u3055>\u4E0B</r>\u3052\u308B<r=\u307B\u3046\u307B\u3046>\u65B9\u6CD5</r>\u3092\n\u300C\u30D1\u30EB\u30B9\u30B7\u30E7\u30C3\u30C8\u300D\u3068\u3044\u3044\u307E\u3059\u3002<r=\u3064\u3088>\u5F37</r>\u3044<r=\u307F\u305A>\u6C34</r>\u3058\u3083\u306A\u3044\u306E\u304C\u30DD\u30A4\u30F3\u30C8\u3002"
+  _rubyShowType: 0
+  _rubyMargin: 10
+--- !u!222 &1491903892
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1491903889}
+  m_CullTransparentMesh: 1
+--- !u!1 &1518794231
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1518794232}
+  - component: {fileID: 1518794234}
+  - component: {fileID: 1518794233}
+  m_Layer: 5
+  m_Name: Text (RubyTMP) - Tips 5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1518794232
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1518794231}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1366805357}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1518794233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1518794231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d07049f6d216504ca6e1d9c13e6d41b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: "<nobr>\u706B<space=-67.5075><voffset=1em><size=50%>\u3072</size></voffset><space=22.5025></nobr>\u304C<nobr>\u898B<space=-67.5075><voffset=1em><size=50%>\u307F</size></voffset><space=22.5025></nobr>\u3048\u306A\u304F\u3066\u3082\u3001\u30AC\u30B9\u306A\u3069\u304C\u305F\u307E\u3063\u3066\u3066<nobr><space=22.4975>\u6025<space=-112.5075><voffset=1em><size=50%>\u304D\u3085\u3046</size></voffset><space=-22.4975></nobr>\u306B\u30DC\u30F3\u30C3\u3068<nobr>\u71C3<space=-67.5075><voffset=1em><size=50%>\u3082</size></voffset><space=22.5025></nobr>\u3048\u308B\u3053\u3068\u304C\u3042\u308A\u3001\n\u305D\u308C\u3092\u300C\u30D6\u30EA\u30FC\u30D6<nobr><space=22.49751>\u73FE\u8C61<space=-202.5075><voffset=1em><size=50%>\u3052\u3093\u3057\u3087\u3046</size></voffset><space=-22.49751></nobr>\u300D\u3068\u3044\u3044\u307E\u3059\u3002"
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8daaf5cc2a20d4c4e948c21406d4873c, type: 2}
+  m_sharedMaterial: {fileID: 6646221812947265802, guid: 8daaf5cc2a20d4c4e948c21406d4873c, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 90
+  m_fontSizeBase: 90
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: -20
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+  _rubyVerticalOffset: 1em
+  _rubyScale: 0.5
+  _rubyLineHeight: 
+  _uneditedText: "<r=\u3072>\u706B</r>\u304C<r=\u307F>\u898B</r>\u3048\u306A\u304F\u3066\u3082\u3001\u30AC\u30B9\u306A\u3069\u304C\u305F\u307E\u3063\u3066\u3066<r=\u304D\u3085\u3046>\u6025</r>\u306B\u30DC\u30F3\u30C3\u3068<r=\u3082>\u71C3</r>\u3048\u308B\u3053\u3068\u304C\u3042\u308A\u3001\n\u305D\u308C\u3092\u300C\u30D6\u30EA\u30FC\u30D6<r=\u3052\u3093\u3057\u3087\u3046>\u73FE\u8C61</r>\u300D\u3068\u3044\u3044\u307E\u3059\u3002"
+  _rubyShowType: 0
+  _rubyMargin: 10
+--- !u!222 &1518794234
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1518794231}
+  m_CullTransparentMesh: 1
+--- !u!1 &1701681139
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1701681140}
+  - component: {fileID: 1701681142}
+  - component: {fileID: 1701681141}
+  m_Layer: 5
+  m_Name: Text (RubyTMP) - Tips 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1701681140
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701681139}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1366805357}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1701681141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701681139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d07049f6d216504ca6e1d9c13e6d41b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: "<nobr>\u90E8\u5C4B<space=-135.0075><voffset=1em><size=50%>\u3078\u3084</size></voffset><space=45.0025></nobr>\u306E<nobr>\u4E2D<space=-90.0075><voffset=1em><size=50%>\u306A\u304B</size></voffset><space=0.002502441></nobr>\u306E<nobr>\u7A7A\u6C17<space=-157.5075><voffset=1em><size=50%>\u304F\u3046\u304D</size></voffset><space=22.50249></nobr>\u304C<nobr>\u71B1<space=-90.0075><voffset=1em><size=50%>\u3042\u3064</size></voffset><space=0.002502441></nobr>\u304F\u306A\u308B\u3068\u3001\u307E\u3060<nobr>\u706B<space=-67.5075><voffset=1em><size=50%>\u3072</size></voffset><space=22.5025></nobr>\u304C\u3064\u3044\u3066\u306A\u3044<nobr>\u7269<space=-90.0075><voffset=1em><size=50%>\u3082\u306E</size></voffset><space=0.002502441></nobr>\u307E\u3067\n<nobr>\u4E00\u6C17<space=-157.5075><voffset=1em><size=50%>\u3044\u3063\u304D</size></voffset><space=22.50249></nobr>\u306B<nobr>\u71C3<space=-67.5075><voffset=1em><size=50%>\u3082</size></voffset><space=22.5025></nobr>\u3048\u3060\u3059\u300C\u30D5\u30E9\u30C3\u30B7\u30E5\u30AA\u30FC\u30D0\u30FC\u300D\u304C<nobr>\u8D77<space=-67.5075><voffset=1em><size=50%>\u304A</size></voffset><space=22.5025></nobr>\u304D\u308B<nobr>\u5834\u5408<space=-157.5075><voffset=1em><size=50%>\u3070\u3042\u3044</size></voffset><space=22.50249></nobr>\u304C\u3042\u308A\u307E\u3059\u3002"
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8daaf5cc2a20d4c4e948c21406d4873c, type: 2}
+  m_sharedMaterial: {fileID: 6646221812947265802, guid: 8daaf5cc2a20d4c4e948c21406d4873c, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 90
+  m_fontSizeBase: 90
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: -20
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+  _rubyVerticalOffset: 1em
+  _rubyScale: 0.5
+  _rubyLineHeight: 
+  _uneditedText: "<r=\u3078\u3084>\u90E8\u5C4B</r>\u306E<r=\u306A\u304B>\u4E2D</r>\u306E<r=\u304F\u3046\u304D>\u7A7A\u6C17</r>\u304C<r=\u3042\u3064>\u71B1</r>\u304F\u306A\u308B\u3068\u3001\u307E\u3060<r=\u3072>\u706B</r>\u304C\u3064\u3044\u3066\u306A\u3044<r=\u3082\u306E>\u7269</r>\u307E\u3067\n<r=\u3044\u3063\u304D>\u4E00\u6C17</r>\u306B<r=\u3082>\u71C3</r>\u3048\u3060\u3059\u300C\u30D5\u30E9\u30C3\u30B7\u30E5\u30AA\u30FC\u30D0\u30FC\u300D\u304C<r=\u304A>\u8D77</r>\u304D\u308B<r=\u3070\u3042\u3044>\u5834\u5408</r>\u304C\u3042\u308A\u307E\u3059\u3002"
+  _rubyShowType: 0
+  _rubyMargin: 10
+--- !u!222 &1701681142
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701681139}
+  m_CullTransparentMesh: 1
 --- !u!1 &1940203031
 GameObject:
   m_ObjectHideFlags: 0
@@ -663,7 +1368,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2002055500
 RectTransform:
   m_ObjectHideFlags: 0
@@ -843,7 +1548,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<nobr>\u706B<space=-66.0075><voffset=1em><size=50%>\u3072</size></voffset><space=22.0025></nobr>\u306E<nobr>\u5148<space=-88.0075><voffset=1em><size=50%>\u3055\u304D</size></voffset><space=0.002502441></nobr>\u3067\u306F\u306A\u304F\u3001\u3044\u3061\u3070\u3093<nobr>\u4E0B<space=-88.0075><voffset=1em><size=50%>\u3057\u305F</size></voffset><space=0.002502441></nobr>\u306E\u300C<nobr>\u706B<space=-66.0075><voffset=1em><size=50%>\u3072</size></voffset><space=22.0025></nobr>\u306E<nobr>\u6839\u672C<space=-154.0075><voffset=1em><size=50%>\u306D\u3082\u3068</size></voffset><space=22.00249></nobr>\u300D\u306B<nobr>\u6C34<space=-88.0075><voffset=1em><size=50%>\u307F\u305A</size></voffset><space=0.002502441></nobr>\u3092<nobr>\u5F53<space=-66.0075><voffset=1em><size=50%>\u3042</size></voffset><space=22.0025></nobr>\u3066\u308B\u3068\u3001<nobr>\u706B<space=-66.0075><voffset=1em><size=50%>\u3072</size></voffset><space=22.0025></nobr>\u304C<nobr>\u6D88<space=-66.0075><voffset=1em><size=50%>\u304D</size></voffset><space=22.0025></nobr>\u3048\u3084\u3059\u304F\u306A\u308A\u307E\u3059\u3002"
+  m_text: "<nobr>\u706B<space=-67.5075><voffset=1em><size=50%>\u3072</size></voffset><space=22.5025></nobr>\u306E<nobr>\u5148<space=-90.0075><voffset=1em><size=50%>\u3055\u304D</size></voffset><space=0.002502441></nobr>\u3067\u306F\u306A\u304F\u3001\u3044\u3061\u3070\u3093<nobr>\u4E0B<space=-90.0075><voffset=1em><size=50%>\u3057\u305F</size></voffset><space=0.002502441></nobr>\u306E\u300C<nobr>\u706B<space=-67.5075><voffset=1em><size=50%>\u3072</size></voffset><space=22.5025></nobr>\u306E<nobr>\u6839\u672C<space=-157.5075><voffset=1em><size=50%>\u306D\u3082\u3068</size></voffset><space=22.50249></nobr>\u300D\u306B<nobr>\u6C34<space=-90.0075><voffset=1em><size=50%>\u307F\u305A</size></voffset><space=0.002502441></nobr>\u3092<nobr>\u5F53<space=-67.5075><voffset=1em><size=50%>\u3042</size></voffset><space=22.5025></nobr>\u3066\u308B\u3068\u3001<nobr>\u706B<space=-67.5075><voffset=1em><size=50%>\u3072</size></voffset><space=22.5025></nobr>\u304C<nobr>\u6D88<space=-67.5075><voffset=1em><size=50%>\u304D</size></voffset><space=22.5025></nobr>\u3048\u3084\u3059\u304F\u306A\u308A\u307E\u3059\u3002"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8daaf5cc2a20d4c4e948c21406d4873c, type: 2}
   m_sharedMaterial: {fileID: 6646221812947265802, guid: 8daaf5cc2a20d4c4e948c21406d4873c, type: 2}
@@ -870,8 +1575,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 88
-  m_fontSizeBase: 88
+  m_fontSize: 90
+  m_fontSizeBase: 90
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
