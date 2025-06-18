@@ -31,7 +31,9 @@ public class Bullet : MonoBehaviour
 
     SphereCollider sphereCollider;
     AudioSource audioSource;
-    bool hasCollided = false;
+    public bool hasCollided = false;
+    public bool hasInstanced = false;
+
 
     void Start()
     {
