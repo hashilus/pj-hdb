@@ -1,5 +1,5 @@
 {
-    "initialTime": 100.0,
+    "initialTime": 12.0,
     "checkpointExtendTimes": [0, 30, 0, 40, 0, 0],
     "fireLifeScale1P": 1.0,
     "fireLifeScale2P": 1.8,
