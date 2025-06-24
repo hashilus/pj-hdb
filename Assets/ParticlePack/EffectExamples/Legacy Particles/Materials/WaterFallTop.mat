@@ -113,7 +113,7 @@ Material:
     - _ClearCoatSmoothness: 0
     - _ColorMode: 1
     - _Cull: 2
-    - _Cutoff: 0.5
+    - _Cutoff: 0.055
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DistortionBlend: 0.5
@@ -134,7 +134,7 @@ Material:
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0.5
+    - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SoftParticlesEnabled: 0
     - _SoftParticlesFarFadeDistance: 1
@@ -146,10 +146,10 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 0
     m_Colors:
-    - _BaseColor: {r: 0.7977484, g: 0.8503011, b: 0.8584906, a: 0.69803923}
+    - _BaseColor: {r: 0.7977484, g: 0.8503011, b: 0.8584906, a: 0.44313726}
     - _BaseColorAddSubDiff: {r: 1, g: 0, b: 0, a: 0}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
-    - _Color: {r: 0.7977484, g: 0.8503011, b: 0.8584906, a: 0.69803923}
+    - _Color: {r: 0.7977484, g: 0.8503011, b: 0.8584906, a: 0.44313726}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}

@@ -46,6 +46,8 @@ public class DRigidPropAction : MonoBehaviour
         Vector3 randomTorque = Random.onUnitSphere * torqueMagnitude;
         rb.AddTorque(randomTorque, ForceMode.Impulse);
 
+        GetComponent<AudioSource>().Play();
+
         Destroy(gameObject, 3);
     }
 }
