@@ -10,6 +10,9 @@ public class ControllerAngleChecker : MonoBehaviour
 
     private bool isOutOfRange = false;
 
+    private float originalXAngle;
+    private float originalYAngle;
+
     private void Start()
     {
         if (targetTransform == null)
@@ -20,6 +23,12 @@ public class ControllerAngleChecker : MonoBehaviour
 
     private void Update()
     {
+        if(Input.GetKeyDown(KeyCode.C))
+        {
+            originalXAngle = targetTransform.localEulerAngles.x;
+            originalYAngle = targetTransform.localEulerAngles.y;
+        }
+
         CheckAngles();
     }
 
@@ -30,13 +39,11 @@ public class ControllerAngleChecker : MonoBehaviour
         float yAngle = localEulerAngles.y;
 
         // 角度を-180から180の範囲に正規化
-        xAngle = NormalizeAngle(xAngle);
-        yAngle = NormalizeAngle(yAngle);
+        xAngle = NormalizeAngle(xAngle, originalXAngle);
+        yAngle = NormalizeAngle(yAngle, originalYAngle);
 
-        bool isXOutOfRange = xAngle < Settings.ControllerAngle.XAxisMinAngle.Value || 
-                            xAngle > Settings.ControllerAngle.XAxisMaxAngle.Value;
-        bool isYOutOfRange = yAngle < Settings.ControllerAngle.YAxisMinAngle.Value || 
-                            yAngle > Settings.ControllerAngle.YAxisMaxAngle.Value;
+        bool isXOutOfRange = xAngle < Settings.ControllerAngle.XAxisMinAngle || xAngle > Settings.ControllerAngle.XAxisMaxAngle;
+        bool isYOutOfRange = yAngle < Settings.ControllerAngle.YAxisMinAngle || yAngle > Settings.ControllerAngle.YAxisMaxAngle;
 
         if (isXOutOfRange || isYOutOfRange)
         {
@@ -64,8 +71,9 @@ public class ControllerAngleChecker : MonoBehaviour
         }
     }
 
-    private float NormalizeAngle(float angle)
+    private float NormalizeAngle(float angle, float originalAngle)
     {
+        angle = angle - originalAngle;
         angle = angle % 360f;
         if (angle > 180f)
         {

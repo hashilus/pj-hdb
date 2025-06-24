@@ -46,22 +46,19 @@ public static class AirBlowPermission
     /// </summary>
     public static void SetControllerAngleOutOfRange(PlayerSelection player, bool isOutOfRange)
     {
-        // 未完成の為一時的に不使用にする（falseのままにする
-        
-        //
-        // if(player == PlayerSelection.Both)
-        // {
-        //     controllerAngleOutOfRange[0] = isOutOfRange;
-        //     controllerAngleOutOfRange[1] = isOutOfRange;
-        // }
-        // else if(player == PlayerSelection.Player1)
-        // {
-        //     controllerAngleOutOfRange[0] = isOutOfRange;
-        // }
-        // else if(player == PlayerSelection.Player2)
-        // {
-        //     controllerAngleOutOfRange[1] = isOutOfRange;
-        // }
+        if(player == PlayerSelection.Both)
+        {
+            controllerAngleOutOfRange[0] = isOutOfRange;
+            controllerAngleOutOfRange[1] = isOutOfRange;
+        }
+        else if(player == PlayerSelection.Player1)
+        {
+            controllerAngleOutOfRange[0] = isOutOfRange;
+        }
+        else if(player == PlayerSelection.Player2)
+        {
+            controllerAngleOutOfRange[1] = isOutOfRange;
+        }
     }
 
     /// <summary>
