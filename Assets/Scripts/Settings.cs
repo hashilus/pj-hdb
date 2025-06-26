@@ -13,6 +13,7 @@ public partial class Settings
         public static SettingFloat AirBlowToWeakenWait = new("空気吹きを弱めるまでの待機時間(秒)", 2f);
         public static SettingFloat TrackerLostCheckDuration = new("トラッカーが見失われたとみなすまでの時間(秒)", 1f);
         public static SettingBool UsedSpaceCalibrator = new("スペースキャリブレーターを使ってトラッカーのキャリブレーションを実施した【旧トラッカーでは必須】", false);
+        public static SettingFloat ControllerLimitAngle = new("コントローラーの角度制限", 80f);
     }
 
     public class Calibration
@@ -21,14 +22,6 @@ public partial class Settings
         public static SettingVector3 ControllerOffsetL = new("Lコントローラーのオフセット", new Vector3(-0.2f, -0.8f, -0.7f));
         public static SettingVector3 ControllerOffsetR = new("Rコントローラーのオフセット", new Vector3(0.2f, -0.8f, -0.7f));
         public static SettingFloat ControllerXRotationOffset = new("コントローラーのX軸回転オフセット", 0f);
-    }
-
-    public class ControllerAngle
-    {
-        public static SettingFloat XAxisMinAngle = new("コントローラーのX軸最小角度", -45f);
-        public static SettingFloat XAxisMaxAngle = new("コントローラーのX軸最大角度", 45f);
-        public static SettingFloat YAxisMinAngle = new("コントローラーのY軸最小角度", -45f);
-        public static SettingFloat YAxisMaxAngle = new("コントローラーのY軸最大角度", 45f);
     }
 
     public class Bullet

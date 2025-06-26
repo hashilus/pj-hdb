@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b8618e052c646f44b90309a1ade72a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTransform: {fileID: 4784648056786493642}
+  targetTransform: {fileID: 86841432782353778}
   isLController: 0
 --- !u!1 &3510793635299709782
 GameObject:
@@ -258,6 +258,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5abade1bac3df054d91007cf8efb5b25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isLController: 0
+  isMisting: 0
 --- !u!1 &4516167863357007837
 GameObject:
   m_ObjectHideFlags: 0

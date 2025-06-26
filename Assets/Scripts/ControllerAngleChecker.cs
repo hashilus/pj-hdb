@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class ControllerAngleChecker : MonoBehaviour
@@ -9,6 +10,10 @@ public class ControllerAngleChecker : MonoBehaviour
     private bool isLController;
 
     private bool isOutOfRange = false;
+
+    CalibrationPositionHolder.PlayerSelection playerSelection => isLController
+        ? CalibrationPositionHolder.PlayerSelection.Player2
+        : CalibrationPositionHolder.PlayerSelection.Player1;
 
     private void Start()
     {
@@ -25,24 +30,14 @@ public class ControllerAngleChecker : MonoBehaviour
 
     private void CheckAngles()
     {
-        Vector3 localEulerAngles = targetTransform.localEulerAngles;
-        float xAngle = localEulerAngles.x;
-        float yAngle = localEulerAngles.y;
+        var angle = Quaternion.Angle(CalibrationPositionHolder.Instance.GetRotation(playerSelection),
+                                     targetTransform.localRotation);
 
-        // 角度を-180から180の範囲に正規化
-        xAngle = NormalizeAngle(xAngle);
-        yAngle = NormalizeAngle(yAngle);
-
-        bool isXOutOfRange = xAngle < Settings.ControllerAngle.XAxisMinAngle.Value || 
-                            xAngle > Settings.ControllerAngle.XAxisMaxAngle.Value;
-        bool isYOutOfRange = yAngle < Settings.ControllerAngle.YAxisMinAngle.Value || 
-                            yAngle > Settings.ControllerAngle.YAxisMaxAngle.Value;
-
-        if (isXOutOfRange || isYOutOfRange)
+        if (angle > Settings.System.ControllerLimitAngle)
         {
             if (!isOutOfRange)
             {
-                Debug.Log($"Controller angle out of range - X: {xAngle:F1}°, Y: {yAngle:F1}°");
+                Debug.Log($"Controller angle out of range - angle: {angle:F1}°");
                 isOutOfRange = true;
                 AirBlowPermission.SetControllerAngleOutOfRange(
                     isLController ? AirBlowPermission.PlayerSelection.Player2 : AirBlowPermission.PlayerSelection.Player1,
@@ -62,15 +57,5 @@ public class ControllerAngleChecker : MonoBehaviour
                 );
             }
         }
-    }
-
-    private float NormalizeAngle(float angle)
-    {
-        angle = angle % 360f;
-        if (angle > 180f)
-        {
-            angle -= 360f;
-        }
-        return angle;
     }
 } 
