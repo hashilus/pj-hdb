@@ -7,6 +7,9 @@ public class SettingsData
     public float fireLifeScale1P = 1.0f;
     public float fireLifeScale2P = 1.0f;
 
+    public string advertiseVideoFiles = ""; // カンマ区切りのファイル名
+    public float advertisePlayInterval = 60f; // 秒
+
     [System.Serializable]
     public class ResultThresholds
     {

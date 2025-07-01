@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4723718275106078}
   - component: {fileID: 198525775101834184}
   - component: {fileID: 199384370109858068}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FireEmbers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4766,7 +4766,7 @@ GameObject:
   - component: {fileID: 1348116291342380937}
   - component: {fileID: 8219863590084278935}
   - component: {fileID: 5748077530407994693}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LargeFlames
   m_TagString: Fire
   m_Icon: {fileID: 0}
@@ -4825,6 +4825,7 @@ MonoBehaviour:
   fireSE: {fileID: 3853552105828472026}
   fireExSE: {fileID: 648632896910371523}
   debugText: {fileID: 369318550526462362}
+  Setlife: 0
 --- !u!82 &1348116291342380937
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4973,7 +4974,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1392273926343297025}
   - component: {fileID: 3853552105828472026}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FireSE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5102,7 +5103,7 @@ GameObject:
   - component: {fileID: 4510872500591797887}
   - component: {fileID: 1968582032140670581}
   - component: {fileID: 6887537569964015510}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MainFire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9952,7 +9953,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7237420072736765000}
   - component: {fileID: 648632896910371523}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: fire_extinguishSE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10081,7 +10082,7 @@ GameObject:
   - component: {fileID: 7887778151240241274}
   - component: {fileID: 625505713206993617}
   - component: {fileID: 369318550526462362}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Debug
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10180,7 +10181,7 @@ GameObject:
   - component: {fileID: 5647074415122280072}
   - component: {fileID: 3243303211960081949}
   - component: {fileID: 6530833843836411957}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10298,6 +10299,10 @@ PrefabInstance:
     - target: {fileID: 1273915125232972, guid: 73767e07adddc394d82b994801f89bbb, type: 3}
       propertyPath: m_Name
       value: SmokeEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 1273915125232972, guid: 73767e07adddc394d82b994801f89bbb, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4508696319873668, guid: 73767e07adddc394d82b994801f89bbb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10465,6 +10470,10 @@ PrefabInstance:
     - target: {fileID: 6179067719891834800, guid: 606f828a02899f4489c58f7c8113616f, type: 3}
       propertyPath: m_Name
       value: SmallFlames
+      objectReference: {fileID: 0}
+    - target: {fileID: 6179067719891834800, guid: 606f828a02899f4489c58f7c8113616f, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6179067719891834800, guid: 606f828a02899f4489c58f7c8113616f, type: 3}
       propertyPath: m_IsActive
