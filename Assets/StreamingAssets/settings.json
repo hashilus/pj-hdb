@@ -9,6 +9,7 @@
         "rankB": 5.0,
         "rankC": 0.0
     },
-
+    "advertiseVideoFiles": "A1.mp4,A2.mp4,A3.mp4",
+    "advertisePlayInterval": 5.0,
     "debugMode": false
 }

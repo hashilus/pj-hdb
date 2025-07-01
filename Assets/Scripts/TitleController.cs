@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
 
 public class TitleController : MonoBehaviour
 {
@@ -57,6 +58,17 @@ public class TitleController : MonoBehaviour
 
     public GameLogManager gameLogManager;
 
+    private float idleTimer = 0f;
+    private Vector3 lastMousePosition;
+    private int currentAdIndex = 0;
+    private string[] adFiles;
+    private bool isPlayingAd = false;
+
+    public GameObject videoPlayerObject; // VideoPlayerをアタッチしたGameObject
+    private VideoPlayer videoPlayer;
+
+    public AudioSource titleBGM;
+
     void Start()
     {
         if (SettingsManager.Instance.settings.debugMode)
@@ -74,15 +86,58 @@ public class TitleController : MonoBehaviour
         calibrationUI.SetActive(true);
 
         //materialFader.FadeIn(); // フェードインを有効にする
+        
+        lastMousePosition = Input.mousePosition;
+        idleTimer = 0f;
+        isPlayingAd = false;
+
+        // 動画ファイルリストを取得
+        string adFileString = SettingsManager.Instance.settings.advertiseVideoFiles;
+        adFiles = string.IsNullOrEmpty(adFileString) ? new string[0] : adFileString.Split(',');
+
+        videoPlayer = videoPlayerObject.GetComponent<VideoPlayer>();
+        videoPlayerObject.SetActive(false);
+        videoPlayer.loopPointReached += OnAdFinished;
     }
 
     void Update()
     {
+
         if (!isPlayed)
         {
             //カメラ位置をタイトル画面位置に固定
             camPlayer.transform.position = camPosition.position;
             camPlayer.transform.rotation = camPosition.rotation;
+            if (isPlayingAd)
+            {
+                // 動画再生中にマウスが動いたら中断
+                if (Input.mousePosition != lastMousePosition)
+                {
+                    StopAd();
+                    titleBGM.UnPause(); // BGMを再開
+                }
+                lastMousePosition = Input.mousePosition;
+                return;
+            }
+
+            // マウスが動いたらタイマーリセット
+            if (Input.mousePosition != lastMousePosition)
+            {
+                idleTimer = 0f;
+            }
+            else
+            {
+                idleTimer += Time.deltaTime;
+            }
+            lastMousePosition = Input.mousePosition;
+
+            // インターバル到達で広告再生
+            float interval = SettingsManager.Instance.settings.advertisePlayInterval;
+            if (adFiles.Length > 0 && idleTimer >= interval)
+            {
+                titleBGM.Pause(); // BGMを一時停止
+                PlayAd();
+            }
         }
 
         // ★ プレイヤー判定ロジックはそのままでOK
@@ -98,6 +153,7 @@ public class TitleController : MonoBehaviour
 
             }
             start1P_Confirmed = true;
+            idleTimer = 0;
         }
 
         if (player2StartCount > startupnumber)
@@ -111,6 +167,7 @@ public class TitleController : MonoBehaviour
                 GetComponent<AudioSource>().PlayOneShot(startSound);
             }
             start2P_Confirmed = true;
+            idleTimer = 0;
         }
 
         if (player1StartCount > startupnumber && player2StartCount > startupnumber)
@@ -192,5 +249,36 @@ public class TitleController : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         isStarting = true;
+    }
+
+        void PlayAd()
+    {
+        if (adFiles.Length == 0) return;
+
+        isPlayingAd = true;
+        idleTimer = 0f;
+
+        string fileName = adFiles[currentAdIndex].Trim();
+        string filePath = System.IO.Path.Combine(Application.streamingAssetsPath, fileName);
+
+        videoPlayer.url = filePath;
+        videoPlayerObject.SetActive(true);
+        videoPlayer.Play();
+
+        // 次の動画インデックスを準備
+        currentAdIndex = (currentAdIndex + 1) % adFiles.Length;
+    }
+
+    void StopAd()
+    {
+        isPlayingAd = false;
+        videoPlayer.Stop();
+        videoPlayerObject.SetActive(false);
+        idleTimer = 0f;
+    }
+
+    void OnAdFinished(VideoPlayer vp)
+    {
+        StopAd();
     }
 }
