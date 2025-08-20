@@ -251,7 +251,7 @@ public class TitleController : MonoBehaviour
         isStarting = true;
     }
 
-        void PlayAd()
+    void PlayAd()
     {
         if (adFiles.Length == 0) return;
 
@@ -275,6 +275,7 @@ public class TitleController : MonoBehaviour
         videoPlayer.Stop();
         videoPlayerObject.SetActive(false);
         idleTimer = 0f;
+        titleBGM.Play(); // BGMÇçƒäJ
     }
 
     void OnAdFinished(VideoPlayer vp)

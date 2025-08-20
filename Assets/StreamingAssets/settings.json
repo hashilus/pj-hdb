@@ -1,15 +1,15 @@
 {
-    "initialTime": 90.0,
-    "checkpointExtendTimes": [0, 30, 0, 40, 0, 0],
-    "fireLifeScale1P": 1.0,
-    "fireLifeScale2P": 1.8,
+    "initialTime": 35.0,
+    "checkpointExtendTimes": [0, 15, 0, 20, 0, 0],
+    "fireLifeScale1P": 0.5,
+    "fireLifeScale2P": 0.9,
     "resultThresholds": {
-        "rankS": 15.0,
-        "rankA": 10.0,
-        "rankB": 5.0,
+        "rankS": 20.0,
+        "rankA": 15.0,
+        "rankB": 10.0,
         "rankC": 0.0
     },
     "advertiseVideoFiles": "A1.mp4,A2.mp4,A3.mp4",
-    "advertisePlayInterval": 5.0,
+    "advertisePlayInterval": 15.0,
     "debugMode": false
 }
