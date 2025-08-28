@@ -69,6 +69,18 @@ public class TitleController : MonoBehaviour
 
     public AudioSource titleBGM;
 
+    public Transform controller1P;
+    public Transform controller2P;
+    Vector3 oldposition1P;
+    Vector3 oldposition2P;
+    bool moved;
+
+    private float moveDistance1P = 0f;
+    private float moveDistance2P = 0f;
+    private float moveCheckTimer = 0f;
+    private const float MOVE_THRESHOLD = 0.02f; // 2cm
+
+
     void Start()
     {
         if (SettingsManager.Instance.settings.debugMode)
@@ -98,6 +110,12 @@ public class TitleController : MonoBehaviour
         videoPlayer = videoPlayerObject.GetComponent<VideoPlayer>();
         videoPlayerObject.SetActive(false);
         videoPlayer.loopPointReached += OnAdFinished;
+
+        oldposition1P = controller1P.position;
+        oldposition2P = controller2P.position;
+        moveDistance1P = 0f;
+        moveDistance2P = 0f;
+        moveCheckTimer = 0f;
     }
 
     void Update()
@@ -105,13 +123,35 @@ public class TitleController : MonoBehaviour
 
         if (!isPlayed)
         {
+            // 1P/2Pの移動距離を加算
+            moveDistance1P += Vector3.Distance(controller1P.position, oldposition1P);
+            moveDistance2P += Vector3.Distance(controller2P.position, oldposition2P);
+            oldposition1P = controller1P.position;
+            oldposition2P = controller2P.position;
+
+            moveCheckTimer += Time.deltaTime;
+            moved = false;
+
+            // 1秒ごとに判定
+            if (moveCheckTimer >= 1f)
+            {
+                if (moveDistance1P >= MOVE_THRESHOLD || moveDistance2P >= MOVE_THRESHOLD)
+                {
+                    moved = true;
+                }
+                // 距離とタイマーをリセット
+                moveDistance1P = 0f;
+                moveDistance2P = 0f;
+                moveCheckTimer = 0f;
+            }
+
             //カメラ位置をタイトル画面位置に固定
             camPlayer.transform.position = camPosition.position;
             camPlayer.transform.rotation = camPosition.rotation;
             if (isPlayingAd)
             {
-                // 動画再生中にマウスが動いたら中断
-                if (Input.mousePosition != lastMousePosition)
+                // 動画再生中にマウスまたはコントローラーが動いたら中断
+                if (Input.mousePosition != lastMousePosition || moved)
                 {
                     StopAd();
                     titleBGM.UnPause(); // BGMを再開
@@ -121,7 +161,7 @@ public class TitleController : MonoBehaviour
             }
 
             // マウスが動いたらタイマーリセット
-            if (Input.mousePosition != lastMousePosition)
+            if (Input.mousePosition != lastMousePosition || moved)
             {
                 idleTimer = 0f;
             }

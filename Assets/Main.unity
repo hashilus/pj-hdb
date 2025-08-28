@@ -84659,6 +84659,11 @@ MonoBehaviour:
   gameLogManager: {fileID: 1012967704}
   materialFader: {fileID: 864644380}
   materialFaderBlack: {fileID: 1660227721}
+  voiceAudio: {fileID: 343128413}
+  voiceEvent1: {fileID: 387888234}
+  voiceEvent2: {fileID: 1161073120}
+  voiceEvent3: {fileID: 975506294}
+  voiceEvent4: {fileID: 137941121}
 --- !u!114 &1012967700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84714,6 +84719,8 @@ MonoBehaviour:
   gameLogManager: {fileID: 1012967704}
   videoPlayerObject: {fileID: 137262492}
   titleBGM: {fileID: 1182652646}
+  controller1P: {fileID: 678309270}
+  controller2P: {fileID: 1326463510}
 --- !u!82 &1012967702
 AudioSource:
   m_ObjectHideFlags: 0
@@ -105867,6 +105874,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 837bcff4ddb1c1c47bf4fe12fcf1c178, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 837bcff4ddb1c1c47bf4fe12fcf1c178, type: 3}
       propertyPath: m_Name
       value: NZL
@@ -113970,6 +113981,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 837bcff4ddb1c1c47bf4fe12fcf1c178, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 837bcff4ddb1c1c47bf4fe12fcf1c178, type: 3}
       propertyPath: m_Name
       value: NZL
@@ -119843,6 +119858,8 @@ PlayableDirector:
     value: {fileID: 1365158900}
   - key: {fileID: 5030951087205133397, guid: 6f448c77328dff64daf1f01f75822ea3, type: 2}
     value: {fileID: 601240218}
+  - key: {fileID: 5166895625163354351, guid: 6f448c77328dff64daf1f01f75822ea3, type: 2}
+    value: {fileID: 343128413}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &1399883091 stripped
@@ -135584,8 +135601,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1572606461}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0000322816, y: 0.9977209, z: -0.00047733725, w: -0.06747438}
-  m_LocalPosition: {x: 27.627464, y: 8.03625, z: 42.876976}
+  m_LocalRotation: {x: -0.0000047727517, y: 0.3307657, z: 0.000001672821, w: 0.94371295}
+  m_LocalPosition: {x: 47.52412, y: 2.833441, z: 46.348724}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

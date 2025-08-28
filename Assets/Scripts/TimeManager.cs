@@ -22,6 +22,14 @@ public class TimeManager : MonoBehaviour
     public MaterialFader materialFader;
     public MaterialFader materialFaderBlack;
 
+    public AudioSource voiceAudio;
+    public AudioSource voiceEvent1;
+    public AudioSource voiceEvent2;
+    public AudioSource voiceEvent3;
+    public AudioSource voiceEvent4;
+
+
+
     void Start()
     {
         currentTime = SettingsManager.Instance.settings.initialTime;
@@ -43,6 +51,12 @@ public class TimeManager : MonoBehaviour
 
         if (currentTime <= 0f)
         {
+            voiceAudio.enabled = false; // タイムラインのボイス停止
+            voiceEvent1.enabled = false;
+            voiceEvent2.enabled = false;
+            voiceEvent3.enabled = false;
+            voiceEvent4.enabled = false;
+
             gameLogManager.SetRank("OVER");
             gameLogManager.WriteLog();
             currentTime = 0f;
