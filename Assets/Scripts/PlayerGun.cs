@@ -1,43 +1,34 @@
 ﻿using UnityEngine;
+using ChocDino.PartyIO;
 
 public class PlayerGun : MonoBehaviour
 {
+    // ---------- Shooting ----------
     [Header("Shooting")]
-    [SerializeField]
-    Bullet bulletPrefab;
+    [SerializeField] Bullet bulletPrefab;
+    [SerializeField] Transform shootingOrigin;
+    [SerializeField] float shootingForce = 500.0f;
 
-    [SerializeField]
-    Transform shootingOrigin;
-
-    [SerializeField]
-    float shootingForce = 500.0f;
-
+    // ---------- Effects ----------
     [Header("Effects")]
-    [SerializeField]
-    ParticleSystem smokeParticle;
+    [SerializeField] ParticleSystem smokeParticle;
+    [SerializeField] ParticleSystem gasParticle;
+    [SerializeField] ParticleSystem waterParticle;
+    [SerializeField] Animator waterSoundAnimator;
+    [SerializeField] AudioSource waterHitSoundAudioSource;
+    [SerializeField] Animator waterHitSoundAnimator;
 
-    [SerializeField]
-    ParticleSystem gasParticle;
-
-    [SerializeField]
-    ParticleSystem waterParticle;
-
-    [SerializeField]
-    Animator waterSoundAnimator;
-
-    [SerializeField]
-    AudioSource waterHitSoundAudioSource;
-
-    [SerializeField]
-    Animator waterHitSoundAnimator;
-
+    // ---------- Tracker ----------
     [Header("Tracker")]
-    [SerializeField]
-    Transform calibratedTracker;
+    [SerializeField] Transform calibratedTracker;
+    [SerializeField] AirController airController;
 
-    [SerializeField]
-    AirController airController;
+    // ---------- Mouse Party ----------
+    [Header("Mouse Party")]
+    [SerializeField] bool useMouseParty = true;
+    [SerializeField, Min(0)] int mousePartyDeviceIndex = 0; // 1P=0, 2P=1
 
+    // ---------- State ----------
     public Player Player { get; private set; }
 
     bool isShooting;
@@ -66,7 +57,6 @@ public class PlayerGun : MonoBehaviour
     void Start()
     {
         transform.GetLocalPositionAndRotation(out targetLocalPosition, out targetLocalRotation);
-
         StopShootingEffect();
     }
 
@@ -76,15 +66,81 @@ public class PlayerGun : MonoBehaviour
         {
             UpdateByTracker();
         }
+        else if (useMouseParty)
+        {
+            UpdateByMousePartyBridge();
+        }
         else
         {
-            UpdateByMouse();
+            UpdateByMouse(); // 旧：単一マウス
         }
 
         UpdatePose();
         UpdateShooting();
     }
 
+    // ===== Mouse Party via Bridge =====
+    void UpdateByMousePartyBridge()
+    {
+        // 1台しかない時は 1P の index=0 のみ成功し、2P は失敗→return で自然に無効化
+        if (!MousePartyInputBridge.TryGetViewport(mousePartyDeviceIndex, out var vp01))
+            return;
+
+        float nx  = vp01.x * 2f - 1f;  // -1..+1
+        float y01 = vp01.y;            // 0..1
+
+        // 位置
+        float x = nx * Settings.Gun.MovingRange.Value.x;
+        float y = y01;
+        targetLocalPosition = new Vector3(x, y, 0f);
+
+        // 俯仰角（Y=0→下、0.5→水平、Y=1→上）
+        float minPitch = Settings.Gun.VerticalLimitAngle.Value.x;
+        float maxPitch = Settings.Gun.VerticalLimitAngle.Value.y;
+        float pitchDeg = Mathf.Lerp(minPitch, maxPitch, y01);
+        targetLocalRotation = Quaternion.Euler(pitchDeg, 0f, 0f);
+
+        // 発射
+        isShooting = MousePartyInputBridge.GetButton(mousePartyDeviceIndex, MouseButton.Left);
+    }
+
+    // ===== Old single mouse fallback =====
+    void UpdateByMouse()
+    {
+        var altPressed = Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt);
+        var inputPlayer = altPressed ? PlayerID.Player2 : PlayerID.Player1;
+        var isInputForThisPlayer = Player.ID == inputPlayer;
+
+        UpdateTargetPoseByMouse(isInputForThisPlayer);
+        UpdateButtonByMouse(isInputForThisPlayer);
+    }
+
+    void UpdateTargetPoseByMouse(bool isInputForThisPlayer)
+    {
+        if (!isInputForThisPlayer) return;
+
+        var vp = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+        float nx  = vp.x * 2f - 1f;
+        float y01 = Mathf.Clamp01(vp.y);
+
+        float x = nx * Settings.Gun.MovingRange.Value.x;
+        float y = y01;
+        targetLocalPosition = new Vector3(x, y, 0f);
+
+        float minPitch = Settings.Gun.VerticalLimitAngle.Value.x;
+        float maxPitch = Settings.Gun.VerticalLimitAngle.Value.y;
+        float pitchDeg = Mathf.Lerp(minPitch, maxPitch, y01);
+        targetLocalRotation = Quaternion.Euler(pitchDeg, 0f, 0f);
+
+        prevNormalizedMousePosition = new Vector2(nx, y01 * 2f - 1f);
+    }
+
+    void UpdateButtonByMouse(bool isInputForThisPlayer)
+    {
+        isShooting = isInputForThisPlayer && Input.GetMouseButton(0);
+    }
+
+    // ===== Tracker (既存) =====
     void UpdateByTracker()
     {
         UpdateTargetPoseByTracker();
@@ -142,68 +198,7 @@ public class PlayerGun : MonoBehaviour
         }
     }
 
-    void UpdateByMouse()
-    {
-        var altPressed = Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt);
-        var inputPlayer = altPressed ? PlayerID.Player2 : PlayerID.Player1;
-        var isInputForThisPlayer = Player.ID == inputPlayer;
-
-        UpdateTargetPoseByMouse(isInputForThisPlayer);
-        UpdateButtonByMouse(isInputForThisPlayer);
-    }
-
-    void UpdateTargetPoseByMouse(bool isInputForThisPlayer)
-    {
-        if (!isInputForThisPlayer) return;
-
-        var viewportMousePosition = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-        var normalizedMousePosition = new Vector2(
-            viewportMousePosition.x * 2.0f - 1.0f,
-            viewportMousePosition.y * 2.0f - 1.0f);
-
-        var deltaMousePosition = normalizedMousePosition - prevNormalizedMousePosition;
-        prevNormalizedMousePosition = normalizedMousePosition;
-
-        if (Input.GetMouseButton(1))
-        {
-            var euler = targetLocalRotation.eulerAngles;
-            euler.x = NormalizeAngle(euler.x);
-            euler.y = NormalizeAngle(euler.y);
-            euler.z = NormalizeAngle(euler.z);
-
-            euler.y += deltaMousePosition.x * Settings.Gun.MouseRotationSensitivity;
-            euler.x -= deltaMousePosition.y * Settings.Gun.MouseRotationSensitivity;
-
-            euler.x = Mathf.Clamp(euler.x, Settings.Gun.HorizontalLimitAngle.Value.x, Settings.Gun.HorizontalLimitAngle.Value.y);
-            euler.y = Mathf.Clamp(euler.y, Settings.Gun.VerticalLimitAngle.Value.x, Settings.Gun.VerticalLimitAngle.Value.y);
-
-            targetLocalRotation = Quaternion.Euler(euler);
-        }
-        else
-        {
-            var x = normalizedMousePosition.x * Settings.Gun.MovingRange.Value.x;
-            var y = Mathf.Clamp(
-                targetLocalPosition.y + deltaMousePosition.y * Settings.Gun.MouseVirticalMovingSensitivity,
-                -Settings.Gun.MovingRange.Value.y,
-                Settings.Gun.MovingRange.Value.y);
-            targetLocalPosition = new Vector3(x, y, 0f);
-
-            targetLocalRotation = Quaternion.identity;
-        }
-    }
-
-    void UpdateButtonByMouse(bool isInputForThisPlayer)
-    {
-        if (isInputForThisPlayer)
-        {
-            isShooting = Input.GetMouseButton(0);
-        }
-        else
-        {
-            isShooting = false;
-        }
-    }
-
+    // ===== Pose / Shooting =====
     void UpdatePose()
     {
         transform.SetLocalPositionAndRotation(
@@ -212,7 +207,10 @@ public class PlayerGun : MonoBehaviour
 
         CorrectAngle();
 
-        targetLocalPosition.y = Mathf.Lerp(targetLocalPosition.y, 0.0f, Settings.Gun.VirticalRestoringInterpolation);
+        if (Settings.System.IsUseTracker)
+        {
+            targetLocalPosition.y = Mathf.Lerp(targetLocalPosition.y, 0.0f, Settings.Gun.VirticalRestoringInterpolation);
+        }
     }
 
     void CorrectAngle()
@@ -220,7 +218,6 @@ public class PlayerGun : MonoBehaviour
         var center = Camera.main.transform;
         var placement = center.transform.InverseTransformPoint(transform.position).x;
         var correctionAngle = Quaternion.Euler(0f, placement * Settings.Gun.AngleCorrection, 0f);
-
         transform.localRotation *= correctionAngle;
     }
 
