@@ -30,7 +30,7 @@ namespace Hashilus.CursorSleeper
             }
 
             var sleeping = idleSeconds > ElapsedSecondsNeededForSleep;
-            Cursor.visible = !sleeping;
+            //Cursor.visible = !sleeping;
 
             previousMousePosition = currentMousePosition;
         }

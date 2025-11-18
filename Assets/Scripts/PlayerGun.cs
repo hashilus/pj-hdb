@@ -3,13 +3,11 @@ using ChocDino.PartyIO;
 
 public class PlayerGun : MonoBehaviour
 {
-    // ---------- Shooting ----------
     [Header("Shooting")]
     [SerializeField] Bullet bulletPrefab;
     [SerializeField] Transform shootingOrigin;
     [SerializeField] float shootingForce = 500.0f;
 
-    // ---------- Effects ----------
     [Header("Effects")]
     [SerializeField] ParticleSystem smokeParticle;
     [SerializeField] ParticleSystem gasParticle;
@@ -18,17 +16,14 @@ public class PlayerGun : MonoBehaviour
     [SerializeField] AudioSource waterHitSoundAudioSource;
     [SerializeField] Animator waterHitSoundAnimator;
 
-    // ---------- Tracker ----------
     [Header("Tracker")]
     [SerializeField] Transform calibratedTracker;
     [SerializeField] AirController airController;
 
-    // ---------- Mouse Party ----------
-    [Header("Mouse Party")]
+    [Header("MouseParty")]
+    [SerializeField] MousePartyInputRouter mouseRouter;
     [SerializeField] bool useMouseParty = true;
-    [SerializeField, Min(0)] int mousePartyDeviceIndex = 0; // 1P=0, 2P=1
 
-    // ---------- State ----------
     public Player Player { get; private set; }
 
     bool isShooting;
@@ -40,6 +35,10 @@ public class PlayerGun : MonoBehaviour
 
     Vector2 prevNormalizedMousePosition;
     Vector3 prevCameraLocalTrackerPosition;
+
+    // MouseParty用
+    Vector3 partyMouseScreenPos = Vector3.zero;
+    bool partyMouseInitialized;
 
     static float NormalizeAngle(float angle) => Mathf.Repeat(angle + 180f, 360f) - 180f;
 
@@ -66,81 +65,19 @@ public class PlayerGun : MonoBehaviour
         {
             UpdateByTracker();
         }
-        else if (useMouseParty)
-        {
-            UpdateByMousePartyBridge();
-        }
         else
         {
-            UpdateByMouse(); // 旧：単一マウス
+            if (useMouseParty && mouseRouter != null && mouseRouter.ConnectedCount > 0)
+                UpdateByMouseParty();
+            else
+                UpdateByMouse();
         }
 
         UpdatePose();
         UpdateShooting();
     }
 
-    // ===== Mouse Party via Bridge =====
-    void UpdateByMousePartyBridge()
-    {
-        // 1台しかない時は 1P の index=0 のみ成功し、2P は失敗→return で自然に無効化
-        if (!MousePartyInputBridge.TryGetViewport(mousePartyDeviceIndex, out var vp01))
-            return;
-
-        float nx  = vp01.x * 2f - 1f;  // -1..+1
-        float y01 = vp01.y;            // 0..1
-
-        // 位置
-        float x = nx * Settings.Gun.MovingRange.Value.x;
-        float y = y01;
-        targetLocalPosition = new Vector3(x, y, 0f);
-
-        // 俯仰角（Y=0→下、0.5→水平、Y=1→上）
-        float minPitch = Settings.Gun.VerticalLimitAngle.Value.x;
-        float maxPitch = Settings.Gun.VerticalLimitAngle.Value.y;
-        float pitchDeg = Mathf.Lerp(minPitch, maxPitch, y01);
-        targetLocalRotation = Quaternion.Euler(pitchDeg, 0f, 0f);
-
-        // 発射
-        isShooting = MousePartyInputBridge.GetButton(mousePartyDeviceIndex, MouseButton.Left);
-    }
-
-    // ===== Old single mouse fallback =====
-    void UpdateByMouse()
-    {
-        var altPressed = Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt);
-        var inputPlayer = altPressed ? PlayerID.Player2 : PlayerID.Player1;
-        var isInputForThisPlayer = Player.ID == inputPlayer;
-
-        UpdateTargetPoseByMouse(isInputForThisPlayer);
-        UpdateButtonByMouse(isInputForThisPlayer);
-    }
-
-    void UpdateTargetPoseByMouse(bool isInputForThisPlayer)
-    {
-        if (!isInputForThisPlayer) return;
-
-        var vp = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-        float nx  = vp.x * 2f - 1f;
-        float y01 = Mathf.Clamp01(vp.y);
-
-        float x = nx * Settings.Gun.MovingRange.Value.x;
-        float y = y01;
-        targetLocalPosition = new Vector3(x, y, 0f);
-
-        float minPitch = Settings.Gun.VerticalLimitAngle.Value.x;
-        float maxPitch = Settings.Gun.VerticalLimitAngle.Value.y;
-        float pitchDeg = Mathf.Lerp(minPitch, maxPitch, y01);
-        targetLocalRotation = Quaternion.Euler(pitchDeg, 0f, 0f);
-
-        prevNormalizedMousePosition = new Vector2(nx, y01 * 2f - 1f);
-    }
-
-    void UpdateButtonByMouse(bool isInputForThisPlayer)
-    {
-        isShooting = isInputForThisPlayer && Input.GetMouseButton(0);
-    }
-
-    // ===== Tracker (既存) =====
+    //==================== Tracker ====================
     void UpdateByTracker()
     {
         UpdateTargetPoseByTracker();
@@ -175,7 +112,7 @@ public class PlayerGun : MonoBehaviour
 
     void UpdateButtonByTracker()
     {
-        var isHardwarePlayer1 = Player.ID == PlayerID.Player2; // ハードウェアの Player1 はゲーム内と左右逆
+        var isHardwarePlayer1 = Player.ID == PlayerID.Player2;
         var playerSection = isHardwarePlayer1 ? AirBlowPermission.PlayerSelection.Player1 : AirBlowPermission.PlayerSelection.Player2;
         var buttonName = isHardwarePlayer1 ? "Fire1" : "Fire2";
 
@@ -198,7 +135,108 @@ public class PlayerGun : MonoBehaviour
         }
     }
 
-    // ===== Pose / Shooting =====
+    //==================== MouseParty ====================
+    void UpdateByMouseParty()
+    {
+        int idx = (Player.ID == PlayerID.Player1) ? 0 : 1;
+        var mouse = mouseRouter.GetMouseForIndex(idx);
+        if (mouse == null)
+        {
+            isShooting = false;
+            return;
+        }
+
+        if (!partyMouseInitialized)
+        {
+            partyMouseScreenPos = new Vector3(Camera.main.pixelWidth * 0.5f, Camera.main.pixelHeight * 0.5f, 0f);
+            partyMouseInitialized = true;
+        }
+
+        // 座標更新
+        Vector3 screenMin = Vector3.zero;
+        Vector3 screenMax = new Vector3(Camera.main.pixelWidth, Camera.main.pixelHeight, 0f);
+        Vector3 newPos = partyMouseScreenPos;
+
+        if (mouse.IsPositionAbsolute())
+        {
+            newPos = mouse.PositionDelta;
+        }
+        else if (mouse.PositionDelta != Vector3.zero)
+        {
+            newPos += new Vector3(mouse.PositionDelta.x, -mouse.PositionDelta.y, 0f);
+        }
+
+        if (newPos != partyMouseScreenPos)
+        {
+            newPos = Vector3.Max(newPos, screenMin);
+            newPos = Vector3.Min(newPos, screenMax);
+            partyMouseScreenPos = newPos;
+        }
+
+        // 座標変換
+        var viewport = new Vector2(
+            partyMouseScreenPos.x / Camera.main.pixelWidth,
+            partyMouseScreenPos.y / Camera.main.pixelHeight
+        );
+        var nmp = new Vector2(viewport.x * 2f - 1f, viewport.y * 2f - 1f);
+
+        var x = nmp.x * Settings.Gun.MovingRange.Value.x;
+        var y = Mathf.Clamp01(0.5f + 0.5f * nmp.y);
+        targetLocalPosition = new Vector3(x, y, 0f);
+
+        const float pitchAtY0 = 25f;
+        const float pitchAtY1 = -35f;
+        float pitch = Mathf.Lerp(pitchAtY0, pitchAtY1, y);
+        targetLocalRotation = Quaternion.Euler(pitch, 0f, 0f);
+
+        // ボタン状態（押下維持で連射）
+        try
+        {
+            isShooting = mouse.IsPressed(MouseButton.Left);
+        }
+        catch
+        {
+            if (mouse.WasPressedThisFrame(MouseButton.Left)) isShooting = true;
+            if (mouse.WasReleasedThisFrame(MouseButton.Left)) isShooting = false;
+        }
+    }
+
+    //==================== 単一マウス（フォールバック） ====================
+    void UpdateByMouse()
+    {
+        var altPressed = Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt);
+        var inputPlayer = altPressed ? PlayerID.Player2 : PlayerID.Player1;
+        var isInputForThisPlayer = Player.ID == inputPlayer;
+
+        UpdateTargetPoseByMouse(isInputForThisPlayer);
+        UpdateButtonByMouse(isInputForThisPlayer);
+    }
+
+    void UpdateTargetPoseByMouse(bool isInputForThisPlayer)
+    {
+        if (!isInputForThisPlayer) return;
+
+        var viewportMousePosition = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+        var nmp = new Vector2(viewportMousePosition.x * 2f - 1f, viewportMousePosition.y * 2f - 1f);
+
+        var x = nmp.x * Settings.Gun.MovingRange.Value.x;
+        var y = Mathf.Clamp01(0.5f + 0.5f * nmp.y);
+        targetLocalPosition = new Vector3(x, y, 0f);
+
+        const float pitchAtY0 = 25f;
+        const float pitchAtY1 = -35f;
+        float pitch = Mathf.Lerp(pitchAtY0, pitchAtY1, y);
+        targetLocalRotation = Quaternion.Euler(pitch, 0f, 0f);
+
+        prevNormalizedMousePosition = nmp;
+    }
+
+    void UpdateButtonByMouse(bool isInputForThisPlayer)
+    {
+        isShooting = isInputForThisPlayer && Input.GetMouseButton(0);
+    }
+
+    //==================== 共通処理 ====================
     void UpdatePose()
     {
         transform.SetLocalPositionAndRotation(
@@ -225,7 +263,7 @@ public class PlayerGun : MonoBehaviour
     {
         if (isShooting)
         {
-            if (!isPrevShooting) { StartShootingEffect(); }
+            if (!isPrevShooting) StartShootingEffect();
 
             if (Time.time >= shootTime + Settings.Gun.ShootingInterval)
             {
@@ -235,7 +273,7 @@ public class PlayerGun : MonoBehaviour
         }
         else
         {
-            if (isPrevShooting) { StopShootingEffect(); }
+            if (isPrevShooting) StopShootingEffect();
         }
 
         isPrevShooting = isShooting;
@@ -258,13 +296,10 @@ public class PlayerGun : MonoBehaviour
     {
         var emission = smokeParticle.emission;
         emission.rateOverTime = 8.0f;
-
         emission = gasParticle.emission;
         emission.rateOverTime = 10.0f;
-
         emission = waterParticle.emission;
         emission.rateOverTime = 60.0f;
-
         waterSoundAnimator.SetBool("IsShooting", true);
     }
 
@@ -272,13 +307,10 @@ public class PlayerGun : MonoBehaviour
     {
         var emission = smokeParticle.emission;
         emission.rateOverTime = 0f;
-
         emission = gasParticle.emission;
         emission.rateOverTime = 0f;
-
         emission = waterParticle.emission;
         emission.rateOverTime = 0f;
-
         waterSoundAnimator.SetBool("IsShooting", false);
     }
 

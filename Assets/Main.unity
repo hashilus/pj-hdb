@@ -34214,6 +34214,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1365204605722371040, guid: 18846474536113543b333fcfd03dfa13, type: 3}
+      propertyPath: mouseRouter
+      value: 
+      objectReference: {fileID: 1572606465}
+    - target: {fileID: 1365204605722371040, guid: 18846474536113543b333fcfd03dfa13, type: 3}
       propertyPath: airController
       value: 
       objectReference: {fileID: 1821916797}
@@ -34239,6 +34243,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4480369604299799445, guid: 18846474536113543b333fcfd03dfa13, type: 3}
       propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480369604299799445, guid: 18846474536113543b333fcfd03dfa13, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480369604299799445, guid: 18846474536113543b333fcfd03dfa13, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480369604299799445, guid: 18846474536113543b333fcfd03dfa13, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480369604299799445, guid: 18846474536113543b333fcfd03dfa13, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480369604299799445, guid: 18846474536113543b333fcfd03dfa13, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7454258633614707273, guid: 18846474536113543b333fcfd03dfa13, type: 3}
@@ -76404,6 +76428,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 0b5a0885f316dcf4ab12ee77e950634e, type: 2}
+    - target: {fileID: 6896474092966838595, guid: 8fb3bb5fd49bfda47a1a6aaf6fac67a7, type: 3}
+      propertyPath: mouseRouter
+      value: 
+      objectReference: {fileID: 1572606465}
     - target: {fileID: 6896474092966838595, guid: 8fb3bb5fd49bfda47a1a6aaf6fac67a7, type: 3}
       propertyPath: airController
       value: 
@@ -135909,6 +135937,8 @@ GameObject:
   - component: {fileID: 1572606463}
   - component: {fileID: 1572606462}
   - component: {fileID: 1572606464}
+  - component: {fileID: 1572606465}
+  - component: {fileID: 1572606466}
   m_Layer: 0
   m_Name: Dolly Cart
   m_TagString: Untagged
@@ -135970,6 +136000,35 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1572606465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1572606461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4effccb6410c73c45a7f4a73b0d01250, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playersNeeded: 2
+  verboseLog: 1
+--- !u!114 &1572606466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1572606461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43adc79af2a627b43b9af35ff4c55267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  router: {fileID: 1572606465}
+  swapKey: 9
+  rebindKey: 114
 --- !u!1 &1573418838 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 25631604351311998, guid: 26f217e91502c9b4c8ddc17d8728b261, type: 3}
