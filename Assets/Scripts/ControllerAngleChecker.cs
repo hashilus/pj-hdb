@@ -33,7 +33,12 @@ public class ControllerAngleChecker : MonoBehaviour
         var angle = Quaternion.Angle(CalibrationPositionHolder.Instance.GetRotation(playerSelection),
                                      targetTransform.localRotation);
 
-        if (angle > Settings.System.ControllerLimitAngle)
+        var v = (targetTransform.localRotation * Quaternion.Inverse(CalibrationPositionHolder.Instance.GetRotation(playerSelection))).eulerAngles;
+        var x = v.x > 180f ? Mathf.Abs(v.x - 360f) : v.x;
+        var y = v.y > 180f ? Mathf.Abs(v.y - 360f) : v.y;
+        var z = v.z > 180f ? Mathf.Abs(v.z - 360f) : v.z;
+        
+        if (x > Settings.System.ControllerLimitXAngle || y > Settings.System.ControllerLimitYAngle)
         {
             if (!isOutOfRange)
             {
